@@ -2,7 +2,6 @@ import * as React from 'react'
 import { NextPage } from 'next'
 import cx from 'classnames'
 import MenuIcon from '@mui/icons-material/Menu'
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import SearchIcon from '@mui/icons-material/Search'
 import {
   AppBar,
@@ -15,15 +14,12 @@ import {
   List,
   ListItemButton,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Toolbar,
   Typography,
 } from '@mui/material'
 import { styled, alpha, useTheme } from '@mui/material/styles'
-import { transcode } from 'buffer'
 import theme from 'tailwindcss/defaultTheme'
-import { ChevronLeft, ChevronRight } from '@mui/icons-material'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
@@ -76,7 +72,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
-const drawerWidth = 240
+const drawerWidth = 200
 
 const Menu = () => {
   const [open, setOpen] = React.useState(false)
@@ -96,20 +92,19 @@ const Menu = () => {
           <IconButton
             size="medium"
             edge="start"
-            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             // equivalent
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            className={cx('mr-2', open && 'hidden')}
+            // sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            className={cx('mr-4', open && 'hidden', 'text-neutral-300')}
           >
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
-            noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            // sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            className={cx('grow', 'none', 'sm:block', 'flex-nowrap')}
           >
             Home
           </Typography>
@@ -131,17 +126,28 @@ const Menu = () => {
           },
         }}
         variant="persistent"
-        anchor="left"
         open={open}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
           {["L'association", 'Nantes', 'Autres Villes'].map((text, index) => {
+            return (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            )
+          })}
+        </List>
+        <Divider />
+        <List>
+          {['Nous contacter', 'Se connecter'].map((text, index) => {
             return (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
