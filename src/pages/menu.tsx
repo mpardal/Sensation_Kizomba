@@ -22,6 +22,8 @@ import { styled, alpha, useTheme } from '@mui/material/styles'
 import theme from 'tailwindcss/defaultTheme'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import Image from 'next/image'
+import logo from '../../public/logo_SK.jpeg'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -73,6 +75,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 
 const drawerWidth = 200
+const navItems = ["L'association", 'Nantes', 'Autres villes']
+const actionItems = ['Nous contacter', 'Se connecter']
 
 const Menu = () => {
   const [open, setOpen] = React.useState(false)
@@ -85,79 +89,130 @@ const Menu = () => {
     setOpen(false)
   }
 
+  const burger = (
+    <IconButton
+      size="medium"
+      edge="start"
+      aria-label="open drawer"
+      onClick={handleDrawerOpen}
+      className={cx('mr-4', open && 'hidden', 'text-neutral-200', 'lg:hidden')}
+    >
+      <MenuIcon />
+    </IconButton>
+  )
+
+  const drawer = (
+    <Drawer
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+        },
+      }}
+      variant="persistent"
+      open={open}
+    >
+      <DrawerHeader>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'ltr' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        {navItems.map((item, index) => {
+          return (
+            <ListItem key={item} disablePadding>
+              <ListItemButton>
+                <ListItemText className={cx('text-yellow-500')} primary={item} />
+              </ListItemButton>
+            </ListItem>
+          )
+        })}
+      </List>
+      <Divider />
+      <List>
+        {actionItems.map((action, index) => {
+          return (
+            <ListItem key={action} disablePadding>
+              <ListItemButton>
+                <ListItemText className={cx('text-yellow-500')} primary={action} />
+              </ListItemButton>
+            </ListItem>
+          )
+        })}
+      </List>
+    </Drawer>
+  )
+
+  const navLink = (
+    <Box className={cx('hidden', 'lg:flex', 'flex-row', 'items-center')}>
+      {navItems.map((item, index) => {
+        return (
+          <Button className={cx('text-yellow-500')} key={index}>
+            {item}
+          </Button>
+        )
+      })}
+      <Image
+        src={logo}
+        alt="logo"
+        width="50px"
+        height="50px"
+        className={cx('rounded-full', 'mx-4')}
+      />
+      {actionItems.map((action, index) => {
+        return (
+          <Button className={cx('text-yellow-500')} key={index}>
+            {action}
+          </Button>
+        )
+      })}
+    </Box>
+  )
+
+  const linkName = (
+    <Typography
+      variant="h6"
+      component="div"
+      className={cx('grow', 'lg:hidden', 'flex-nowrap', 'text-neutral-200')}
+    >
+      Home
+    </Typography>
+  )
+
+  const search = (
+    <Search>
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInput placeholder="Search..." inputProps={{ 'aria-label': 'search' }} />
+    </Search>
+  )
+
+  const image = (
+    <Image
+      src={logo}
+      alt="logo"
+      width="50px"
+      height="50px"
+      className={cx('lg:hidden', 'rounded-full', 'mx-4')}
+    />
+  )
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className={cx('grow')}>
       <AppBar position="sticky">
         <Toolbar>
-          <IconButton
-            size="medium"
-            edge="start"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            // equivalent
-            // sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            className={cx('mr-4', open && 'hidden', 'text-neutral-300')}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            // sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            className={cx('grow', 'none', 'sm:block', 'flex-nowrap')}
-          >
-            Home
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInput placeholder="Search..." inputProps={{ 'aria-label': 'search' }} />
-          </Search>
+          {burger}
+          {linkName}
+          {navLink}
+          {drawer}
+          {image}
+          {search}
         </Toolbar>
       </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {["L'association", 'Nantes', 'Autres Villes'].map((text, index) => {
-            return (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            )
-          })}
-        </List>
-        <Divider />
-        <List>
-          {['Nous contacter', 'Se connecter'].map((text, index) => {
-            return (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            )
-          })}
-        </List>
-      </Drawer>
     </Box>
   )
 }
