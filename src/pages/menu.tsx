@@ -104,10 +104,8 @@ const Menu = () => {
   const drawer = (
     <Drawer
       sx={{
-        width: drawerWidth,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: drawerWidth,
           boxSizing: 'border-box',
         },
       }}
@@ -148,7 +146,7 @@ const Menu = () => {
   )
 
   const navLink = (
-    <Toolbar className={cx('hidden', 'lg:flex', 'justify-start', 'items-center', 'lg:w-5/6')}>
+    <Toolbar className={cx('hidden', 'lg:flex', 'justify-start', 'items-center', 'lg:w-4/6')}>
       {navItems.map((item, index) => {
         return (
           <Button className={cx('text-yellow-500', 'mr-3')} key={index}>
@@ -199,9 +197,9 @@ const Menu = () => {
   )
 
   return (
-    <Box className={cx('w-full')}>
+    <Box>
       <AppBar position="sticky">
-        <Toolbar>
+        <Toolbar className={cx('w-full', 'lg:flex', 'justify-between')}>
           {navLink}
           {burger}
           {linkName}

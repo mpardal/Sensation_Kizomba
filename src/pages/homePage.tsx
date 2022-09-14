@@ -9,32 +9,32 @@ const HomePage = () => {
   return (
     <Box>
       <h1 className={cx('text-center')}>SENSATION KIZOMBA</h1>
-      <Box className={cx('lg:flex', 'flex-row')}>
-        <Typography className={cx('text-justify', 'mx-3', 'md:mx-5')}>
+      <div className={cx('lg:flex', 'flex-row')}>
+        <article className={cx('text-justify', 'm-3', 'md:m-5')}>
           <h2 className={cx('text-center')}>Conexao du 08/10</h2>
           <Image src={conexao} alt="affiche du conexao" />
-          <div>
+          <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid culpa dolor
             dolorem earum excepturi facere, hic incidunt ipsum itaque nesciunt nihil non, pariatur
             praesentium quos suscipit voluptates. Dolorum, molestiae. Ab accusamus ad, aliquid atque
             aut cumque et eveniet fugit harum, id illum, laudantium quam tenetur! Aperiam cumque
             debitis, deserunt excepturi laboriosam quidem ratione tenetur? Consectetur fugiat id
             ipsam voluptatem.
-          </div>
-        </Typography>
-        <Typography className={cx('text-justify', 'mx-3', 'md:mx-5')}>
+          </p>
+        </article>
+        <article className={cx('text-justify', 'm-3', 'md:m-5')}>
           <h2 className={cx('text-center')}>Noite du 24/09</h2>
           <Image src={noite} alt="affiche de la noite" />
-          <div>
+          <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid culpa dolor
             dolorem earum excepturi facere, hic incidunt ipsum itaque nesciunt nihil non, pariatur
             praesentium quos suscipit voluptates. Dolorum, molestiae. Ab accusamus ad, aliquid atque
             aut cumque et eveniet fugit harum, id illum, laudantium quam tenetur! Aperiam cumque
             debitis, deserunt excepturi laboriosam quidem ratione tenetur? Consectetur fugiat id
             ipsam voluptatem.
-          </div>
-        </Typography>
-      </Box>
+          </p>
+        </article>
+      </div>
     </Box>
   )
 }
