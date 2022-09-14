@@ -95,7 +95,7 @@ const Menu = () => {
       edge="start"
       aria-label="open drawer"
       onClick={handleDrawerOpen}
-      className={cx('mr-4', open && 'hidden', 'text-neutral-200')}
+      className={cx('mr-4', open && 'hidden', 'text-neutral-200', 'lg:hidden')}
     >
       <MenuIcon />
     </IconButton>
@@ -111,6 +111,7 @@ const Menu = () => {
           boxSizing: 'border-box',
         },
       }}
+      className={cx('lg:hidden')}
       variant="persistent"
       open={open}
     >
@@ -147,7 +148,7 @@ const Menu = () => {
   )
 
   const navLink = (
-    <Box className={cx('flex', 'flex-row', 'items-center', 'w-4/6', 'ml-5')}>
+    <Toolbar className={cx('hidden', 'lg:flex', 'justify-start', 'items-center', 'lg:w-5/6')}>
       {navItems.map((item, index) => {
         return (
           <Button className={cx('text-yellow-500', 'mr-3')} key={index}>
@@ -163,65 +164,49 @@ const Menu = () => {
           </Button>
         )
       })}
-    </Box>
+    </Toolbar>
   )
 
   const linkName = (
-    <Box>
-      <Typography
-        variant="h6"
-        component="div"
-        className={cx('grow', 'flex-nowrap', 'text-neutral-200', 'mr-4')}
-      >
-        Home
-      </Typography>
-    </Box>
+    <Typography
+      variant="h6"
+      component="div"
+      className={cx('grow', 'flex-nowrap', 'text-neutral-200', 'mr-4', 'lg:hidden')}
+    >
+      Home
+    </Typography>
   )
 
   const search = (
-    <Search>
+    <Search className={cx('none', 'sm:flex', 'lg:w-1/6')}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInput placeholder="Search..." inputProps={{ 'aria-label': 'search' }} />
     </Search>
   )
-
   const image = (
-    <Image
-      src={logo}
-      alt="logo"
-      width="50px"
-      height="50px"
-      layout="fixed"
-      className={cx('rounded-full', 'mx-4', 'lg:hidden')}
-    />
+    <Toolbar className={cx('lg:hidden')}>
+      <Image
+        src={logo}
+        alt="logo"
+        layout="fixed"
+        width="50px"
+        height="50px"
+        className={cx('rounded-full', 'mx-4')}
+      />
+    </Toolbar>
   )
 
   return (
     <Box className={cx('grow')}>
       <AppBar position="sticky">
-        <Toolbar className={cx('flex', 'justify-between', 'sm:hidden')}>
-          <Toolbar>
-            {burger}
-            {linkName}
-            {drawer}
-          </Toolbar>
-          {image}
-        </Toolbar>
-        <Toolbar className={cx('hidden', 'sm:flex', 'sm:justify-between', 'lg:hidden')}>
-          <Toolbar>
-            {burger}
-            {linkName}
-            {drawer}
-          </Toolbar>
-          <Toolbar>
-            {image}
-            {search}
-          </Toolbar>
-        </Toolbar>
-        <Toolbar className={cx('hidden', 'lg:flex', 'lg:justify-between')}>
+        <Toolbar>
           {navLink}
+          {burger}
+          {linkName}
+          {drawer}
+          {image}
           {search}
         </Toolbar>
       </AppBar>
