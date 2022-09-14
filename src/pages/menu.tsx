@@ -178,7 +178,7 @@ const Menu = () => {
   )
 
   const search = (
-    <Search className={cx('none', 'sm:flex', 'lg:w-1/6')}>
+    <Search className={cx('hidden', 'sm:flex', 'lg:w-1/6')}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
@@ -199,7 +199,7 @@ const Menu = () => {
   )
 
   return (
-    <Box className={cx('grow')}>
+    <Box className={cx('w-full')}>
       <AppBar position="sticky">
         <Toolbar>
           {navLink}

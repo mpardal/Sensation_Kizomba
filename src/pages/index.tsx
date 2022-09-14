@@ -5,7 +5,7 @@ import HomePage from './homePage'
 
 const Home = () => {
   return (
-    <div className={cx('xl:container', 'xl:mx-auto')}>
+    <div className={cx('xl:container', 'xl:mx-auto', 'bg-neutral-200')}>
       <Menu />
       <HomePage />
     </div>
