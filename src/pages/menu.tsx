@@ -193,6 +193,7 @@ const Menu = () => {
       alt="logo"
       width="50px"
       height="50px"
+      layout="fixed"
       className={cx('rounded-full', 'mx-4', 'lg:hidden')}
     />
   )
