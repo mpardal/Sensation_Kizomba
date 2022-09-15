@@ -2,6 +2,7 @@ import React from 'react'
 import Menu from './menu'
 import cx from 'classnames'
 import HomePage from './homePage'
+import Link from 'next/link'
 
 const Home = () => {
   return (

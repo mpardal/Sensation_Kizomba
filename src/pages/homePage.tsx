@@ -4,15 +4,17 @@ import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import conexao from '../../public/conexao-8_10.jpeg'
 import noite from '../../public/noite-24_09.jpeg'
+import Menu from './menu'
 
 const HomePage = () => {
   return (
-    <Box>
+    <>
+      <Menu />
       <h1 className={cx('text-center')}>SENSATION KIZOMBA</h1>
       <div className={cx('lg:flex', 'flex-row')}>
         <article className={cx('text-justify', 'm-3', 'md:m-5')}>
           <h2 className={cx('text-center')}>Conexao du 08/10</h2>
-          <Image src={conexao} alt="affiche du conexao" />
+          <Image src={conexao} alt="affiche du conexao" className={cx('rounded-lg')} />
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid culpa dolor
             dolorem earum excepturi facere, hic incidunt ipsum itaque nesciunt nihil non, pariatur
@@ -24,7 +26,7 @@ const HomePage = () => {
         </article>
         <article className={cx('text-justify', 'm-3', 'md:m-5')}>
           <h2 className={cx('text-center')}>Noite du 24/09</h2>
-          <Image src={noite} alt="affiche de la noite" />
+          <Image src={noite} alt="affiche de la noite" className={cx('rounded-lg')} />
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid culpa dolor
             dolorem earum excepturi facere, hic incidunt ipsum itaque nesciunt nihil non, pariatur
@@ -35,7 +37,7 @@ const HomePage = () => {
           </p>
         </article>
       </div>
-    </Box>
+    </>
   )
 }
 

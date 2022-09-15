@@ -24,6 +24,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import Image from 'next/image'
 import logo from '../../public/logo_SK.jpeg'
+import Link from 'next/link'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -74,9 +75,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
-const drawerWidth = 200
-const navItems = ["L'association", 'Nantes', 'Autres villes']
-const actionItems = ['Nous contacter', 'Se connecter']
+// const drawerWidth = 200
+// const navItems = ["L'association", 'Nantes', 'Autres villes']
+// const actionItems = ['Nous contacter', 'Se connecter']
 
 const Menu = () => {
   const [open, setOpen] = React.useState(false)
@@ -102,17 +103,7 @@ const Menu = () => {
   )
 
   const drawer = (
-    <Drawer
-      sx={{
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          boxSizing: 'border-box',
-        },
-      }}
-      className={cx('lg:hidden')}
-      variant="persistent"
-      open={open}
-    >
+    <Drawer className={cx('shrink-0', 'lg:hidden')} variant="persistent" open={open}>
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -120,58 +111,109 @@ const Menu = () => {
       </DrawerHeader>
       <Divider />
       <List>
-        {navItems.map((item, index) => {
-          return (
-            <ListItem key={item} disablePadding>
-              <ListItemButton>
-                <ListItemText className={cx('text-yellow-500')} primary={item} />
-              </ListItemButton>
-            </ListItem>
-          )
-        })}
+        <Link href="/about">
+          <ListItemButton>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <ListItemText className={cx('text-yellow-500', 'mr-3')}>L'association</ListItemText>
+          </ListItemButton>
+        </Link>
+        <Link href="/nantes">
+          <ListItemButton>
+            <ListItemText className={cx('text-yellow-500', 'mr-3')}>Nantes</ListItemText>
+          </ListItemButton>
+        </Link>
+        <Link href="/others">
+          <ListItemButton>
+            <ListItemText className={cx('text-yellow-500', 'mr-3')}>Autres villes</ListItemText>
+          </ListItemButton>
+        </Link>
+        {/*{navItems.map((item, index) => {*/}
+        {/*  return (*/}
+        {/*    <ListItem key={item} disablePadding>*/}
+        {/*      <ListItemButton>*/}
+        {/*        <ListItemText className={cx('text-yellow-500')} primary={item} />*/}
+        {/*      </ListItemButton>*/}
+        {/*    </ListItem>*/}
+        {/*  )*/}
+        {/*})}*/}
       </List>
       <Divider />
       <List>
-        {actionItems.map((action, index) => {
-          return (
-            <ListItem key={action} disablePadding>
-              <ListItemButton>
-                <ListItemText className={cx('text-yellow-500')} primary={action} />
-              </ListItemButton>
-            </ListItem>
-          )
-        })}
+        <Link href="/contact">
+          <ListItemButton>
+            <ListItemText className={cx('text-yellow-500', 'mr-3')}>Nous contacter</ListItemText>
+          </ListItemButton>
+        </Link>
+        <Link href="/connect">
+          <ListItemButton>
+            <ListItemText className={cx('text-yellow-500', 'mr-3')}>Se connecter</ListItemText>
+          </ListItemButton>
+        </Link>
+        {/*{actionItems.map((action, index) => {*/}
+        {/*  return (*/}
+        {/*    <ListItem key={action} disablePadding>*/}
+        {/*      <ListItemButton>*/}
+        {/*        <ListItemText className={cx('text-yellow-500')} primary={action} />*/}
+        {/*      </ListItemButton>*/}
+        {/*    </ListItem>*/}
+        {/*  )*/}
+        {/*})}*/}
       </List>
     </Drawer>
   )
 
   const navLink = (
     <Toolbar className={cx('hidden', 'lg:flex', 'justify-start', 'items-center', 'lg:w-4/6')}>
-      {navItems.map((item, index) => {
-        return (
-          <Button className={cx('text-yellow-500', 'mr-3')} key={index}>
-            {item}
-          </Button>
-        )
-      })}
-      <Image src={logo} alt="logo" width="50px" height="50px" className={cx('rounded-full')} />
-      {actionItems.map((action, index) => {
-        return (
-          <Button className={cx('text-yellow-500', 'ml-3')} key={index}>
-            {action}
-          </Button>
-        )
-      })}
+      {/*{navItems.map((item, index) => {*/}
+      {/*  return (*/}
+      {/*    <Button className={cx('text-yellow-500', 'mr-3')} key={index}>*/}
+      {/*      {item}*/}
+      {/*    </Button>*/}
+      {/*  )*/}
+      {/*})}*/}
+      <Link href="/about">
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <Button className={cx('text-yellow-500', 'mr-3')}>L'association</Button>
+      </Link>
+      <Link href="/nantes">
+        <Button className={cx('text-yellow-500', 'mr-3')}>Nantes</Button>
+      </Link>
+      <Link href="/others">
+        <Button className={cx('text-yellow-500', 'mr-3')}>Autres villes</Button>
+      </Link>
+      <Link href="/homePage">
+        <Image src={logo} alt="logo" width="50px" height="50px" className={cx('rounded-full')} />
+      </Link>
+      <Link href="/contact">
+        <Button className={cx('text-yellow-500', 'mr-3')}>Nous contacter</Button>
+      </Link>
+      <Link href="/connect">
+        <Button className={cx('text-yellow-500', 'mr-3')}>Se connecter</Button>
+      </Link>
+      {/*{actionItems.map((action, index) => {*/}
+      {/*  return (*/}
+      {/*    <Button className={cx('text-yellow-500', 'ml-3')} key={index}>*/}
+      {/*      {action}*/}
+      {/*    </Button>*/}
+      {/*  )*/}
+      {/*})}*/}
     </Toolbar>
   )
 
-  const linkName = (
+  const title = (
     <Typography
       variant="h6"
       component="div"
-      className={cx('grow', 'flex-nowrap', 'text-neutral-200', 'mr-4', 'lg:hidden')}
+      className={cx(
+        'flex',
+        'grow',
+        'justify-center',
+        'flex-nowrap',
+        'text-yellow-500',
+        'lg:hidden',
+      )}
     >
-      Home
+      Sensation Kizomba
     </Typography>
   )
 
@@ -198,13 +240,12 @@ const Menu = () => {
 
   return (
     <Box>
-      <AppBar position="sticky">
+      <AppBar position="sticky" className={cx('bg-gradient-to-r from-inherit to-neutral-200')}>
         <Toolbar className={cx('w-full', 'lg:flex', 'justify-between')}>
           {navLink}
           {burger}
-          {linkName}
           {drawer}
-          {image}
+          <Link href="/homePage">{image}</Link>
           {search}
         </Toolbar>
       </AppBar>
