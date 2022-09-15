@@ -1,12 +1,10 @@
 import React from 'react'
-import Header from '../components/header'
 import Link from 'next/link'
-import Footer from '../components/footer'
+import Layout, { NextPageWithLayout } from '../components/layout'
 
-const About = () => {
+const About: NextPageWithLayout = () => {
   return (
     <div>
-      <Header />
       <div className="m-3 lg:m-5">
         <h1 className="text-center">SENSATION KIZOMBA</h1>
         <h3 className="underline">Qui sommes nous ?</h3>
@@ -30,19 +28,19 @@ const About = () => {
           </a>
         </Link>
         <p></p>
-        <Link href="/others/le-mans" passHref={true}>
+        <Link href="/le-mans" passHref={true}>
           <a className="text-black no-underline">
             <h4 className="italic">Le Mans</h4>
           </a>
         </Link>
         <p></p>
-        <Link href="/others/orleans" passHref={true}>
+        <Link href="/orleans" passHref={true}>
           <a className="text-black no-underline">
             <h4 className="italic">Orléans</h4>
           </a>
         </Link>
         <p></p>
-        <Link href="/others/bordeaux" passHref={true}>
+        <Link href="/bordeaux" passHref={true}>
           <a className="text-black no-underline">
             <h4 className="italic">Bordeaux</h4>
           </a>
@@ -53,9 +51,12 @@ const About = () => {
           <p>Mais aussi venir essayer la Kizomba dans une de nos villes.</p>
         </div>
       </div>
-      <Footer />
     </div>
   )
+}
+
+About.Layout = function AboutLayout(page) {
+  return <Layout>{page}</Layout>
 }
 
 export default About

@@ -8,7 +8,7 @@ const Burger = ({ open, onOpen }: { open: boolean; onOpen: () => void }) => (
     edge="start"
     aria-label="open drawer"
     onClick={onOpen}
-    className={cx('mr-4', open && 'hidden', 'text-neutral-200', 'lg:hidden')}
+    className={cx('mr-4 text-neutral-200 lg:hidden')}
   >
     <MenuIcon />
   </IconButton>

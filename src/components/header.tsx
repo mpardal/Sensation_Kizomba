@@ -1,11 +1,13 @@
+import ButtonBase from '@mui/material/ButtonBase'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { AppBar, Toolbar } from '@mui/material'
 import Burger from './burger'
 import Search from './search'
 import Nav from './nav'
-import DrawerNav from './drawer-nav'
-import logo from '../../public/logo_SK.png'
+import Drawer from './drawer'
 import Image from 'next/future/image'
+import logo from '../../public/logo_SK.png'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
@@ -22,10 +24,15 @@ const Header = () => {
     <AppBar position="sticky">
       <Toolbar className="relative h-[64px] w-full overflow-hidden lg:flex">
         <Burger open={open} onOpen={handleDrawerOpen} />
-        <DrawerNav open={open} onClose={handleDrawerClose} />
-        <Image src={logo} alt="logo" className="mx-5 h-full w-auto rounded-full" />
+        <Drawer open={open} onClose={handleDrawerClose} onOpen={handleDrawerOpen} />
+        <span className="h-full p-2 lg:mr-4">
+          <Link href="/" passHref>
+            <ButtonBase component="a" className="h-full rounded-full text-center">
+              <Image src={logo} alt="logo" className="h-full w-auto rounded-full" />
+            </ButtonBase>
+          </Link>
+        </span>
         <Nav />
-        <Search />
       </Toolbar>
     </AppBar>
   )

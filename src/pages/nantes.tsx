@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout, { NextPageWithLayout } from '../components/layout'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import Image from 'next/image'
@@ -8,7 +9,7 @@ import mardi from '../../public/mardi.jpeg'
 import sdc from '../../public/SDC.jpeg'
 import Info from '../components/info'
 
-const Nantes = () => {
+const Nantes: NextPageWithLayout = () => {
   return (
     <div>
       <Info />
@@ -80,6 +81,10 @@ const Nantes = () => {
       <Footer />
     </div>
   )
+}
+
+Nantes.Layout = function ContactLayout(page) {
+  return <Layout>{page}</Layout>
 }
 
 export default Nantes

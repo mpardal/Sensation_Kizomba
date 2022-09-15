@@ -3,7 +3,7 @@ import { InputBase } from '@mui/material'
 
 const Search = () => {
   return (
-    <div className="relative ml-auto hidden w-1/2 rounded bg-gray-600 transition-colors hover:bg-gray-700 sm:flex sm:w-auto">
+    <div className="relative hidden w-1/2 rounded bg-gray-600 transition-colors hover:bg-gray-700 sm:flex sm:w-auto">
       <div className="pointer-events-none absolute flex h-full items-center justify-center py-0 px-4">
         <SearchIcon />
       </div>

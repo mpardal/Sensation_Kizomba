@@ -40,7 +40,6 @@ function MuiTheme({ children }: React.PropsWithChildren) {
         defaultProps: {
           type: 'button',
         },
-        styleOverrides: {},
       },
     },
   })

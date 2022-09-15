@@ -1,19 +1,39 @@
-import cx from 'classnames'
-import { Divider, Drawer, IconButton, List, ListItemButton, ListItemText } from '@mui/material'
-import theme from 'tailwindcss/defaultTheme'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import { Typography, SwipeableDrawer } from '@mui/material'
+import { Divider, List, ListItemButton, ListItemText, Drawer as MuiDrawer } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Link from 'next/link'
-import * as React from 'react'
+import { styled } from '@mui/material/styles'
 
-const DrawerNav = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+const DrawerHeader = styled('div')(({ theme }) => ({
+  ...theme.mixins.toolbar,
+}))
+
+const Drawer = ({
+  open,
+  onClose,
+  onOpen,
+}: {
+  open: boolean
+  onClose: () => void
+  onOpen: () => void
+}) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', onClose)
+
+    return () => {
+      router.events.off('routeChangeComplete', onClose)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <Drawer className="shrink-0 lg:hidden" open={open} variant="persistent">
-      <div className="flex items-center justify-center pt-0 pr-2">
-        <IconButton onClick={onClose}>
-          {theme.direction === 'ltr' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-        </IconButton>
-      </div>
+    <SwipeableDrawer open={open} onClose={onClose} onOpen={onOpen}>
+      <DrawerHeader className="flex items-center justify-end px-2">
+        <Typography variant="h6">Sensation Kizomba</Typography>
+      </DrawerHeader>
       <Divider />
       <List>
         <Link href="/about" passHref={true}>
@@ -26,17 +46,17 @@ const DrawerNav = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
             <ListItemText className="mr-3 text-yellow-500">Nantes</ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/others/bordeaux" passHref={true}>
+        <Link href="/bordeaux" passHref={true}>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-yellow-500">Bordeaux</ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/others/le-mans" passHref={true}>
+        <Link href="/le-mans" passHref={true}>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-yellow-500">Le Mans</ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/others/orleans" passHref={true}>
+        <Link href="/orleans" passHref={true}>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-yellow-500">Orléans</ListItemText>
           </ListItemButton>
@@ -49,14 +69,14 @@ const DrawerNav = ({ open, onClose }: { open: boolean; onClose: () => void }) =>
             <ListItemText className="mr-3 text-yellow-500">Nous contacter</ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/connect" passHref={true}>
+        <Link href="/login" passHref={true}>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-yellow-500">Se connecter</ListItemText>
           </ListItemButton>
         </Link>
       </List>
-    </Drawer>
+    </SwipeableDrawer>
   )
 }
 
-export default DrawerNav
+export default Drawer

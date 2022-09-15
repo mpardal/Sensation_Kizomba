@@ -1,16 +1,16 @@
 import React from 'react'
 import Layout, { NextPageWithLayout } from '../components/layout'
 
-const Contact: NextPageWithLayout = () => {
+const Login: NextPageWithLayout = () => {
   return (
     <div>
-      <h1>Contact</h1>
+      <h1>Connect</h1>
     </div>
   )
 }
 
-Contact.Layout = function ContactLayout(page) {
+Login.Layout = function LoginLayout(page) {
   return <Layout>{page}</Layout>
 }
 
-export default Contact
+export default Login
