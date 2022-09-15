@@ -7,7 +7,6 @@ import Link from 'next/link'
 const Home = () => {
   return (
     <div className={cx('xl:container', 'xl:mx-auto', 'bg-neutral-200')}>
-      <Menu />
       <HomePage />
     </div>
   )
