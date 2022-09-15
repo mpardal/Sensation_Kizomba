@@ -1,10 +1,10 @@
 import React from 'react'
-import Menu from '../menu'
+import Header from '../../components/menu'
 
 const Bordeaux = () => {
   return (
     <div>
-      <Menu />
+      <Header />
       <h1>Bordeaux</h1>
     </div>
   )

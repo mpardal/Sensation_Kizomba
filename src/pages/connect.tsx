@@ -1,11 +1,13 @@
 import React from 'react'
-import Menu from './menu'
+import Header from '../components/header'
+import Footer from '../components/footer'
 
 const Connect = () => {
   return (
     <div>
-      <Menu />
+      <Header />
       <h1>Connect</h1>
+      <Footer />
     </div>
   )
 }

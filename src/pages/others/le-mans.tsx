@@ -1,10 +1,10 @@
 import React from 'react'
-import Menu from '../menu'
+import Header from '../../components/menu'
 
 const LeMans = () => {
   return (
     <div>
-      <Menu />
+      <Header />
       <h1>Le Mans</h1>
     </div>
   )

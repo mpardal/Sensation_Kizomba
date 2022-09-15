@@ -1,30 +1,30 @@
 import React from 'react'
-import Menu from './menu'
+import Header from '../../components/menu'
 import Link from 'next/link'
 
-const Others = () => {
+const OthersPage = () => {
   return (
     <div>
-      <Menu />
+      <Header />
       <h1>Sensation Kizomba</h1>
       <h2>Autres villes</h2>
       <Link href="/others/bordeaux">
-        <div>
+        <a>
           <h3>Bordeaux</h3>
-        </div>
+        </a>
       </Link>
       <Link href="/others/le-mans">
-        <div>
+        <a>
           <h3>Le Mans</h3>
-        </div>
+        </a>
       </Link>
       <Link href="/others/orleans">
-        <div>
+        <a>
           <h3>Orléans</h3>
-        </div>
+        </a>
       </Link>
     </div>
   )
 }
 
-export default Others
+export default OthersPage

@@ -1,11 +1,13 @@
 import React from 'react'
-import Menu from './menu'
+import Header from '../components/header'
+import Footer from '../components/footer'
 
 const Disconnect = () => {
   return (
     <div>
-      <Menu />
+      <Header />
       <h1>Disconnect</h1>
+      <Footer />
     </div>
   )
 }
