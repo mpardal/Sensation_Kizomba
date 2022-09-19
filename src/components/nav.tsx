@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { Button } from '@mui/material'
-import cx from 'classnames'
+import { Button, Drawer } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import * as React from 'react'
 
@@ -8,17 +7,17 @@ const Nav = () => {
   return (
     <div className="hidden h-full items-center justify-center lg:flex">
       <Link href="/about" passHref={true}>
-        <Button component="a" className={cx('text-yellow-500', 'mr-3')}>
+        <Button component="a" className="mr-3 text-yellow-500">
           L'association
         </Button>
       </Link>
       <Link href="/nantes" passHref={true}>
-        <Button component="a" className={cx('text-yellow-500', 'mr-3')}>
+        <Button component="a" className="mr-3 text-yellow-500">
           Nantes
         </Button>
       </Link>
-      <Link href="/others/Index" passHref={true}>
-        <Button component="a" className={cx('text-yellow-500', 'mr-3')}>
+      <Link href="/others/" passHref={true}>
+        <Button component="a" className="mr-3 text-yellow-500">
           Autres villes
         </Button>
       </Link>
@@ -28,12 +27,12 @@ const Nav = () => {
         </a>
       </Link>
       <Link href="/contact" passHref={true}>
-        <Button component="a" className={cx('text-yellow-500', 'ml-3')}>
+        <Button component="a" className="ml-3 text-yellow-500">
           Nous contacter
         </Button>
       </Link>
       <Link href="/connect" passHref={true}>
-        <Button component="a" className={cx('text-yellow-500', 'ml-3')}>
+        <Button component="a" className="ml-3 text-yellow-500">
           Se connecter
         </Button>
       </Link>

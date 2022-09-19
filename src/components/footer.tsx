@@ -4,7 +4,7 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 
 const Footer = () => {
   return (
-    <AppBar className="flex flex-row justify-around">
+    <footer className="flex flex-row justify-around bg-black text-neutral-200">
       <div className="flex flex-row items-center justify-start">
         <p className="mr-5">Facebook :</p>
         <FacebookIcon />
@@ -14,7 +14,7 @@ const Footer = () => {
         <p className="mr-5">Instagram :</p>
         <InstagramIcon />
       </div>
-    </AppBar>
+    </footer>
   )
 }
 

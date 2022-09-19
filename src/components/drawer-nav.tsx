@@ -1,28 +1,19 @@
 import cx from 'classnames'
-import { Divider, IconButton, List, ListItemButton, ListItemText } from '@mui/material'
+import { Divider, Drawer, IconButton, List, ListItemButton, ListItemText } from '@mui/material'
 import theme from 'tailwindcss/defaultTheme'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import Link from 'next/link'
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}))
-
-const Drawer = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+const DrawerNav = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   return (
-    <div className={cx('shrink-0 lg:hidden', open)}>
-      <DrawerHeader>
+    <Drawer className="shrink-0 lg:hidden" open={open} variant="persistent">
+      <div className="flex items-center justify-center pt-0 pr-2">
         <IconButton onClick={onClose}>
           {theme.direction === 'ltr' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
-      </DrawerHeader>
+      </div>
       <Divider />
       <List>
         <Link href="/about" passHref={true}>
@@ -64,8 +55,8 @@ const Drawer = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
           </ListItemButton>
         </Link>
       </List>
-    </div>
+    </Drawer>
   )
 }
 
-export default Drawer
+export default DrawerNav
