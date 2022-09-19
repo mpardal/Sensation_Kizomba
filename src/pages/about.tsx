@@ -6,14 +6,13 @@ const About: NextPageWithLayout = () => {
   return (
     <div>
       <div className="m-3 lg:m-5">
-        <h1 className="text-center">SENSATION KIZOMBA</h1>
-        <h3 className="underline">Qui sommes nous ?</h3>
+        <h2 className="underline">Qui sommes nous ?</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium, aperiam,
           aspernatur dolorum est fugit laboriosam libero maxime nemo obcaecati quo tempore?
           Architecto asperiores blanditiis illo nobis officiis vero, voluptas!
         </p>
-        <h3 className="underline">Que faisons-nous ?</h3>
+        <h2 className="underline">Que faisons-nous ?</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aut, delectus, distinctio
           eaque error facilis fugiat id laborum minima molestiae molestias nemo odit omnis placeat
@@ -21,7 +20,7 @@ const About: NextPageWithLayout = () => {
           asperiores aspernatur consectetur dicta ducimus, earum facere facilis harum illo incidunt
           magnam, molestiae neque nesciunt, pariatur quasi sunt temporibus! Iure, magnam veritatis.
         </p>
-        <h3 className="underline">Où sommes nous ?</h3>
+        <h2 className="underline">Où sommes nous ?</h2>
         <Link href="/nantes" passHref={true}>
           <a className="text-black no-underline">
             <h4 className="italic">Nantes</h4>

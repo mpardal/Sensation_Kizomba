@@ -9,7 +9,7 @@ import Layout, { NextPageWithLayout } from '../components/layout'
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <h1 className="text-center">SENSATION KIZOMBA</h1>
+      <h1>Derniers articles</h1>
       <div className="flex-row lg:flex">
         <article className="m-3 text-justify md:m-5">
           <h2 className="text-center">Conexao du 08/10</h2>
