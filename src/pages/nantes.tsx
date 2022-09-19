@@ -12,8 +12,6 @@ import Info from '../components/info'
 const Nantes: NextPageWithLayout = () => {
   return (
     <div>
-      <Info />
-      <Header />
       <div className="m-3 lg:m-5">
         <h1 className="text-center">Sensation Kizomba</h1>
         <h2>Nantes</h2>
@@ -78,7 +76,6 @@ const Nantes: NextPageWithLayout = () => {
           </div>
         </article>
       </div>
-      <Footer />
     </div>
   )
 }

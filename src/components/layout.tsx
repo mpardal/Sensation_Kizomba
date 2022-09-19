@@ -1,7 +1,8 @@
 import { NextPage } from 'next'
-import { PropsWithChildren, ReactElement, ReactNode, useState } from 'react'
+import React, { PropsWithChildren, ReactElement, ReactNode, useState } from 'react'
 import Footer from './footer'
 import Header from './header'
+import Info from './info'
 import PageContainer from './page-container'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -11,6 +12,7 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div>
+      <Info />
       <Header />
       <PageContainer>{children}</PageContainer>
       <Footer />

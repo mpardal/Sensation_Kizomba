@@ -5,7 +5,7 @@ import { AppBar, Toolbar } from '@mui/material'
 import Burger from './burger'
 import Search from './search'
 import Nav from './nav'
-import Drawer from './drawer'
+import Drawer from './drawer-nav'
 import Image from 'next/future/image'
 import logo from '../../public/logo_SK.png'
 

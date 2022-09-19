@@ -3,20 +3,26 @@ import Link from 'next/link'
 
 const Info = () => {
   return (
-    <div className="m-O flex items-center justify-center bg-yellow-500 p-3">
-      <h3 className="mr-3">Prochaine événement :</h3>
-      <Link href="#">
-        <a className="mx-2 text-black no-underline">Noite Kizomba - 24 septembre</a>
-      </Link>
-      <NightlifeIcon className="mx-2" />
-      <Link href="#">
-        <a className="mx-2 text-black no-underline">Unidade - 1 octobre</a>
-      </Link>
-      <NightlifeIcon className="mx-2" />
-      <Link href="#">
-        <a className="mx-2 text-black no-underline">Conexao - 8 octobre</a>
-      </Link>
-      <NightlifeIcon className="mx-2" />
+    <div className="flex items-center justify-center gap-3 bg-yellow-500">
+      <h3>Prochains événements :</h3>
+      <div className="flex items-center gap-2 rounded-full bg-yellow-800 px-2 text-white">
+        <Link href="#">
+          <a className="text-inherit no-underline">Noite Kizomba - 24 septembre</a>
+        </Link>
+        <NightlifeIcon />
+      </div>
+      <div className="flex items-center gap-2 rounded-full bg-yellow-800 px-2 text-white">
+        <Link href="#">
+          <a className="text-inherit no-underline">Unidade - 1 octobre</a>
+        </Link>
+        <NightlifeIcon />
+      </div>
+      <div className="flex items-center gap-2 rounded-full bg-yellow-800 px-2 text-white">
+        <Link href="#">
+          <a className="text-inherit no-underline">Conexao - 8 octobre</a>
+        </Link>
+        <NightlifeIcon />
+      </div>
     </div>
   )
 }
