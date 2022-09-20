@@ -7,7 +7,8 @@ import Event from '../components/event'
 const Bordeaux: NextPageWithLayout = () => {
   return (
     <div>
-      <h1>Bordeaux</h1>
+      <h1 className="text-center underline">Bordeaux</h1>
+      <h2 className="ml-5 mt-10">Événements annuels</h2>
       <Event
         title="Bordeaux Kizomba Salsa Congress"
         city="Mérignac"

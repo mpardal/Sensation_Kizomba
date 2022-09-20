@@ -6,8 +6,8 @@ import noite from '/noite-24_09.jpeg'
 const Orleans: NextPageWithLayout = () => {
   return (
     <div>
-      <h1>Orléans</h1>
-      <h2>Événements mensuels</h2>
+      <h1 className="text-center underline">Orléans</h1>
+      <h2 className="ml-5 mt-10">Événements mensuels</h2>
       <Event
         title="Noite Orléans"
         city="Saint-Jean-De-Braye"

@@ -6,8 +6,8 @@ const Nantes: NextPageWithLayout = () => {
   return (
     <div>
       <div className="m-3 lg:m-5">
-        <h1>Nantes</h1>
-        <h2>Événements hebdomadaires</h2>
+        <h1 className="text-center underline">Nantes</h1>
+        <h2 className="ml-5 mt-10">Événements hebdomadaires</h2>
         <Event
           title="Les mardis au Sao"
           image="/mardi.jpeg"
@@ -19,7 +19,7 @@ const Nantes: NextPageWithLayout = () => {
           linkDetails="#"
           linkBuyTicket="#"
         />
-        <h2>Événements mensuels</h2>
+        <h2 className="ml-5 mt-10">Événements mensuels</h2>
         <Event
           title="conexao"
           image="/conexao-8_10.jpeg"
@@ -31,7 +31,7 @@ const Nantes: NextPageWithLayout = () => {
           linkDetails="#"
           linkBuyTicket="#"
         />
-        <h2>Événements trimestriels</h2>
+        <h2 className="ml-5 mt-10">Événements trimestriels</h2>
         <Event
           title="Unidade"
           image="/unidade-01_10.jpeg"
@@ -43,7 +43,7 @@ const Nantes: NextPageWithLayout = () => {
           linkDetails="#"
           linkBuyTicket="#"
         />
-        <h2>Événements annuels</h2>
+        <h2 className="ml-5 mt-10">Événements annuels</h2>
         <Event
           title="Sensation Dance Congress"
           image="/SDC.jpeg"

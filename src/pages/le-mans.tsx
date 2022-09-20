@@ -5,7 +5,8 @@ import Event from '../components/event'
 const LeMans: NextPageWithLayout = () => {
   return (
     <div>
-      <h1>Le Mans</h1>
+      <h1 className="text-center underline">Le Mans</h1>
+      <h2 className="ml-5 mt-10">Événements annuels</h2>
       <Event
         title="Kizomba Castle Exkiz festival"
         city="Pârigné l'évêque"
