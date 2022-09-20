@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Info = () => {
   return (
-    <div className="flex items-center justify-center gap-3 bg-yellow-500">
+    <div className="flex flex-col items-center justify-center gap-3 bg-yellow-500 pb-6 lg:flex-row">
       <h3>Prochains événements :</h3>
       <div className="flex items-center gap-2 rounded-full bg-yellow-800 px-2 text-white">
         <Link href="#">

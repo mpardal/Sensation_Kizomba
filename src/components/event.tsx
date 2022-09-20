@@ -11,8 +11,9 @@ import {
 } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import LocalActivityIcon from '@mui/icons-material/LocalActivity'
-import Image from 'next/image'
+import Image from 'next/future/image'
 import Link from 'next/link'
+import conexao from '../../public/conexao-8_10.jpeg'
 
 const Event = ({
   title,
@@ -38,13 +39,13 @@ const Event = ({
   return (
     <Card className="m-5 max-w-full rounded-2xl bg-neutral-300 p-5">
       <CardContent>
-        <Typography className="text-md mb-5 text-center font-bold text-yellow-600 lg:text-2xl">
+        <Typography className="mb-10 text-center text-3xl font-bold text-yellow-600 lg:text-4xl">
           {title}
         </Typography>
         <div className="flex flex-col items-center justify-around lg:flex-row">
-          <Image src={{ image }} alt={title} width="750px" height="500px" className="rounded-3xl" />
+          <Image src={image} alt={title} width="750" height="500" className="rounded-3xl" />
           <List>
-            <ListItem className="flex flex-col items-start text-sm text-yellow-600 md:flex-row lg:flex-col lg:justify-around lg:text-xl">
+            <ListItem className="flex flex-col items-start text-yellow-600 md:flex-row lg:flex-col lg:justify-around lg:text-xl">
               <ListItemButton>Ville : {city}</ListItemButton>
               <ListItemButton>Adresse : {address}</ListItemButton>
               <ListItemButton>Date : {date}</ListItemButton>

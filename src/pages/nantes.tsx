@@ -1,10 +1,5 @@
 import React from 'react'
 import Layout, { NextPageWithLayout } from '../components/layout'
-import Image from 'next/image'
-import unidade from '../../public/unidade-01_10.jpeg'
-import conexao from '../../public/conexao-8_10.jpeg'
-import mardi from '../../public/mardi.jpeg'
-import sdc from '../../public/SDC.jpeg'
 import Event from '../components/event'
 
 const Nantes: NextPageWithLayout = () => {
@@ -15,7 +10,7 @@ const Nantes: NextPageWithLayout = () => {
         <h2>Événements hebdomadaires</h2>
         <Event
           title="Les mardis au Sao"
-          image="mardi"
+          image="/mardi.jpeg"
           address="Quai des Antilles"
           city="Nantes"
           date="tous les mardis"
@@ -27,7 +22,7 @@ const Nantes: NextPageWithLayout = () => {
         <h2>Événements mensuels</h2>
         <Event
           title="conexao"
-          image="conexao"
+          image="/conexao-8_10.jpeg"
           address="Smash Goal"
           city="Nantes"
           date="08/10/2022"
@@ -39,7 +34,7 @@ const Nantes: NextPageWithLayout = () => {
         <h2>Événements trimestriels</h2>
         <Event
           title="Unidade"
-          image="unidade"
+          image="/unidade-01_10.jpeg"
           address="Orange Bleue"
           city="La Chapelle sur Erdre"
           date="01/10/2022"
@@ -51,7 +46,7 @@ const Nantes: NextPageWithLayout = () => {
         <h2>Événements annuels</h2>
         <Event
           title="Sensation Dance Congress"
-          image="sdc"
+          image="/SDC.jpeg"
           address="Vigneux de Bretagne"
           city="Vigneux de Bretagne"
           date="10/11/2022 au 14/11/2022"
