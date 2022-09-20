@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@mui/material'
 import React from 'react'
-import OtherCitiesMenu from './other-cities-menu'
+import NavOtherCitiesMenu from './nav-other-cities-menu'
 import Search from './search'
 
 const Nav = () => {
@@ -19,7 +19,7 @@ const Nav = () => {
           </Button>
         </Link>
 
-        <OtherCitiesMenu />
+        <NavOtherCitiesMenu />
       </div>
 
       <div className="flex gap-3">

@@ -1,8 +1,8 @@
 import { NextPage } from 'next'
-import React, { PropsWithChildren, ReactElement, ReactNode, useState } from 'react'
+import React, { PropsWithChildren, ReactElement, ReactNode } from 'react'
 import Footer from './footer'
 import Header from './header'
-import Info from './info'
+import NextEventsBanner from './next-events-banner'
 import PageContainer from './page-container'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -12,7 +12,7 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div>
-      <Info />
+      <NextEventsBanner />
       <Header />
       <PageContainer>{children}</PageContainer>
       <Footer />

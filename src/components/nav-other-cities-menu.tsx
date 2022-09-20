@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-const OtherCitiesMenu = () => {
+const NavOtherCitiesMenu = () => {
   const router = useRouter()
 
   useEffect(() => {
@@ -57,4 +57,4 @@ const OtherCitiesMenu = () => {
   )
 }
 
-export default OtherCitiesMenu
+export default NavOtherCitiesMenu

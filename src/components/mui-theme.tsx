@@ -5,7 +5,7 @@
  *
  */
 
-import type { PaletteMode, PaletteOptions } from '@mui/material'
+import type { PaletteOptions } from '@mui/material'
 import { createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
 import red from '@mui/material/colors/red'
 import React from 'react'
@@ -13,7 +13,7 @@ import React from 'react'
 function MuiTheme({ children }: React.PropsWithChildren) {
   const palette: PaletteOptions = {
     mode: 'dark',
-    primary: { main: '#2c5896', light: '#3388ff', dark: '#1f3e69' },
+    primary: { main: '#dbb12b', light: '#dbb12b', dark: '#dbb12b' },
     secondary: { main: '#2cb67d', light: '#3fc68e' },
     error: { main: red['300'], light: '#e45858' },
   }
@@ -40,14 +40,21 @@ function MuiTheme({ children }: React.PropsWithChildren) {
         defaultProps: {
           type: 'button',
         },
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
+          },
+        },
       },
     },
   })
 
   return (
     <StyledEngineProvider injectFirst>
-      <CssBaseline />
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
     </StyledEngineProvider>
   )
 }
