@@ -5,7 +5,7 @@ import Event from '../components/event'
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <h1>Derniers articles</h1>
+      <h1 className="text-center underline">Derniers articles</h1>
       <div className="flex flex-col">
         <Event
           title="Conexao"

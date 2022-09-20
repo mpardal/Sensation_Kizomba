@@ -6,6 +6,18 @@ const LeMans: NextPageWithLayout = () => {
   return (
     <div>
       <h1 className="text-center underline">Le Mans</h1>
+      <h2 className="ml-5 mt-10">Événements hebdomadaires</h2>
+      <Event
+        title="Cours & soirée KIZOMBA"
+        image="/jeudi-mans.jpeg"
+        city="Le Mans"
+        address="Restaurant Loso - 16 rue d'Alger"
+        date="du 13/07/2023 au 16/07/2023"
+        professor="Jonathan"
+        dj="DJ Persy & DJ Anonymous"
+        linkBuyTicket="#"
+        linkDetails="#"
+      />
       <h2 className="ml-5 mt-10">Événements annuels</h2>
       <Event
         title="Kizomba Castle Exkiz festival"
