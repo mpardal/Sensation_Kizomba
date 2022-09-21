@@ -1,3 +1,4 @@
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
@@ -13,12 +14,24 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material'
+import { auth } from '../config/firebase-config'
 
 const LoginPage: NextPageWithLayout = () => {
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleSubmit = (evt: FormEvent) => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
+    // aucune validation n'est effectuée ici, il faudra rajouter quelque chose comme zod et formik
+    const formData = new FormData(evt.currentTarget)
+
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+
+    // permet de se connecter à firebase, l'utilisateur est récupéré dans hooks/use-auth.tsx
+    const cred = await signInWithEmailAndPassword(auth, email, password)
+
+    // par la suite, on supprimera le console.log
+    console.log(cred)
   }
 
   return (
@@ -51,7 +64,9 @@ const LoginPage: NextPageWithLayout = () => {
               />
             </FormControl>
           </div>
-          <Button variant="outlined">Se connecter</Button>
+          <Button variant="outlined" type="submit">
+            Se connecter
+          </Button>
         </form>
       </div>
     </div>
