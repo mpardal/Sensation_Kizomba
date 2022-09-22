@@ -6,14 +6,19 @@ import {
   CardMedia,
   Card,
   List,
-  ListItemButton,
-  ListItem, IconButton, CardHeader, ListItemText, ListItemAvatar, Avatar,
+  ListItem,
+  IconButton,
+  CardHeader,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
 } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import LocalActivityIcon from '@mui/icons-material/LocalActivity'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import LocationCityIcon from '@mui/icons-material/LocationCity'
+import MusicNoteIcon from '@mui/icons-material/MusicNote'
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
 import Image from 'next/future/image'
 import Link from 'next/link'
 
@@ -60,11 +65,15 @@ const Event = ({
                 <LocationCityIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText>{address} à <strong>{city}</strong></ListItemText>
+            <ListItemText>
+              {address} à <strong>{city}</strong>
+            </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemAvatar>
-              <Avatar />
+              <Avatar>
+                <SupervisorAccountIcon />
+              </Avatar>
             </ListItemAvatar>
             <ListItemText>{professor}</ListItemText>
           </ListItem>
