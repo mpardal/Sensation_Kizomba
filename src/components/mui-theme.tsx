@@ -55,7 +55,7 @@ function MuiTheme({ children }: PropsWithChildren) {
     <StyledEngineProvider injectFirst>
       {/* le problème de couleur venait d'ici, il fallait d'abord mettre ThemeProvider puis CssBaseline, là où on avait l'inverse */}
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         {children}
       </ThemeProvider>
     </StyledEngineProvider>

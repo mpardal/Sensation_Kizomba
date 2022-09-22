@@ -7,13 +7,15 @@ import {
   Card,
   List,
   ListItemButton,
-  ListItem,
+  ListItem, IconButton, CardHeader, ListItemText, ListItemAvatar, Avatar,
 } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import LocalActivityIcon from '@mui/icons-material/LocalActivity'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import Image from 'next/future/image'
 import Link from 'next/link'
-import conexao from '../../public/conexao-8_10.jpeg'
 
 const Event = ({
   title,
@@ -37,34 +39,55 @@ const Event = ({
   linkDetails: string
 }) => {
   return (
-    <Card className="m-5 max-w-full rounded-2xl bg-neutral-300 p-5">
+    <Card variant="outlined">
+      <CardHeader title={title} subheader={date} />
+      <CardMedia title={title}>
+        <Image src={image} alt={title} sizes="100vw" fill className="!relative" />
+      </CardMedia>
       <CardContent>
-        <Typography className="mb-10 text-center text-3xl font-bold text-yellow-600 lg:text-4xl">
-          {title}
-        </Typography>
-        <div className="flex flex-col items-center justify-around lg:flex-row">
-          <Image src={image} alt={title} width="750" height="500" className="rounded-3xl" />
-          <List>
-            <ListItem className="flex flex-col items-start text-yellow-600 md:flex-row lg:flex-col lg:justify-around lg:text-xl">
-              <ListItemButton>Ville : {city}</ListItemButton>
-              <ListItemButton>Adresse : {address}</ListItemButton>
-              <ListItemButton>Date : {date}</ListItemButton>
-              <ListItemButton>Professeurs : {professor}</ListItemButton>
-              <ListItemButton>DJs : {dj}</ListItemButton>
-            </ListItem>
-          </List>
-        </div>
+        <List>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <CalendarMonthIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>{date}</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <LocationCityIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>{address} à <strong>{city}</strong></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar />
+            </ListItemAvatar>
+            <ListItemText>{professor}</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <MusicNoteIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>{dj}</ListItemText>
+          </ListItem>
+        </List>
       </CardContent>
-      <CardActions className="m-6 flex justify-around gap-10 lg:justify-start">
-        <Link href={linkDetails}>
-          <a>
-            <AddCircleOutlineIcon className="text-black" />
-          </a>
+      <CardActions>
+        <Link href={linkDetails} passHref>
+          <IconButton component="a">
+            <AddCircleOutlineIcon color="action" fontSize="large" />
+          </IconButton>
         </Link>
-        <Link href={linkBuyTicket}>
-          <a>
-            <LocalActivityIcon className="text-black" />
-          </a>
+        <Link href={linkBuyTicket} passHref>
+          <IconButton component="a">
+            <LocalActivityIcon color="action" fontSize="large" />
+          </IconButton>
         </Link>
       </CardActions>
     </Card>
