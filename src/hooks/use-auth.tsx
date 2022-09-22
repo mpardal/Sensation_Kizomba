@@ -9,6 +9,7 @@ const AuthContext = createContext({
 } as {
   authUser: AppUser | undefined
   loading: boolean
+  logged: boolean
 })
 
 const FirebaseAuthProvider = ({ children }: PropsWithChildren) => {
@@ -44,11 +45,14 @@ const FirebaseAuthProvider = ({ children }: PropsWithChildren) => {
     }
   }, [])
 
+  const logged = Boolean(authUser)
+
   return (
     <AuthContext.Provider
       value={{
         authUser,
         loading,
+        logged,
       }}
     >
       {children}

@@ -1,9 +1,13 @@
 import { Typography, SwipeableDrawer } from '@mui/material'
 import { Divider, List, ListItemButton, ListItemText, Drawer as MuiDrawer } from '@mui/material'
+import { signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { styled } from '@mui/material/styles'
+import { auth } from '../config/firebase-config'
+import { useAuth } from '../hooks/use-auth'
+import { useGlobalSnackbar } from '../hooks/use-global-snackbar'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
@@ -19,6 +23,8 @@ const Drawer = ({
   onOpen: () => void
 }) => {
   const router = useRouter()
+  const { logged } = useAuth()
+  const { setMessage } = useGlobalSnackbar()
 
   useEffect(() => {
     router.events.on('routeChangeComplete', onClose)
@@ -69,11 +75,28 @@ const Drawer = ({
             <ListItemText className="mr-3 text-yellow-500">Nous contacter</ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/login" passHref={true}>
-          <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">Se connecter</ListItemText>
+        {!logged ? (
+          <Link href="/login" passHref={true}>
+            <ListItemButton component="a">
+              <ListItemText className="mr-3 text-yellow-500">Se connecter</ListItemText>
+            </ListItemButton>
+          </Link>
+        ) : (
+          <ListItemButton
+            onClick={() => {
+              signOut(auth)
+                .then(() => {
+                  setMessage('Vous êtes déconnecté', 'success')
+                  onClose()
+                })
+                .catch((err) => {
+                  console.error('Error signOut', err)
+                })
+            }}
+          >
+            <ListItemText className="text-yellow-500">Déconnexion</ListItemText>
           </ListItemButton>
-        </Link>
+        )}
       </List>
     </SwipeableDrawer>
   )

@@ -41,8 +41,8 @@ const Event = ({
   return (
     <Card variant="outlined">
       <CardHeader title={title} subheader={date} />
-      <CardMedia title={title}>
-        <Image src={image} alt={title} sizes="100vw" fill className="!relative" />
+      <CardMedia title={title} className="relative">
+        <Image src={image} alt={title} sizes="100vw" fill className="!relative" priority />
       </CardMedia>
       <CardContent>
         <List>
