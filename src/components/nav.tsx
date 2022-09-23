@@ -4,12 +4,14 @@ import { Button } from '@mui/material';
 import React from 'react';
 import { auth } from '../config/firebase-config';
 import { useAuth } from '../hooks/use-auth';
+import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
 import NavOtherCitiesMenu from './nav-other-cities-menu';
 import Search from './search';
 
 function Nav() {
   const { logged, loading } = useAuth();
+  const { setMessage } = useGlobalSnackbar();
 
   return (
     <div className="flex h-full w-full items-center justify-center">
@@ -49,9 +51,13 @@ function Nav() {
             color="primary"
             disabled={loading}
             onClick={() => {
-              signOut(auth).catch((error) => {
-                logger.error('cannot logout', error);
-              });
+              signOut(auth)
+                .then(() => {
+                  setMessage('Vous êtes déconnecté', 'success');
+                })
+                .catch((error) => {
+                  logger.error('cannot logout', error);
+                });
             }}
           >
             Déconnexion

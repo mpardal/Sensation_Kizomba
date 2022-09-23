@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import type { ReactNode } from 'react';
 
 const Context = createContext(
   {} as {
@@ -13,7 +14,7 @@ const Context = createContext(
   },
 );
 
-function GlobalSnackbarProvider({ children }: { children: React.ReactNode }) {
+function GlobalSnackbarProvider({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState('');
   const [severity, setSeverity] = useState<
     'success' | 'info' | 'warning' | 'error'
