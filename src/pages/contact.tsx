@@ -1,62 +1,102 @@
-import React from 'react'
-import Layout, { NextPageWithLayout } from '../components/layout'
-import { Button, TextField } from '@mui/material'
+import React from 'react';
+import {
+  Avatar,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import MessageIcon from '@mui/icons-material/Message';
+import Layout from '../components/layout';
+import { logger } from '../utils/logger';
+import type { FormEvent } from 'react';
+import type { NextPageWithLayout } from '../components/layout';
 
 const Contact: NextPageWithLayout = () => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.currentTarget);
+
+    const firstname = formData.get('firstname') as string;
+    const lastname = formData.get('lastname') as string;
+    const email = formData.get('email') as string;
+    const comment = formData.get('comment') as string;
+
+    logger.log(firstname, lastname, email, comment);
+  };
+
   return (
-    <div>
-      <h1 className="mb-10 text-center">Formulaire de contact</h1>
-      <div className="mx-3 flex flex-col">
+    <Container maxWidth="sm">
+      <div className="mb-4 flex flex-col items-center gap-2">
+        <Avatar className="bg-primary-500">
+          <MessageIcon />
+        </Avatar>
+        <Typography className="text-center" gutterBottom variant="h4">
+          Nous contacter
+        </Typography>
+      </div>
+      <form className="mx-3 flex flex-col" onSubmit={handleSubmit}>
         <div className="flex flex-col lg:flex-row lg:gap-4">
           <div className="my-3 flex flex-col lg:w-full">
-            <label htmlFor="firstName">Nom :</label>
-            <input
+            <TextField
+              id="firstname"
+              label="Prénom"
+              name="firstname"
               required
               type="text"
-              id="firstName"
-              placeholder="Prénom"
-              className="rounded-md !text-black"
-              //variant="outlined"
             />
           </div>
           <div className="my-3 flex flex-col lg:w-full">
-            <label htmlFor="lastName">Nom :</label>
-            <input required type="text" id="lastName" placeholder="Nom" className="rounded-md" />
+            <TextField
+              id="lastname"
+              label="Nom"
+              name="lastname"
+              required
+              type="text"
+            />
           </div>
         </div>
         <div className="flex flex-col lg:flex-row lg:flex-row lg:gap-4">
           <div className="my-3 flex flex-col lg:w-full">
-            <label htmlFor="phoneNumber">Numéro de téléphone :</label>
-            <input
-              type="number"
-              id="phoneNumber"
-              className="rounded-md"
-              placeholder="06.12.34.56.78"
-            />
+            <TextField id="tel" label="Téléphone" name="tel" type="tel" />
           </div>
           <div className="my-3 flex flex-col lg:w-full">
-            <label htmlFor="email">Adresse email :</label>
-            <input
+            <TextField
+              id="email"
+              label="Adresse e-mail"
+              name="email"
               required
               type="email"
-              id="email"
-              placeholder="prenom.nom@domain.fr"
-              className="rounded-md"
             />
           </div>
         </div>
         <div className="my-3 flex flex-col">
-          <label htmlFor="comment">Commentaires</label>
-          <input type="text" id="comment" className="max-w-full rounded-md" />
+          <TextField
+            id="comment"
+            label="Commentaires"
+            minRows={3}
+            multiline
+            name="comment"
+            type="text"
+          />
         </div>
-        <Button className="my-10 mx-auto bg-neutral-200 lg:w-1/2">Envoyer</Button>
-      </div>
-    </div>
-  )
-}
+        <Button
+          color="primary"
+          startIcon={<SendIcon />}
+          type="submit"
+          variant="contained"
+        >
+          Envoyer
+        </Button>
+      </form>
+    </Container>
+  );
+};
 
 Contact.Layout = function ContactLayout(page) {
-  return <Layout>{page}</Layout>
-}
+  return <Layout>{page}</Layout>;
+};
 
-export default Contact
+export default Contact;

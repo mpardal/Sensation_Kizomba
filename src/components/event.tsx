@@ -1,21 +1,25 @@
 import {
-  Button,
   CardActions,
   CardContent,
-  Typography,
   CardMedia,
   Card,
   List,
-  ListItemButton,
   ListItem,
-} from '@mui/material'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import LocalActivityIcon from '@mui/icons-material/LocalActivity'
-import Image from 'next/future/image'
-import Link from 'next/link'
-import conexao from '../../public/conexao-8_10.jpeg'
+  IconButton,
+  CardHeader,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+} from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import Link from 'next/link';
 
-const Event = ({
+function Event({
   title,
   image,
   city,
@@ -26,49 +30,72 @@ const Event = ({
   linkBuyTicket,
   linkDetails,
 }: {
-  title: string
-  image: string
-  city: string
-  address: string
-  date: string
-  professor: string
-  dj: string
-  linkBuyTicket: string
-  linkDetails: string
-}) => {
+  title: string;
+  image: string;
+  city: string;
+  address: string;
+  date: string;
+  professor: string;
+  dj: string;
+  linkBuyTicket: string;
+  linkDetails: string;
+}) {
   return (
-    <Card className="m-5 max-w-full rounded-2xl bg-neutral-300 p-5">
+    <Card variant="outlined">
+      <CardHeader subheader={date} title={title} />
+      <CardMedia component="img" loading="lazy" src={image} title={title} />
       <CardContent>
-        <Typography className="mb-10 text-center text-3xl font-bold text-yellow-600 lg:text-4xl">
-          {title}
-        </Typography>
-        <div className="flex flex-col items-center justify-around lg:flex-row">
-          <Image src={image} alt={title} width="750" height="500" className="rounded-3xl" />
-          <List>
-            <ListItem className="flex flex-col items-start text-yellow-600 md:flex-row lg:flex-col lg:justify-around lg:text-xl">
-              <ListItemButton>Ville : {city}</ListItemButton>
-              <ListItemButton>Adresse : {address}</ListItemButton>
-              <ListItemButton>Date : {date}</ListItemButton>
-              <ListItemButton>Professeurs : {professor}</ListItemButton>
-              <ListItemButton>DJs : {dj}</ListItemButton>
-            </ListItem>
-          </List>
-        </div>
+        <List>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <CalendarMonthIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>{date}</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <LocationCityIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>
+              {address} à <strong>{city}</strong>
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <SupervisorAccountIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>{professor}</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <MusicNoteIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>{dj}</ListItemText>
+          </ListItem>
+        </List>
       </CardContent>
-      <CardActions className="m-6 flex justify-around gap-10 lg:justify-start">
-        <Link href={linkDetails}>
-          <a>
-            <AddCircleOutlineIcon className="text-black" />
-          </a>
+      <CardActions>
+        <Link href={linkDetails} passHref>
+          <IconButton component="a">
+            <AddCircleOutlineIcon color="action" fontSize="large" />
+          </IconButton>
         </Link>
-        <Link href={linkBuyTicket}>
-          <a>
-            <LocalActivityIcon className="text-black" />
-          </a>
+        <Link href={linkBuyTicket} passHref>
+          <IconButton component="a">
+            <LocalActivityIcon color="action" fontSize="large" />
+          </IconButton>
         </Link>
       </CardActions>
     </Card>
-  )
+  );
 }
 
-export default Event
+export default Event;
