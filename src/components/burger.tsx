@@ -1,17 +1,19 @@
-import { IconButton } from '@mui/material'
-import { Menu as MenuIcon } from '@mui/icons-material'
-import cx from 'classnames'
+import { IconButton } from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
+import cx from 'classnames';
 
-const Burger = ({ open, onOpen }: { open: boolean; onOpen: () => void }) => (
-  <IconButton
-    size="medium"
-    edge="start"
-    aria-label="open drawer"
-    onClick={onOpen}
-    className={cx('mr-4 text-neutral-200 lg:hidden')}
-  >
-    <MenuIcon />
-  </IconButton>
-)
+function Burger({ onOpen }: { onOpen: () => void }) {
+  return (
+    <IconButton
+      aria-label="open drawer"
+      className={cx('mr-4 lg:hidden')}
+      edge="start"
+      onClick={onOpen}
+      size="medium"
+    >
+      <MenuIcon />
+    </IconButton>
+  );
+}
 
-export default Burger
+export default Burger;

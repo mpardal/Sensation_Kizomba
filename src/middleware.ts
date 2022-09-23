@@ -1,20 +1,25 @@
-import { NextRequest, NextResponse } from 'next/server'
+/* eslint-disable @next/next/no-server-import-in-page */
+import { NextResponse } from 'next/server';
+import createLogger from 'pino';
+import type { NextRequest } from 'next/server';
+
+const logger = createLogger({
+  prettyPrint: true,
+});
 
 /**
  * Fonction qui est exécutée à chaque requête. Permet ou non de rediriger, de bloquer des requêtes (par exemple si l'utilisateur n'est pas connecté)
- * @param request
+ * @param request -
  *
- * @return NextResponse
+ * @returns import('next/server').NextResponse
  */
 export function middleware(request: NextRequest): NextResponse {
   // placeholder, pour l'instant, elle ne fait rien
-  const response = NextResponse.next()
+  const response = NextResponse.next();
 
-  const cookie = response.cookies.entries()
+  logger.debug(request);
 
-  console.log(request)
-
-  return response
+  return response;
 }
 
 /**
@@ -22,4 +27,5 @@ export function middleware(request: NextRequest): NextResponse {
  */
 export const config = {
   matcher: ['/login/:path*'],
-}
+};
+/* eslint-enable @next/next/no-server-import-in-page */

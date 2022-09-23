@@ -5,10 +5,15 @@
  *
  */
 
-import type { PaletteOptions } from '@mui/material'
-import { createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
-import { red } from '@mui/material/colors'
-import { PropsWithChildren } from 'react'
+import {
+  createTheme,
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+} from '@mui/material';
+import { red } from '@mui/material/colors';
+import type { PropsWithChildren } from 'react';
+import type { PaletteOptions } from '@mui/material';
 
 function MuiTheme({ children }: PropsWithChildren) {
   const palette: PaletteOptions = {
@@ -17,7 +22,7 @@ function MuiTheme({ children }: PropsWithChildren) {
     primary: { main: '#dbb12b', light: '#dbb12b', dark: '#dbb12b' },
     secondary: { main: '#2cb67d', light: '#3fc68e' },
     error: { main: red['300'], light: '#e45858' },
-  }
+  };
 
   const theme = createTheme({
     palette,
@@ -49,7 +54,7 @@ function MuiTheme({ children }: PropsWithChildren) {
         },
       },
     },
-  })
+  });
 
   return (
     <StyledEngineProvider injectFirst>
@@ -59,7 +64,7 @@ function MuiTheme({ children }: PropsWithChildren) {
         {children}
       </ThemeProvider>
     </StyledEngineProvider>
-  )
+  );
 }
 
-export default MuiTheme
+export default MuiTheme;

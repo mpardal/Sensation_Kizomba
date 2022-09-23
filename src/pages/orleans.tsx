@@ -1,7 +1,7 @@
-import React from 'react'
-import Layout, { NextPageWithLayout } from '../components/layout'
-import Event from '../components/event'
-import noite from '/noite-24_09.jpeg'
+import React from 'react';
+import Layout from '../components/layout';
+import Event from '../components/event';
+import type { NextPageWithLayout } from '../components/layout';
 
 const Orleans: NextPageWithLayout = () => {
   return (
@@ -9,22 +9,22 @@ const Orleans: NextPageWithLayout = () => {
       <h1 className="text-center underline">Orléans</h1>
       <h2 className="ml-5 mt-10">Événements mensuels</h2>
       <Event
-        title="Noite Orléans"
-        city="Saint-Jean-De-Braye"
-        image="/noite-24_09.jpeg"
         address="Orange Bleue - 21 avenue Gay Lussac"
+        city="Saint-Jean-De-Braye"
         date="24/09/2022"
-        professor="DJ Thao"
         dj="Jonathan"
+        image="/noite-24_09.jpeg"
         linkBuyTicket="#"
         linkDetails="#"
+        professor="DJ Thao"
+        title="Noite Orléans"
       />
     </div>
-  )
-}
+  );
+};
 
 Orleans.Layout = function OrleansLayout(page) {
-  return <Layout>{page}</Layout>
-}
+  return <Layout>{page}</Layout>;
+};
 
-export default Orleans
+export default Orleans;

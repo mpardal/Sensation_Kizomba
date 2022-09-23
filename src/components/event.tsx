@@ -1,8 +1,6 @@
 import {
-  Button,
   CardActions,
   CardContent,
-  Typography,
   CardMedia,
   Card,
   List,
@@ -12,17 +10,16 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-} from '@mui/material'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import LocalActivityIcon from '@mui/icons-material/LocalActivity'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
-import LocationCityIcon from '@mui/icons-material/LocationCity'
-import MusicNoteIcon from '@mui/icons-material/MusicNote'
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
-import Image from 'next/future/image'
-import Link from 'next/link'
+} from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import Link from 'next/link';
 
-const Event = ({
+function Event({
   title,
   image,
   city,
@@ -33,22 +30,20 @@ const Event = ({
   linkBuyTicket,
   linkDetails,
 }: {
-  title: string
-  image: string
-  city: string
-  address: string
-  date: string
-  professor: string
-  dj: string
-  linkBuyTicket: string
-  linkDetails: string
-}) => {
+  title: string;
+  image: string;
+  city: string;
+  address: string;
+  date: string;
+  professor: string;
+  dj: string;
+  linkBuyTicket: string;
+  linkDetails: string;
+}) {
   return (
     <Card variant="outlined">
-      <CardHeader title={title} subheader={date} />
-      <CardMedia title={title} className="relative">
-        <Image src={image} alt={title} sizes="100vw" fill className="!relative" priority />
-      </CardMedia>
+      <CardHeader subheader={date} title={title} />
+      <CardMedia component="img" loading="lazy" src={image} title={title} />
       <CardContent>
         <List>
           <ListItem>
@@ -100,7 +95,7 @@ const Event = ({
         </Link>
       </CardActions>
     </Card>
-  )
+  );
 }
 
-export default Event
+export default Event;

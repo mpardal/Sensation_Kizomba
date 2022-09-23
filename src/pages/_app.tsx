@@ -1,24 +1,26 @@
-import type { AppProps } from 'next/app'
-import { NextPageWithLayout } from '../components/layout'
-import MuiTheme from '../components/mui-theme'
-import FirebaseAuthProvider from '../hooks/use-auth'
-import GlobalSnackbarProvider from '../hooks/use-global-snackbar'
-import '../styles/globals.css'
+import MuiTheme from '../components/mui-theme';
+import FirebaseAuthProvider from '../hooks/use-auth';
+import GlobalSnackbarProvider from '../hooks/use-global-snackbar';
+import type { NextPageWithLayout } from '../components/layout';
+import type { AppProps } from 'next/app';
+import '../styles/globals.css';
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
+  Component: NextPageWithLayout;
+};
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const Layout = Component.Layout ?? ((page) => page)
+  const Layout = Component.Layout ?? ((page) => page);
 
   return (
     <MuiTheme>
       <FirebaseAuthProvider>
-        <GlobalSnackbarProvider>{Layout(<Component {...pageProps} />)}</GlobalSnackbarProvider>
+        <GlobalSnackbarProvider>
+          {Layout(<Component {...pageProps} />)}
+        </GlobalSnackbarProvider>
       </FirebaseAuthProvider>
     </MuiTheme>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

@@ -1,84 +1,105 @@
-import { Typography, SwipeableDrawer } from '@mui/material'
-import { Divider, List, ListItemButton, ListItemText, Drawer as MuiDrawer } from '@mui/material'
-import { signOut } from 'firebase/auth'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import Link from 'next/link'
-import { styled } from '@mui/material/styles'
-import { auth } from '../config/firebase-config'
-import { useAuth } from '../hooks/use-auth'
-import { useGlobalSnackbar } from '../hooks/use-global-snackbar'
+import {
+  Divider,
+  List,
+  ListItemButton,
+  ListItemText,
+  Typography,
+  SwipeableDrawer,
+} from '@mui/material';
+import { signOut } from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { styled } from '@mui/material/styles';
+import { auth } from '../config/firebase-config';
+import { useAuth } from '../hooks/use-auth';
+import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
+import { logger } from '../utils/logger';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
-}))
+}));
 
-const Drawer = ({
+function Drawer({
   open,
   onClose,
   onOpen,
 }: {
-  open: boolean
-  onClose: () => void
-  onOpen: () => void
-}) => {
-  const router = useRouter()
-  const { logged } = useAuth()
-  const { setMessage } = useGlobalSnackbar()
+  open: boolean;
+  onClose: () => void;
+  onOpen: () => void;
+}) {
+  const router = useRouter();
+  const { logged } = useAuth();
+  const { setMessage } = useGlobalSnackbar();
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', onClose)
+    router.events.on('routeChangeComplete', onClose);
 
     return () => {
-      router.events.off('routeChangeComplete', onClose)
-    }
+      router.events.off('routeChangeComplete', onClose);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
-    <SwipeableDrawer open={open} onClose={onClose} onOpen={onOpen}>
+    <SwipeableDrawer onClose={onClose} onOpen={onOpen} open={open}>
       <DrawerHeader className="flex items-center justify-end px-2">
         <Typography variant="h6">Sensation Kizomba</Typography>
       </DrawerHeader>
       <Divider />
       <List>
-        <Link href="/about" passHref={true}>
+        <Link href="/about" passHref>
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">L'association</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              L'association
+            </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/nantes" passHref={true}>
+        <Link href="/nantes" passHref>
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">Nantes</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              Nantes
+            </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/bordeaux" passHref={true}>
+        <Link href="/bordeaux" passHref>
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">Bordeaux</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              Bordeaux
+            </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/le-mans" passHref={true}>
+        <Link href="/le-mans" passHref>
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">Le Mans</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              Le Mans
+            </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/orleans" passHref={true}>
+        <Link href="/orleans" passHref>
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">Orléans</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              Orléans
+            </ListItemText>
           </ListItemButton>
         </Link>
       </List>
       <Divider />
       <List>
-        <Link href="/contact" passHref={true}>
+        <Link href="/contact" passHref>
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-yellow-500">Nous contacter</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              Nous contacter
+            </ListItemText>
           </ListItemButton>
         </Link>
         {!logged ? (
-          <Link href="/login" passHref={true}>
+          <Link href="/login" passHref>
             <ListItemButton component="a">
-              <ListItemText className="mr-3 text-yellow-500">Se connecter</ListItemText>
+              <ListItemText className="mr-3 text-primary-500">
+                Se connecter
+              </ListItemText>
             </ListItemButton>
           </Link>
         ) : (
@@ -86,20 +107,22 @@ const Drawer = ({
             onClick={() => {
               signOut(auth)
                 .then(() => {
-                  setMessage('Vous êtes déconnecté', 'success')
-                  onClose()
+                  setMessage('Vous êtes déconnecté', 'success');
+                  onClose();
                 })
                 .catch((err) => {
-                  console.error('Error signOut', err)
-                })
+                  logger.error('Error signOut', err);
+                });
             }}
           >
-            <ListItemText className="text-yellow-500">Déconnexion</ListItemText>
+            <ListItemText className="text-primary-500">
+              Déconnexion
+            </ListItemText>
           </ListItemButton>
         )}
       </List>
     </SwipeableDrawer>
-  )
+  );
 }
 
-export default Drawer
+export default Drawer;

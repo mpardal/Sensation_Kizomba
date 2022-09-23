@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -19,16 +20,23 @@
     "firebase": "^9.9.4",
     "next": "12.3.0",
     "next-connect": "^0.13.0",
+    "pino": "^8.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/eslint-parser": "^7.19.1",
     "@types/node": "18.7.16",
     "@types/react": "18.0.19",
     "@types/react-dom": "18.0.6",
+    "@vercel/style-guide": "^3.0.0",
     "autoprefixer": "^10.4.9",
     "eslint": "8.22.0",
     "eslint-config-next": "12.3.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
@@ -41,5 +49,11 @@
         "@babel/core"
       ]
     }
-  }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "prettier": "@vercel/style-guide/prettier"
 }
