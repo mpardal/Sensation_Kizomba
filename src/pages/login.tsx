@@ -62,6 +62,8 @@ const LoginPage: NextPageWithLayout = () => {
       logger.debug(cred);
 
       setMessage('Vous êtes connecté', 'success');
+
+      await router.push((router.query.from as string | undefined) ?? '/');
     } catch (err) {
       logger.error(err);
 
@@ -77,8 +79,6 @@ const LoginPage: NextPageWithLayout = () => {
     } finally {
       setLoading(false);
     }
-
-    await router.push((router.query.from as string | undefined) ?? '/');
   };
 
   return (
