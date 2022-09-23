@@ -1,11 +1,6 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 import { NextResponse } from 'next/server';
-import createLogger from 'pino';
 import type { NextRequest } from 'next/server';
-
-const logger = createLogger({
-  prettyPrint: true,
-});
 
 /**
  * Fonction qui est exécutée à chaque requête. Permet ou non de rediriger, de bloquer des requêtes (par exemple si l'utilisateur n'est pas connecté)
@@ -17,7 +12,8 @@ export function middleware(request: NextRequest): NextResponse {
   // placeholder, pour l'instant, elle ne fait rien
   const response = NextResponse.next();
 
-  logger.debug(request);
+  // eslint-disable-next-line no-console
+  console.debug(request);
 
   return response;
 }
