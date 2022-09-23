@@ -5,14 +5,13 @@ import type { NextOrObserver, User } from 'firebase/auth';
 import type { PropsWithChildren } from 'react';
 import type { AppUser } from '../types/app-user';
 
-const AuthContext = createContext({
-  authUser: undefined,
-  loading: true,
-} as {
-  authUser: AppUser | undefined;
-  loading: boolean;
-  logged: boolean;
-});
+const AuthContext = createContext(
+  {} as {
+    authUser: AppUser | undefined;
+    loading: boolean;
+    logged: boolean;
+  },
+);
 
 function FirebaseAuthProvider({ children }: PropsWithChildren) {
   const [authUser, setAuthUser] = useState<AppUser | undefined>();
