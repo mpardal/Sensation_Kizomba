@@ -21,16 +21,20 @@ import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import { auth } from '../config/firebase-config';
 import { useAuth } from '../hooks/use-auth';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
+import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '../components/layout';
 import type { FormEvent } from 'react';
 
-const LoginPage: NextPageWithLayout = () => {
+const LoginPage: NextPageWithLayout<{
+  defaultEmail: string;
+  fromForgotPassword: boolean;
+}> = ({ defaultEmail, fromForgotPassword }) => {
   const { setMessage, hide } = useGlobalSnackbar();
   const { logged } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +42,13 @@ const LoginPage: NextPageWithLayout = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (fromForgotPassword) {
+      setMessage('Votre mot de passe a été modifié', 'success', 4000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fromForgotPassword]);
 
   const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -63,7 +74,7 @@ const LoginPage: NextPageWithLayout = () => {
 
       setMessage('Vous êtes connecté', 'success');
 
-      await router.push((router.query.from as string | undefined) ?? '/');
+      void router.push((router.query.from as string | undefined) ?? '/');
     } catch (err) {
       logger.error(err);
 
@@ -95,6 +106,7 @@ const LoginPage: NextPageWithLayout = () => {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <TextField
+            defaultValue={defaultEmail}
             id="email"
             label="Adresse e-mail"
             name="email"
@@ -125,10 +137,10 @@ const LoginPage: NextPageWithLayout = () => {
             />
           </FormControl>
           <div className="flex justify-between">
-            <Link href="/" passHref>
+            <Link href="/forgot-password" passHref>
               <MuiLink>Mot de passe oublié ?</MuiLink>
             </Link>
-            <Link href="/" passHref>
+            <Link href="/sign-up" passHref>
               <MuiLink>Inscription</MuiLink>
             </Link>
           </div>
@@ -158,6 +170,17 @@ const LoginPage: NextPageWithLayout = () => {
 
 LoginPage.Layout = function LoginLayout(page) {
   return <Layout>{page}</Layout>;
+};
+
+// eslint-disable-next-line @typescript-eslint/require-await
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return {
+    props: {
+      defaultEmail: (ctx.query.email as string | undefined) ?? '',
+      fromForgotPassword:
+        ((ctx.query.fromForgotPassword as string | undefined) ?? '') === 'true',
+    },
+  };
 };
 
 export default LoginPage;

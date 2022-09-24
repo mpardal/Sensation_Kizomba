@@ -8,9 +8,11 @@ const Context = createContext(
     setMessage: (
       message: string,
       severity?: 'success' | 'info' | 'warning' | 'error',
+      duration?: number,
     ) => void;
     hide: () => void;
     open: boolean;
+    duration?: number;
   },
 );
 
@@ -20,14 +22,20 @@ function GlobalSnackbarProvider({ children }: { children: ReactNode }) {
     'success' | 'info' | 'warning' | 'error'
   >('success');
   const [open, setOpen] = useState(false);
+  const [duration, setDuration] = useState(6000);
 
   const show = (
     newMessage: string,
     newSeverity?: 'success' | 'info' | 'warning' | 'error',
+    newDuration?: number,
   ) => {
     setMessage(newMessage);
     setSeverity(newSeverity || 'info');
     setOpen(true);
+
+    if (newDuration) {
+      setDuration(newDuration);
+    }
   };
 
   const hide = () => {
@@ -36,7 +44,7 @@ function GlobalSnackbarProvider({ children }: { children: ReactNode }) {
 
   return (
     <Context.Provider
-      value={{ message, severity, setMessage: show, hide, open }}
+      value={{ message, severity, setMessage: show, hide, open, duration }}
     >
       {children}
     </Context.Provider>

@@ -30,7 +30,7 @@ function Nav() {
         <NavOtherCitiesMenu />
       </div>
 
-      <div className="flex w-full gap-3">
+      <div className="flex items-center w-full gap-3">
         <Link href="/contact" passHref>
           <Button className="hidden lg:block" component="a">
             Nous contacter

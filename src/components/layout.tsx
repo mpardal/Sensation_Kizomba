@@ -14,7 +14,7 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 };
 
 function Layout({ children }: PropsWithChildren) {
-  const { message, severity, hide, open } = useGlobalSnackbar();
+  const { message, severity, hide, open, duration } = useGlobalSnackbar();
 
   return (
     <div>
@@ -22,7 +22,15 @@ function Layout({ children }: PropsWithChildren) {
       <Header />
       <PageContainer>{children}</PageContainer>
       <Footer />
-      <Snackbar autoHideDuration={4000} onClose={hide} open={open}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        autoHideDuration={duration}
+        onClose={hide}
+        open={open}
+      >
         <Alert onClose={hide} severity={severity}>
           {message}
         </Alert>

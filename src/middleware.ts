@@ -13,7 +13,7 @@ export function middleware(request: NextRequest): NextResponse {
   const response = NextResponse.next();
 
   // eslint-disable-next-line no-console
-  console.debug(request);
+  console.log(request);
 
   return response;
 }
