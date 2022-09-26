@@ -16,20 +16,35 @@ import {
   Container,
   Avatar,
   Link as MuiLink,
+  FormHelperText,
 } from '@mui/material';
 import { FirebaseError } from 'firebase/app';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useFormik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { z } from 'zod';
 import Layout from '../components/layout';
-import { auth } from '../config/firebase-config';
 import { useAuth } from '../hooks/auth/use-auth';
+import { useLogin } from '../hooks/auth/use-login';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
-import { logger } from '../utils/logger';
+import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
 import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '../components/layout';
-import type { FormEvent } from 'react';
+
+const LoginObject = z.object({
+  email: z
+    .string({
+      required_error: "L'adresse e-mail est obligatoire",
+    })
+    .email({ message: "L'adresse e-mail n'est pas valide" }),
+  password: z
+    .string({
+      required_error: 'Le mot de passe est requis',
+      invalid_type_error: 'Le mot de passe doit être une chaîne de caractères',
+    })
+    .min(6, { message: 'Le mot de passe doit faire au moins 6 caractères' }),
+});
 
 const LoginPage: NextPageWithLayout<{
   defaultEmail: string;
@@ -40,8 +55,54 @@ const LoginPage: NextPageWithLayout<{
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const login = useLogin({
+    onMutate: () => {
+      setShowErrorMessage(false);
+      hide();
+    },
+    onSuccess: () => {
+      setMessage('Vous êtes connecté', 'success');
+
+      void router.push((router.query.from as string | undefined) ?? '/');
+    },
+    onError: (err) => {
+      if (err instanceof FirebaseError) {
+        if (
+          err.code === 'auth/wrong-password' ||
+          err.code === 'auth/user-not-found'
+        ) {
+          setErrorMessage("L'adresse e-mail ou le mot de passe est incorrect");
+          setShowErrorMessage(true);
+        }
+      }
+    },
+  });
+
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    isSubmitting,
+    isValid,
+    touched,
+    errors,
+    values,
+  } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: toFormikValidationSchema(LoginObject),
+    onSubmit: async ({ email, password }) => {
+      try {
+        await login.mutateAsync({ email, password });
+      } catch {
+        // l'erreur est catchée dans useMutation
+      }
+    },
+  });
 
   useEffect(() => {
     if (fromForgotPassword) {
@@ -49,48 +110,6 @@ const LoginPage: NextPageWithLayout<{
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fromForgotPassword]);
-
-  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
-    if (loading || logged) return;
-
-    setLoading(true);
-    setShowErrorMessage(false);
-    hide();
-
-    // aucune validation n'est effectuée ici, il faudra rajouter quelque chose comme zod et formik
-    const formData = new FormData(evt.currentTarget);
-
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-
-    try {
-      // permet de se connecter à firebase, l'utilisateur est récupéré dans hooks/use-auth.tsx
-      const cred = await signInWithEmailAndPassword(auth, email, password);
-
-      // par la suite, on supprimera le console.log
-      logger.debug(cred);
-
-      setMessage('Vous êtes connecté', 'success');
-
-      void router.push((router.query.from as string | undefined) ?? '/');
-    } catch (err) {
-      logger.error(err);
-
-      if (err instanceof FirebaseError) {
-        if (
-          err.code === 'auth/wrong-password' ||
-          err.code === 'auth/user-not-found'
-        ) {
-          setErrorMessage('Adresse email ou mot de passe incorrect');
-          setShowErrorMessage(true);
-        }
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <Container maxWidth="xs">
@@ -106,12 +125,20 @@ const LoginPage: NextPageWithLayout<{
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <TextField
+            aria-errormessage={errors.email}
+            aria-label="adresse e-mail"
+            aria-required="true"
             defaultValue={defaultEmail}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
             id="email"
             label="Adresse e-mail"
             name="email"
+            onBlur={handleBlur}
+            onChange={handleChange}
             required
             type="email"
+            value={values.email}
           />
           <FormControl>
             <InputLabel htmlFor="password">Mot de passe</InputLabel>
@@ -129,12 +156,19 @@ const LoginPage: NextPageWithLayout<{
                   </IconButton>
                 </InputAdornment>
               }
+              error={touched.password && Boolean(errors.password)}
               id="password"
               label="Mot de passe"
               name="password"
+              onBlur={handleBlur}
+              onChange={handleChange}
               required
               type={showPassword ? 'text' : 'password'}
+              value={values.password}
             />
+            {touched.password && Boolean(errors.password) && (
+              <FormHelperText error>{errors.password}</FormHelperText>
+            )}
           </FormControl>
           <div className="flex justify-between">
             <Link href="/forgot-password" passHref>
@@ -148,8 +182,8 @@ const LoginPage: NextPageWithLayout<{
 
         <LoadingButton
           color="primary"
-          disabled={logged}
-          loading={loading}
+          disabled={logged || !isValid || Object.keys(touched).length === 0}
+          loading={login.isLoading || isSubmitting}
           loadingPosition="start"
           startIcon={<LoginIcon />}
           type="submit"

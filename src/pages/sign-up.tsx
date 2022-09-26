@@ -140,35 +140,10 @@ const SignUp: NextPageWithLayout = () => {
     },
     validationSchema: toFormikValidationSchema(SignUpObject),
     onSubmit: async ({ email, password, firstname, lastname }) => {
-      setShowErrorMessage(false);
-
       try {
         await createUser.mutateAsync({ email, password, firstname, lastname });
-
-        setMessage(
-          <>
-            <div>Votre compte a bien été créé</div>
-            <div>Un e-mail de vérification vous sera envoyé.</div>
-          </>,
-        );
-      } catch (err) {
-        if (err instanceof FirebaseError) {
-          if (
-            err.code === 'auth/wrong-password' ||
-            err.code === 'auth/email-already-in-use'
-          ) {
-            setShowErrorMessage(true);
-
-            switch (err.code) {
-              case 'auth/wrong-password':
-                setErrorMessage('Le mot de passe est incorrect');
-                break;
-              case 'auth/email-already-in-use':
-                setErrorMessage("L'adresse e-mail est déjà utilisée");
-                break;
-            }
-          }
-        }
+      } catch {
+        // l'erreur est gérée dans useMutation
       }
     },
   });
@@ -258,7 +233,7 @@ const SignUp: NextPageWithLayout = () => {
         <LoadingButton
           className="col-span-2"
           color="primary"
-          disabled={!isValid}
+          disabled={!isValid || Object.keys(touched).length === 0}
           loading={isSubmitting || isValidating || createUser.isLoading}
           loadingPosition="start"
           startIcon={<PeopleIcon />}

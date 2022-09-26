@@ -114,7 +114,7 @@ const ForgotPassword: NextPageWithLayout = () => {
 
         <LoadingButton
           color="primary"
-          disabled={!isValid}
+          disabled={!isValid || Object.keys(touched).length === 0}
           loading={askPassword.isLoading || isSubmitting}
           loadingPosition="start"
           startIcon={<AlternateEmailIcon />}
