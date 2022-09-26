@@ -11,59 +11,75 @@ import {
 } from '@mui/material';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import { FirebaseError } from 'firebase/app';
+import { useFormik } from 'formik';
 import Link from 'next/link';
 import { useState } from 'react';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { z } from 'zod';
 import Layout from '../components/layout';
-import { auth } from '../config/firebase-config';
-import { logger } from '../utils/logger';
-import type { FormEvent } from 'react';
+import { useAskPassword } from '../hooks/auth/use-ask-password';
+import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '../components/layout';
 
+const ForgotPasswordObject = z.object({
+  email: z
+    .string({
+      required_error: "L'adresse e-mail est obligatoire",
+    })
+    .email({ message: "L'adresse e-mail n'est pas valide" }),
+});
+
 const ForgotPassword: NextPageWithLayout = () => {
-  const [loading, setLoading] = useState(false);
   const [messageToShow, setMessageToShow] = useState('');
   const [showMessage, setShowMessage] = useState(false);
+  const askPassword = useAskPassword<{ setCompleteMessage: () => void }>({
+    onMutate: () => {
+      setShowMessage(false);
 
-  const setCompleteMessage = () => {
-    setMessageToShow(
-      'Vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe',
-    );
-    setShowMessage(true);
-  };
-
-  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
-    if (loading) return;
-
-    setLoading(true);
-    setShowMessage(false);
-
-    const formData = new FormData(evt.currentTarget);
-
-    const email = formData.get('email') as string;
-
-    try {
-      await sendPasswordResetEmail(auth, email, {
-        url: `${window.location.origin}/login?email=${email}`,
-      });
-
-      setCompleteMessage();
-    } catch (err) {
+      return {
+        setCompleteMessage: () => {
+          setShowMessage(true);
+          setMessageToShow(
+            'Vous recevrez un e-mail avec un lien pour réinitialiser votre mot de passe si cette adresse e-mail est associée à un compte',
+          );
+        },
+      };
+    },
+    onSuccess: (data, variables, ctx) => {
+      ctx?.setCompleteMessage();
+    },
+    onError: (err, variables, ctx) => {
       if (err instanceof FirebaseError) {
         if (err.code === 'auth/user-not-found') {
-          setCompleteMessage();
+          ctx?.setCompleteMessage();
 
           return;
         }
       }
 
-      logger.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+      throw err;
+    },
+  });
+
+  const {
+    handleSubmit,
+    values,
+    errors,
+    isSubmitting,
+    touched,
+    handleChange,
+    isValid,
+    handleBlur,
+  } = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: toFormikValidationSchema(ForgotPasswordObject),
+    onSubmit: async ({ email }) => {
+      if (askPassword.isLoading) return;
+
+      await askPassword.mutateAsync({ email });
+    },
+  });
 
   return (
     <Container maxWidth="xs">
@@ -79,11 +95,17 @@ const ForgotPassword: NextPageWithLayout = () => {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <TextField
+            aria-errormessage={errors.email}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
             id="email"
             label="Adresse e-mail"
             name="email"
+            onBlur={handleBlur}
+            onChange={handleChange}
             required
             type="email"
+            value={values.email}
           />
           <Link href="/login" passHref>
             <MuiLink>Retour à la connexion</MuiLink>
@@ -92,7 +114,8 @@ const ForgotPassword: NextPageWithLayout = () => {
 
         <LoadingButton
           color="primary"
-          loading={loading}
+          disabled={!isValid}
+          loading={askPassword.isLoading || isSubmitting}
           loadingPosition="start"
           startIcon={<AlternateEmailIcon />}
           type="submit"

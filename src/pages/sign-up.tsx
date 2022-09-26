@@ -85,7 +85,38 @@ const SignUpObject = z
   });
 
 const SignUp: NextPageWithLayout = () => {
-  const createUser = useCreateUser();
+  const createUser = useCreateUser({
+    onMutate: () => {
+      setShowErrorMessage(false);
+    },
+    onSuccess: () => {
+      setMessage(
+        <>
+          <div>Votre compte a bien été créé</div>
+          <div>Un e-mail de vérification vous sera envoyé.</div>
+        </>,
+      );
+    },
+    onError: (err) => {
+      if (err instanceof FirebaseError) {
+        if (
+          err.code === 'auth/wrong-password' ||
+          err.code === 'auth/email-already-in-use'
+        ) {
+          setShowErrorMessage(true);
+
+          switch (err.code) {
+            case 'auth/wrong-password':
+              setErrorMessage('Le mot de passe est incorrect');
+              break;
+            case 'auth/email-already-in-use':
+              setErrorMessage("L'adresse e-mail est déjà utilisée");
+              break;
+          }
+        }
+      }
+    },
+  });
   const { setMessage } = useGlobalSnackbar();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
