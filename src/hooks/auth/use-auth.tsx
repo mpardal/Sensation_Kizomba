@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../config/firebase-config';
-import { logger } from '../utils/logger';
+import { auth } from '../../config/firebase-config';
+import { logger } from '../../utils/logger';
 import type { NextOrObserver, User } from 'firebase/auth';
 import type { PropsWithChildren } from 'react';
-import type { AppUser } from '../types/app-user';
+import type { AppUser } from '../../types/app-user';
 
 const AuthContext = createContext(
   {} as {

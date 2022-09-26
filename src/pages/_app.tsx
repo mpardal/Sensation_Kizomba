@@ -1,5 +1,7 @@
+import { QueryClient } from '@tanstack/query-core';
+import { QueryClientProvider } from '@tanstack/react-query';
 import MuiTheme from '../components/mui-theme';
-import FirebaseAuthProvider from '../hooks/use-auth';
+import FirebaseAuthProvider from '../hooks/auth/use-auth';
 import GlobalSnackbarProvider from '../hooks/use-global-snackbar';
 import type { NextPageWithLayout } from '../components/layout';
 import type { AppProps } from 'next/app';
@@ -9,16 +11,26 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? ((page) => page);
 
   return (
     <MuiTheme>
-      <FirebaseAuthProvider>
-        <GlobalSnackbarProvider>
-          {Layout(<Component {...pageProps} />)}
-        </GlobalSnackbarProvider>
-      </FirebaseAuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <FirebaseAuthProvider>
+          <GlobalSnackbarProvider>
+            {Layout(<Component {...pageProps} />)}
+          </GlobalSnackbarProvider>
+        </FirebaseAuthProvider>
+      </QueryClientProvider>
     </MuiTheme>
   );
 }

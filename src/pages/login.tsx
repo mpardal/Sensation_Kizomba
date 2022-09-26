@@ -24,7 +24,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import { auth } from '../config/firebase-config';
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from '../hooks/auth/use-auth';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
 import type { GetServerSideProps } from 'next';
