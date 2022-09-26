@@ -63,8 +63,6 @@ const LoginPage: NextPageWithLayout<{
       hide();
     },
     onSuccess: () => {
-      setMessage('Vous êtes connecté', 'success');
-
       void router.push((router.query.from as string | undefined) ?? '/');
     },
     onError: (err) => {
@@ -91,7 +89,7 @@ const LoginPage: NextPageWithLayout<{
     values,
   } = useFormik({
     initialValues: {
-      email: '',
+      email: defaultEmail,
       password: '',
     },
     validationSchema: toFormikValidationSchema(LoginObject),
@@ -128,7 +126,6 @@ const LoginPage: NextPageWithLayout<{
             aria-errormessage={errors.email}
             aria-label="adresse e-mail"
             aria-required="true"
-            defaultValue={defaultEmail}
             error={touched.email && Boolean(errors.email)}
             helperText={touched.email && errors.email}
             id="email"

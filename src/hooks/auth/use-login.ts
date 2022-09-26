@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase-config';
+import type { UserCredential } from 'firebase/auth';
 import type { UseMutationOptions } from '@tanstack/react-query';
 
 interface Variables {
@@ -9,12 +10,12 @@ interface Variables {
 }
 
 export function useLogin<TContext = unknown>(
-  options?: UseMutationOptions<unknown, unknown, Variables, TContext>,
+  options?: UseMutationOptions<UserCredential, unknown, Variables, TContext>,
 ) {
   return useMutation({
     mutationKey: ['auth', 'login'],
-    mutationFn: async ({ email, password }: Variables) => {
-      await signInWithEmailAndPassword(auth, email, password);
+    mutationFn: ({ email, password }: Variables) => {
+      return signInWithEmailAndPassword(auth, email, password);
     },
     ...options,
   });

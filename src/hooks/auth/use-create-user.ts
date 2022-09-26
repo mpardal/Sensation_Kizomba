@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { auth, database } from '../../config/firebase-config';
 import type { User } from 'firebase/auth';
 import type { UseMutationOptions } from '@tanstack/react-query';
@@ -25,11 +25,9 @@ export function useCreateUser<TContext = unknown>(
       );
 
       try {
-        await addDoc(collection(database, 'users'), {
-          email,
+        await setDoc(doc(database, 'users', user.uid), {
           firstname,
           lastname,
-          uid: user.uid,
         });
       } catch (err) {
         await deleteUser(user);

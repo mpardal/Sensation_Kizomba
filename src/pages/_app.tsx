@@ -25,11 +25,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <MuiTheme>
       <QueryClientProvider client={queryClient}>
-        <FirebaseAuthProvider>
-          <GlobalSnackbarProvider>
+        <GlobalSnackbarProvider>
+          <FirebaseAuthProvider>
             {Layout(<Component {...pageProps} />)}
-          </GlobalSnackbarProvider>
-        </FirebaseAuthProvider>
+          </FirebaseAuthProvider>
+        </GlobalSnackbarProvider>
       </QueryClientProvider>
     </MuiTheme>
   );
