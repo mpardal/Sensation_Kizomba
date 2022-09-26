@@ -12,12 +12,12 @@ interface Variables {
   lastname: string;
 }
 
-export function useCreateUser(
-  options?: UseMutationOptions<User, unknown, Variables>,
+export function useCreateUser<TContext = unknown>(
+  options?: UseMutationOptions<User, unknown, Variables, TContext>,
 ) {
-  return useMutation({
+  return useMutation<User, unknown, Variables, TContext>({
     mutationKey: ['auth', 'createUser'],
-    mutationFn: async ({ email, password, firstname, lastname }: Variables) => {
+    mutationFn: async ({ email, password, firstname, lastname }) => {
       const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
