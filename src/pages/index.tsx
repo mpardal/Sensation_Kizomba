@@ -19,7 +19,7 @@ const Home: NextPageWithLayout = () => {
           image="/conexao-8_10.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="Jonathan & Laura"
+          teacher="Jonathan & Laura"
           title="Conexao"
         />
         <Event
@@ -30,7 +30,7 @@ const Home: NextPageWithLayout = () => {
           image="/unidade-01_10.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="Jonathan & Laura, Miguel"
+          teacher="Jonathan & Laura, Miguel"
           title="Unidade"
         />
         <Event
@@ -41,7 +41,7 @@ const Home: NextPageWithLayout = () => {
           image="/noite-24_09.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="Jonathan"
+          teacher="Jonathan"
           title="Noite Orléans"
         />
       </div>

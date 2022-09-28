@@ -1,11 +1,14 @@
 import React from 'react';
 import Layout from '../components/layout';
 import Event from '../components/event';
+import Events from '../components/events';
+import { useEvents } from '../hooks/use-events';
 import type { NextPageWithLayout } from '../components/layout';
 
 const Nantes: NextPageWithLayout = () => {
   return (
     <div>
+      <Events city="Nantes" />
       <div className="m-3 lg:m-5">
         <h1 className="text-center underline">Nantes</h1>
         <h2 className="ml-5 mt-10">Événements hebdomadaires</h2>
@@ -17,7 +20,7 @@ const Nantes: NextPageWithLayout = () => {
           image="/mardi.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="Jonathan & Laura"
+          teacher="Jonathan & Laura"
           title="Les mardis au Sao"
         />
         <h2 className="ml-5 mt-10">Événements mensuels</h2>
@@ -29,7 +32,7 @@ const Nantes: NextPageWithLayout = () => {
           image="/conexao-8_10.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="Jonathan & Laura"
+          teacher="Jonathan & Laura"
           title="conexao"
         />
         <h2 className="ml-5 mt-10">Événements trimestriels</h2>
@@ -41,7 +44,7 @@ const Nantes: NextPageWithLayout = () => {
           image="/unidade-01_10.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="Mervil & Amandine"
+          teacher="Mervil & Amandine"
           title="Unidade"
         />
         <h2 className="ml-5 mt-10">Événements annuels</h2>
@@ -53,7 +56,7 @@ const Nantes: NextPageWithLayout = () => {
           image="/SDC.jpeg"
           linkBuyTicket="#"
           linkDetails="#"
-          professor="internationaux"
+          teacher="internationaux"
           title="Sensation Dance Congress"
         />
       </div>

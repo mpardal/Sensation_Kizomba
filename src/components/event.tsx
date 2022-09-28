@@ -25,7 +25,7 @@ function Event({
   city,
   address,
   date,
-  professor,
+  teacher,
   dj,
   linkBuyTicket,
   linkDetails,
@@ -35,9 +35,9 @@ function Event({
   city: string;
   address: string;
   date: string;
-  professor: string;
+  teacher: string;
   dj: string;
-  linkBuyTicket: string;
+  linkBuyTicket?: string;
   linkDetails: string;
 }) {
   return (
@@ -70,7 +70,7 @@ function Event({
                 <SupervisorAccountIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText>{professor}</ListItemText>
+            <ListItemText>{teacher}</ListItemText>
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -88,11 +88,13 @@ function Event({
             <AddCircleOutlineIcon color="action" fontSize="large" />
           </IconButton>
         </Link>
-        <Link href={linkBuyTicket} passHref>
-          <IconButton component="a">
-            <LocalActivityIcon color="action" fontSize="large" />
-          </IconButton>
-        </Link>
+        {linkBuyTicket && (
+          <Link href={linkBuyTicket} passHref>
+            <IconButton component="a">
+              <LocalActivityIcon color="action" fontSize="large" />
+            </IconButton>
+          </Link>
+        )}
       </CardActions>
     </Card>
   );

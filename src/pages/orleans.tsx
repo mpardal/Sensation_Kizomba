@@ -16,7 +16,7 @@ const Orleans: NextPageWithLayout = () => {
         image="/noite-24_09.jpeg"
         linkBuyTicket="#"
         linkDetails="#"
-        professor="DJ Thao"
+        teacher="DJ Thao"
         title="Noite Orléans"
       />
     </div>

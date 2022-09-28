@@ -17,7 +17,7 @@ const Bordeaux: NextPageWithLayout = () => {
           image="/BKSC2023.jpeg"
           linkBuyTicket="https://my.weezevent.com/bordeaux-kizomba-salsa-congress-2023-1?fbclid=IwAR2rLJdr9chESVQARdrcw73EcYQntytC6ZjhD8GMbaGZReflaj10Vi0P6Do"
           linkDetails="#"
-          professor="Ludo & Constance, Miguel"
+          teacher="Ludo & Constance, Miguel"
           title="Bordeaux Kizomba Salsa Congress"
         />
       </div>

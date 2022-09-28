@@ -16,7 +16,7 @@ const LeMans: NextPageWithLayout = () => {
         image="/jeudi-mans.jpeg"
         linkBuyTicket="#"
         linkDetails="#"
-        professor="Jonathan"
+        teacher="Jonathan"
         title="Cours & soirée KIZOMBA"
       />
       <h2 className="ml-5 mt-10">Événements annuels</h2>
@@ -28,7 +28,7 @@ const LeMans: NextPageWithLayout = () => {
         image="/EXKIZ2023.jpeg"
         linkBuyTicket="https://my.weezevent.com/kizomba-castle-exkiz-festival-2023?fbclid=IwAR1F6NwZTfSmyPfkxjT2MDqu2pIvCKv7YeUmCqGZwA-8ccjc8CqDz8h5Agg"
         linkDetails="#"
-        professor="internationaux"
+        teacher="internationaux"
         title="Kizomba Castle Exkiz festival"
       />
       <Event
@@ -39,7 +39,7 @@ const LeMans: NextPageWithLayout = () => {
         image="/EXKIZ2022.jpeg"
         linkBuyTicket="#"
         linkDetails="#"
-        professor="internationaux"
+        teacher="internationaux"
         title="Kizomba Castle Exkiz festival"
       />
     </div>
