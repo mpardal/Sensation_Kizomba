@@ -1,9 +1,12 @@
+import { getDoc, doc } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../config/firebase-config';
-import { logger } from '../utils/logger';
+import { auth, database } from '../../config/firebase-config';
+import { logger } from '../../utils/logger';
+import { useGlobalSnackbar } from '../use-global-snackbar';
+import type { DocumentSnapshot } from 'firebase/firestore';
 import type { NextOrObserver, User } from 'firebase/auth';
 import type { PropsWithChildren } from 'react';
-import type { AppUser } from '../types/app-user';
+import type { AppUser } from '../../types/app-user';
 
 const AuthContext = createContext(
   {} as {
@@ -16,21 +19,33 @@ const AuthContext = createContext(
 function FirebaseAuthProvider({ children }: PropsWithChildren) {
   const [authUser, setAuthUser] = useState<AppUser | undefined>();
   const [loading, setLoading] = useState(true);
+  const { setMessage } = useGlobalSnackbar();
 
   useEffect(() => {
     // On s'abonne à l'authentification de firebase, exécutée quand l'utilisateur se connecte ou se déconnecte, et aussi au chargement initial de la page
-    const onChanged: NextOrObserver<User> = (user) => {
+    const onChanged: NextOrObserver<User> = async (user) => {
       if (user) {
         // par la suite, on supprimera le console.log
         logger.debug(user);
+
+        const userInfo = (await getDoc(
+          doc(database, 'users', user.uid),
+        )) as DocumentSnapshot<{ firstname: string; lastname: string }>;
 
         // permet d'enregistrer l'utilisateur qui vient de se connecter
         setAuthUser({
           uid: user.uid,
           email: user.email as string,
-          displayName: user.displayName,
-          emailVerified: user.emailVerified,
+          user,
+          information: userInfo,
         });
+
+        setMessage(
+          `Bienvenue ${userInfo.data()?.firstname ?? 'unknown'} ${
+            userInfo.data()?.lastname ?? 'unknown'
+          }`,
+          'success',
+        );
       } else {
         setAuthUser(undefined);
       }
@@ -44,6 +59,7 @@ function FirebaseAuthProvider({ children }: PropsWithChildren) {
     return () => {
       unsub();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logged = Boolean(authUser);

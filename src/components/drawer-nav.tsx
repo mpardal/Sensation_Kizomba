@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
 import { auth } from '../config/firebase-config';
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from '../hooks/auth/use-auth';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
 

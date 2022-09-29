@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '@mui/material';
 import React from 'react';
 import { auth } from '../config/firebase-config';
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from '../hooks/auth/use-auth';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
 import NavOtherCitiesMenu from './nav-other-cities-menu';
@@ -30,7 +30,7 @@ function Nav() {
         <NavOtherCitiesMenu />
       </div>
 
-      <div className="flex w-full gap-3">
+      <div className="flex items-center w-full gap-3">
         <Link href="/contact" passHref>
           <Button className="hidden lg:block" component="a">
             Nous contacter
