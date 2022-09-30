@@ -10,12 +10,7 @@ import type { NextRequest } from 'next/server';
  */
 export function middleware(request: NextRequest): NextResponse {
   // placeholder, pour l'instant, elle ne fait rien
-  const response = NextResponse.next();
-
-  // eslint-disable-next-line no-console
-  console.log(request);
-
-  return response;
+  return NextResponse.next();
 }
 
 /**
