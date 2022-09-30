@@ -33,6 +33,7 @@ module.exports = {
   rules: {
     'react/no-unescaped-entities': 'off',
     'prettier/prettier': 'error',
+    'import/no-named-as-default-member': 'off'
   },
   overrides: [
     {

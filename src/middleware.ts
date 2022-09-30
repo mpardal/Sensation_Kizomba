@@ -8,6 +8,7 @@ import type { NextRequest } from 'next/server';
  *
  * @returns import('next/server').NextResponse
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function middleware(request: NextRequest): NextResponse {
   // placeholder, pour l'instant, elle ne fait rien
   return NextResponse.next();
