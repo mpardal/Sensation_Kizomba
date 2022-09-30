@@ -9,8 +9,10 @@ import {
 } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import { FirebaseError } from 'firebase/app';
+//Gestion des formulaires
 import { useFormik } from 'formik';
 import { useState } from 'react';
+//zod permet d'éviter la duplication de validation
 import { z } from 'zod';
 import Layout from '../components/layout';
 import { useCreateUser } from '../hooks/auth/use-create-user';

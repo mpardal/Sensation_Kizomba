@@ -7,6 +7,7 @@ function NavOtherCitiesMenu() {
   const router = useRouter();
 
   useEffect(() => {
+    //Si l'url change, le menu se ferme
     router.events.on('routeChangeStart', handleOtherCitiesMenuClose);
 
     return () => {

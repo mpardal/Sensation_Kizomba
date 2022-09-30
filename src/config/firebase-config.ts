@@ -5,7 +5,7 @@ import { getFirestore } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+//Configuration de l'app web avec Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyA5vg6I5Vofxei2fV4Qq5JX1d5MF2T7yO4',
   authDomain: 'sensation-kizomba.firebaseapp.com',

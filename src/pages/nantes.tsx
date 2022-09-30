@@ -2,12 +2,12 @@ import React from 'react';
 import Layout from '../components/layout';
 import Event from '../components/event';
 import Events from '../components/events';
-import { useEvents } from '../hooks/use-events';
 import type { NextPageWithLayout } from '../components/layout';
 
 const Nantes: NextPageWithLayout = () => {
   return (
     <div>
+      {/*Appel le composant Events*/}
       <Events city="Nantes" />
       <div className="m-3 lg:m-5">
         <h1 className="text-center underline">Nantes</h1>

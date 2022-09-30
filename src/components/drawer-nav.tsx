@@ -33,6 +33,7 @@ function Drawer({
   const { logged } = useAuth();
   const { setMessage } = useGlobalSnackbar();
 
+  //Ferme le menu quand on change de page
   useEffect(() => {
     router.events.on('routeChangeComplete', onClose);
 

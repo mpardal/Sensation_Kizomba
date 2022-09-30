@@ -2,7 +2,7 @@ import NightlifeIcon from '@mui/icons-material/Nightlife';
 import { Chip, Typography } from '@mui/material';
 
 function NextEventsBanner() {
-  // design à définir, il ne faudrait pas que ce soit très grand. Rajouter des Link par la suite
+  // design à définir, il ne faudrait pas que ce soit très grand. Rajouter des Link par la suite => Trois événements, c'est suffisant (Micka) faire une MAJ automatique
   return (
     <div className="flex p-2 w-screen items-center bg-secondary-900">
       <Typography className="mr-3" component="span" variant="body2">

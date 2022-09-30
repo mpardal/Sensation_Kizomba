@@ -22,6 +22,7 @@ function Layout({ children }: PropsWithChildren) {
       <Header />
       <PageContainer>{children}</PageContainer>
       <Footer />
+      {/*Permet d'afficher le message lors de la connexion*/}
       <Snackbar
         anchorOrigin={{
           vertical: 'top',

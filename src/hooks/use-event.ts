@@ -5,8 +5,11 @@ import type { UseQueryOptions } from '@tanstack/react-query';
 import type { DocumentSnapshot } from 'firebase/firestore';
 import type { AppEvent } from '../types/app-event';
 
+//Fonction permettant de récupérer un document d'une collection Firebase
 export function useEvent(
+  //id est un string
   id: string,
+  //?
   options?: UseQueryOptions<DocumentSnapshot<AppEvent>>,
 ) {
   return useQuery({
@@ -16,6 +19,7 @@ export function useEvent(
         doc(database, 'events', id),
       )) as DocumentSnapshot<AppEvent>;
     },
+    //?
     ...options,
   });
 }

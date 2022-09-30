@@ -7,15 +7,14 @@ import { useAuth } from '../hooks/auth/use-auth';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
 import NavOtherCitiesMenu from './nav-other-cities-menu';
-import Search from './search';
 
 function Nav() {
   const { logged, loading } = useAuth();
   const { setMessage } = useGlobalSnackbar();
 
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="hidden lg:flex lg:items-center">
+    <div className="flex h-full w-full items-center">
+      <div className="hidden lg:flex lg:items-center gap-6">
         <Link href="/about" passHref>
           <Button color="primary" component="a">
             L'association
@@ -28,16 +27,11 @@ function Nav() {
         </Link>
 
         <NavOtherCitiesMenu />
-      </div>
-
-      <div className="flex items-center w-full gap-3">
         <Link href="/contact" passHref>
           <Button className="hidden lg:block" component="a">
             Nous contacter
           </Button>
         </Link>
-
-        <Search />
 
         {!logged ? (
           <Link href="/login" passHref>
@@ -46,6 +40,7 @@ function Nav() {
             </Button>
           </Link>
         ) : (
+          //Bouton de déconnexion
           <Button
             className="ml-auto sm:ml-0"
             color="primary"
