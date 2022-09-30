@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { database } from '../config/firebase-config';
+import type { AppEventType } from '../types/app-event-type';
 import type { UseQueryOptions } from '@tanstack/react-query';
 import type { QuerySnapshot } from 'firebase/firestore';
 import type { AppEvent } from '../types/app-event';

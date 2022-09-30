@@ -20,9 +20,10 @@ import {
 } from '@mui/material';
 import { FirebaseError } from 'firebase/app';
 import { useFormik } from 'formik';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
 import Layout from '../components/layout';
 import { useAuth } from '../hooks/auth/use-auth';
@@ -110,92 +111,101 @@ const LoginPage: NextPageWithLayout<{
   }, [fromForgotPassword]);
 
   return (
-    <Container maxWidth="xs">
-      <div className="mb-4 flex flex-col items-center gap-2">
-        <Avatar className="bg-primary-500">
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography className="text-center" gutterBottom variant="h4">
-          Sensation Kizomba
-        </Typography>
-      </div>
+    <>
+      <Head>
+        <title>SENSATION-KIZOMBA — Connexion</title>
+      </Head>
+      <Container maxWidth="xs">
+        <div className="mb-4 flex flex-col items-center gap-2">
+          <Avatar className="bg-primary-500">
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography className="text-center" gutterBottom variant="h4">
+            Sensation Kizomba
+          </Typography>
+        </div>
 
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4">
-          <TextField
-            aria-errormessage={errors.email}
-            aria-label="adresse e-mail"
-            aria-required="true"
-            error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
-            id="email"
-            label="Adresse e-mail"
-            name="email"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            required
-            type="email"
-            value={values.email}
-          />
-          <FormControl>
-            <InputLabel htmlFor="password">Mot de passe</InputLabel>
-            <OutlinedInput
-              aria-label="mot de passe"
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-4">
+            <TextField
+              aria-errormessage={errors.email}
+              aria-label="adresse e-mail"
               aria-required="true"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    edge="end"
-                    onClick={() => setShowPassword((s) => !s)}
-                  >
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              error={touched.password && Boolean(errors.password)}
-              id="password"
-              label="Mot de passe"
-              name="password"
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+              id="email"
+              label="Adresse e-mail"
+              name="email"
               onBlur={handleBlur}
               onChange={handleChange}
               required
-              type={showPassword ? 'text' : 'password'}
-              value={values.password}
+              type="email"
+              value={values.email}
             />
-            {touched.password && Boolean(errors.password) && (
-              <FormHelperText error>{errors.password}</FormHelperText>
-            )}
-          </FormControl>
-          <div className="flex justify-between">
-            <Link href="/forgot-password" passHref>
-              <MuiLink>Mot de passe oublié ?</MuiLink>
-            </Link>
-            <Link href="/sign-up" passHref>
-              <MuiLink>Inscription</MuiLink>
-            </Link>
+            <FormControl>
+              <InputLabel htmlFor="password">Mot de passe</InputLabel>
+              <OutlinedInput
+                aria-label="mot de passe"
+                aria-required="true"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={() => setShowPassword((s) => !s)}
+                    >
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                error={touched.password && Boolean(errors.password)}
+                id="password"
+                label="Mot de passe"
+                name="password"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                required
+                type={showPassword ? 'text' : 'password'}
+                value={values.password}
+              />
+              {touched.password && Boolean(errors.password) && (
+                <FormHelperText error>{errors.password}</FormHelperText>
+              )}
+            </FormControl>
+            <div className="flex justify-between">
+              <Link href="/forgot-password" passHref>
+                <MuiLink>Mot de passe oublié ?</MuiLink>
+              </Link>
+              <Link href="/sign-up" passHref>
+                <MuiLink>Inscription</MuiLink>
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <LoadingButton
-          color="primary"
-          disabled={logged || !isValid || Object.keys(touched).length === 0}
-          loading={login.isLoading || isSubmitting}
-          loadingPosition="start"
-          startIcon={<LoginIcon />}
-          type="submit"
-          variant="contained"
-        >
-          Se connecter
-        </LoadingButton>
+          <LoadingButton
+            color="primary"
+            disabled={logged || !isValid || Object.keys(touched).length === 0}
+            loading={login.isLoading || isSubmitting}
+            loadingPosition="start"
+            startIcon={<LoginIcon />}
+            type="submit"
+            variant="contained"
+          >
+            Se connecter
+          </LoadingButton>
 
-        <Grow in={showErrorMessage}>
-          <Alert onClose={() => setShowErrorMessage(false)} severity="error">
-            {errorMessage}
-          </Alert>
-        </Grow>
-      </form>
-    </Container>
+          <Grow in={showErrorMessage}>
+            <Alert onClose={() => setShowErrorMessage(false)} severity="error">
+              {errorMessage}
+            </Alert>
+          </Grow>
+        </form>
+      </Container>
+    </>
   );
 };
 

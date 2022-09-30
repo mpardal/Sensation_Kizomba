@@ -17,7 +17,7 @@ function Layout({ children }: PropsWithChildren) {
   const { message, severity, hide, open, duration } = useGlobalSnackbar();
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <NextEventsBanner />
       <Header />
       <PageContainer>{children}</PageContainer>

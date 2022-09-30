@@ -26,9 +26,8 @@ const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
         <Event
           address={eventData.address}
           city={eventData.city}
-          date={dayjs(eventData.date.toDate()).format('lll')}
+          date={eventData.date}
           dj={eventData.dj}
-          image="/mardi.jpeg"
           linkDetails={`/events/${event.data.id}`}
           teacher={eventData.teacher}
           title={eventData.title}

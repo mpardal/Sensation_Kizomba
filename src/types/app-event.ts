@@ -1,15 +1,13 @@
-import type { Timestamp } from 'firebase/firestore';
-
-//tri en fonction des types d'événement présent dans la page
-type AppEventType = 'daily' | 'weekly' | 'monthly' | 'yearly';
+import type { AppEventDate } from './app-event-date';
+import type { AppEventType } from './app-event-type';
 
 //type les données provenant de firebase
 export interface AppEvent {
-  title: string;
   address: string;
   city: string;
-  date: Timestamp;
+  date: AppEventDate;
   dj: string;
   teacher: string;
+  title: string;
   type: AppEventType;
 }

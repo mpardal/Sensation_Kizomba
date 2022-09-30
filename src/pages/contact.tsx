@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import {
   Avatar,
@@ -28,70 +29,75 @@ const Contact: NextPageWithLayout = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <div className="mb-4 flex flex-col items-center gap-2">
-        <Avatar className="bg-primary-500">
-          <MessageIcon />
-        </Avatar>
-        <Typography className="text-center" gutterBottom variant="h4">
-          Nous contacter
-        </Typography>
-      </div>
-      <form className="mx-3 flex flex-col" onSubmit={handleSubmit}>
-        <div className="flex flex-col lg:flex-row lg:gap-4">
-          <div className="my-3 flex flex-col lg:w-full">
+    <>
+      <Head>
+        <title>SENSATION-KIZOMBA — Nous contacter</title>
+      </Head>
+      <Container maxWidth="sm">
+        <div className="mb-4 flex flex-col items-center gap-2">
+          <Avatar className="bg-primary-500">
+            <MessageIcon />
+          </Avatar>
+          <Typography className="text-center" gutterBottom variant="h4">
+            Nous contacter
+          </Typography>
+        </div>
+        <form className="mx-3 flex flex-col" onSubmit={handleSubmit}>
+          <div className="flex flex-col lg:flex-row lg:gap-4">
+            <div className="my-3 flex flex-col lg:w-full">
+              <TextField
+                id="firstname"
+                label="Prénom"
+                name="firstname"
+                required
+                type="text"
+              />
+            </div>
+            <div className="my-3 flex flex-col lg:w-full">
+              <TextField
+                id="lastname"
+                label="Nom"
+                name="lastname"
+                required
+                type="text"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col lg:flex-row lg:flex-row lg:gap-4">
+            <div className="my-3 flex flex-col lg:w-full">
+              <TextField id="tel" label="Téléphone" name="tel" type="tel" />
+            </div>
+            <div className="my-3 flex flex-col lg:w-full">
+              <TextField
+                id="email"
+                label="Adresse e-mail"
+                name="email"
+                required
+                type="email"
+              />
+            </div>
+          </div>
+          <div className="my-3 flex flex-col">
             <TextField
-              id="firstname"
-              label="Prénom"
-              name="firstname"
-              required
+              id="comment"
+              label="Commentaires"
+              minRows={3}
+              multiline
+              name="comment"
               type="text"
             />
           </div>
-          <div className="my-3 flex flex-col lg:w-full">
-            <TextField
-              id="lastname"
-              label="Nom"
-              name="lastname"
-              required
-              type="text"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col lg:flex-row lg:flex-row lg:gap-4">
-          <div className="my-3 flex flex-col lg:w-full">
-            <TextField id="tel" label="Téléphone" name="tel" type="tel" />
-          </div>
-          <div className="my-3 flex flex-col lg:w-full">
-            <TextField
-              id="email"
-              label="Adresse e-mail"
-              name="email"
-              required
-              type="email"
-            />
-          </div>
-        </div>
-        <div className="my-3 flex flex-col">
-          <TextField
-            id="comment"
-            label="Commentaires"
-            minRows={3}
-            multiline
-            name="comment"
-            type="text"
-          />
-        </div>
-        <Button
-          color="primary"
-          startIcon={<SendIcon />}
-          type="submit"
-          variant="contained"
-        >
-          Envoyer
-        </Button>
-      </form>
-    </Container>
+          <Button
+            color="primary"
+            startIcon={<SendIcon />}
+            type="submit"
+            variant="contained"
+          >
+            Envoyer
+          </Button>
+        </form>
+      </Container>
+    </>
   );
 };
 

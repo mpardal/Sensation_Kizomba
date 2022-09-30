@@ -1,27 +1,38 @@
-import { useEvents } from '../hooks/use-events';
+import { Typography } from '@mui/material';
+import Event from './event';
+import type { QueryDocumentSnapshot } from 'firebase/firestore';
+import type { AppEvent } from '../types/app-event';
 
-function Events({ city }: { city: string }) {
-  //intègre la fonction dans le fichier "use-event" et tri par ville
-  const eventsSnapshot = useEvents(city);
-
+function Events({
+  events: eventsSnapshot,
+}: {
+  events: QueryDocumentSnapshot<AppEvent>[];
+}) {
   return (
-    <>
-      {/*Correspond à ce qui est affiché en cas de chargement*/}
-      {eventsSnapshot.isLoading && <div>loading</div>}
+    <div className="flex justify-center items-center flex-wrap gap-4">
+      {eventsSnapshot.length === 0 && (
+        <Typography className="text-center my-8" variant="h5">
+          Aucun événement
+        </Typography>
+      )}
 
-      {/*Correspond à ce qui est affiché en cas d'erreur*/}
-      {eventsSnapshot.isError && <div>Error</div>}
+      {eventsSnapshot.map((doc) => {
+        const { title, city, address, date, teacher, dj } = doc.data();
 
-      {eventsSnapshot.isSuccess &&
-        eventsSnapshot.data.docs.map((doc) => {
-          return (
-            <div className="mb-8" key={doc.id}>
-              {/*Retourne un objet correspondant à la collection events dans Firebase*/}
-              {JSON.stringify(doc.data(), undefined, 2)}
-            </div>
-          );
-        })}
-    </>
+        return (
+          <Event
+            address={address}
+            city={city}
+            date={date}
+            dj={dj}
+            key={doc.id}
+            linkDetails={`/events/${doc.id}`}
+            teacher={teacher}
+            title={title}
+          />
+        );
+      })}
+    </div>
   );
 }
 
