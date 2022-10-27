@@ -103,7 +103,9 @@ const Cms: NextPageWithLayout = () => {
           <Toolbar variant="dense">
             <Button
               color="inherit"
-              onClick={() => editor?.chain().focus().toggleBold().run()}
+              onClick={(): void => {
+                editor?.chain().focus().toggleBold().run();
+              }}
               startIcon={<FormatBold />}
               variant={!editor?.isActive('bold') ? 'outlined' : 'contained'}
             >

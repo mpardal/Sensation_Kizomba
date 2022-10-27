@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import Layout from '../components/layout';
-import Event from '../components/event';
 import City from '../components/ui/city';
 import type { NextPageWithLayout } from '../components/layout';
 

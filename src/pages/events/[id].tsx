@@ -1,11 +1,11 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import type { GetServerSideProps } from 'next';
 import Layout from '../../components/layout';
 import { useEvent } from '../../hooks/use-event';
 import Event from '../../components/event';
 import type { NextPageWithLayout } from '../../components/layout';
-import type { GetServerSideProps } from 'next';
 
 interface EventPageProps {
   //Type le paramètre id
@@ -22,7 +22,7 @@ const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
   //Retourne le component event en intégrant les données récupéré dans Firebase
   return (
     <div className="px-4">
-      {event.isSuccess && eventData && (
+      {event.isSuccess && eventData ? (
         <Event
           address={eventData.address}
           city={eventData.city}
@@ -32,7 +32,7 @@ const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
           teacher={eventData.teacher}
           title={eventData.title}
         />
-      )}
+      ) : null}
     </div>
   );
 };

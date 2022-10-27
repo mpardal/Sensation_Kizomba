@@ -10,7 +10,7 @@ export class ValidationError extends Error {
   }
 }
 
-function createValidationError(e: z.ZodError) {
+function createValidationError(e: z.ZodError): ValidationError {
   const error = new ValidationError(e.message);
   error.inner = e.errors.map((err) => ({
     message: err.message,
@@ -31,7 +31,7 @@ export function toFormikValidationSchema<T>(
   params?: Partial<z.ParseParams>,
 ): { validate: (obj: T) => Promise<void> } {
   return {
-    async validate(obj: T) {
+    async validate(obj: T): Promise<void> {
       try {
         await schema.parseAsync(obj, params);
       } catch (err: unknown) {

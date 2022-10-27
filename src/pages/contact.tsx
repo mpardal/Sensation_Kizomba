@@ -9,9 +9,9 @@ import {
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import MessageIcon from '@mui/icons-material/Message';
+import type { FormEvent } from 'react';
 import Layout from '../components/layout';
 import { logger } from '../utils/logger';
-import type { FormEvent } from 'react';
 import type { NextPageWithLayout } from '../components/layout';
 
 const Contact: NextPageWithLayout = () => {

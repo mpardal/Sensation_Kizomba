@@ -25,12 +25,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
+import type { GetServerSideProps } from 'next';
 import Layout from '../components/layout';
 import { useAuth } from '../hooks/auth/use-auth';
 import { useLogin } from '../hooks/auth/use-login';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
-import type { GetServerSideProps } from 'next';
 import type { NextPageWithLayout } from '../components/layout';
 
 const LoginObject = z.object({
@@ -131,8 +131,8 @@ const LoginPage: NextPageWithLayout<{
               aria-errormessage={errors.email}
               aria-label="adresse e-mail"
               aria-required="true"
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
+              error={touched.email ? Boolean(errors.email) : undefined}
+              helperText={touched.email ? errors.email : undefined}
               id="email"
               label="Adresse e-mail"
               name="email"
@@ -162,7 +162,7 @@ const LoginPage: NextPageWithLayout<{
                     </IconButton>
                   </InputAdornment>
                 }
-                error={touched.password && Boolean(errors.password)}
+                error={touched.password ? Boolean(errors.password) : undefined}
                 id="password"
                 label="Mot de passe"
                 name="password"
@@ -172,9 +172,9 @@ const LoginPage: NextPageWithLayout<{
                 type={showPassword ? 'text' : 'password'}
                 value={values.password}
               />
-              {touched.password && Boolean(errors.password) && (
+              {touched.password && Boolean(errors.password) ? (
                 <FormHelperText error>{errors.password}</FormHelperText>
-              )}
+              ) : null}
             </FormControl>
             <div className="flex justify-between">
               <Link href="/forgot-password" passHref>

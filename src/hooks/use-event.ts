@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { doc, getDoc } from 'firebase/firestore';
-import { database } from '../config/firebase-config';
 import type { UseQueryOptions } from '@tanstack/react-query';
 import type { DocumentSnapshot } from 'firebase/firestore';
+import { database } from '../config/firebase-config';
 import type { AppEvent } from '../types/app-event';
 
 //Fonction permettant de récupérer un document d'une collection Firebase

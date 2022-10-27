@@ -1,12 +1,12 @@
 import { Alert, Snackbar } from '@mui/material';
 import React from 'react';
+import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import type { NextPage } from 'next';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import Footer from './footer';
 import Header from './header';
 import NextEventsBanner from './next-events-banner';
 import PageContainer from './page-container';
-import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
-import type { NextPage } from 'next';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

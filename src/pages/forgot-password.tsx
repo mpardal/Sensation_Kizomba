@@ -101,8 +101,8 @@ const ForgotPassword: NextPageWithLayout = () => {
           <div className="flex flex-col gap-4">
             <TextField
               aria-errormessage={errors.email}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
+              error={touched.email ? Boolean(errors.email) : undefined}
+              helperText={touched.email ? errors.email : undefined}
               id="email"
               label="Adresse e-mail"
               name="email"

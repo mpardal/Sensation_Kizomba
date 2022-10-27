@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../config/firebase-config';
 import type { UserCredential } from 'firebase/auth';
 import type { UseMutationOptions } from '@tanstack/react-query';
+import { auth } from '../../config/firebase-config';
 
 interface Variables {
   email: string;

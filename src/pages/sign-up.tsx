@@ -173,8 +173,8 @@ const SignUp: NextPageWithLayout = () => {
         <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
           <TextField
             aria-errormessage={errors.firstname}
-            error={touched.firstname && Boolean(errors.firstname)}
-            helperText={touched.firstname && errors.firstname}
+            error={touched.firstname ? Boolean(errors.firstname) : undefined}
+            helperText={touched.firstname ? errors.firstname : undefined}
             id="firstname"
             label="Prénom"
             name="firstname"
@@ -186,8 +186,8 @@ const SignUp: NextPageWithLayout = () => {
           />
           <TextField
             aria-errormessage={errors.lastname}
-            error={touched.lastname && Boolean(errors.lastname)}
-            helperText={touched.lastname && errors.lastname}
+            error={touched.lastname ? Boolean(errors.lastname) : undefined}
+            helperText={touched.lastname ? errors.lastname : undefined}
             id="lastname"
             label="Nom"
             name="lastname"
@@ -200,8 +200,8 @@ const SignUp: NextPageWithLayout = () => {
           <TextField
             aria-errormessage={errors.email}
             className="col-span-2"
-            error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
+            error={touched.email ? Boolean(errors.email) : undefined}
+            helperText={touched.email ? errors.email : undefined}
             id="email"
             label="Adresse e-mail"
             name="email"
@@ -213,8 +213,8 @@ const SignUp: NextPageWithLayout = () => {
           />
           <TextField
             aria-errormessage={errors.password}
-            error={touched.password && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
+            error={touched.password ? Boolean(errors.password) : undefined}
+            helperText={touched.password ? errors.password : undefined}
             id="password"
             label="Mot de passe"
             name="password"
@@ -226,8 +226,14 @@ const SignUp: NextPageWithLayout = () => {
           />
           <TextField
             aria-errormessage={errors.confirmPassword}
-            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
-            helperText={touched.confirmPassword && errors.confirmPassword}
+            error={
+              touched.confirmPassword
+                ? Boolean(errors.confirmPassword)
+                : undefined
+            }
+            helperText={
+              touched.confirmPassword ? errors.confirmPassword : undefined
+            }
             id="confirmPassword"
             label="Confirmer le mot de passe"
             name="confirmPassword"

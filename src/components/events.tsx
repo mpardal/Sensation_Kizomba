@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
-import Event from './event';
 import type { QueryDocumentSnapshot } from 'firebase/firestore';
 import type { AppEvent } from '../types/app-event';
+import Event from './event';
 
 function Events({
   events: eventsSnapshot,

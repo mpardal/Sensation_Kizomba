@@ -1,7 +1,6 @@
 import {
   CardActions,
   CardContent,
-  CardMedia,
   Card,
   List,
   ListItem,
@@ -20,7 +19,6 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import type { AppEventDate } from '../types/app-event-date';
-import type { Timestamp } from 'firebase/firestore';
 
 function Event({
   title,
@@ -104,13 +102,13 @@ function Event({
             <AddCircleOutlineIcon color="action" fontSize="large" />
           </IconButton>
         </Link>
-        {linkBuyTicket && (
+        {linkBuyTicket ? (
           <Link href={linkBuyTicket} passHref>
             <IconButton component="a">
               <LocalActivityIcon color="action" fontSize="large" />
             </IconButton>
           </Link>
-        )}
+        ) : null}
       </CardActions>
     </Card>
   );

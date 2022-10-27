@@ -21,15 +21,15 @@ function City({ city }: { city: string }) {
           {city}
         </Typography>
 
-        {eventsSnapshot.isLoading && (
+        {eventsSnapshot.isLoading ? (
           <div className="flex justify-center">
             <CircularProgress variant="indeterminate" />
           </div>
-        )}
+        ) : null}
 
         <Grow in={eventsSnapshot.isSuccess}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 sm:gap-y-12">
-            {eventsSnapshot.data && (
+            {eventsSnapshot.data ? (
               <>
                 <Card className="flex flex-col">
                   <CardHeader
@@ -89,7 +89,7 @@ function City({ city }: { city: string }) {
                   </CardContent>
                 </Card>
               </>
-            )}
+            ) : null}
           </div>
         </Grow>
       </div>
