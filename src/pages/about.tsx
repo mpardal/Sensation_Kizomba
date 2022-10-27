@@ -30,25 +30,25 @@ const About: NextPageWithLayout = () => {
             pariatur quasi sunt temporibus! Iure, magnam veritatis.
           </p>
           <h2 className="underline">Où sommes nous ?</h2>
-          <Link href="/nantes" passHref>
+          <Link href="/nantes" legacyBehavior passHref>
             <a className="text-black no-underline">
               <h4 className="italic">Nantes</h4>
             </a>
           </Link>
           <p />
-          <Link href="/le-mans" passHref>
+          <Link href="/le-mans" legacyBehavior passHref>
             <a className="text-black no-underline">
               <h4 className="italic">Le Mans</h4>
             </a>
           </Link>
           <p />
-          <Link href="/orleans" passHref>
+          <Link href="/orleans" legacyBehavior passHref>
             <a className="text-black no-underline">
               <h4 className="italic">Orléans</h4>
             </a>
           </Link>
           <p />
-          <Link href="/bordeaux" passHref>
+          <Link href="/bordeaux" legacyBehavior passHref>
             <a className="text-black no-underline">
               <h4 className="italic">Bordeaux</h4>
             </a>

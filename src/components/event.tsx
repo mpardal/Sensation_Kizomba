@@ -97,13 +97,13 @@ function Event({
         </List>
       </CardContent>
       <CardActions>
-        <Link href={linkDetails} passHref>
+        <Link href={linkDetails} legacyBehavior passHref>
           <IconButton component="a">
             <AddCircleOutlineIcon color="action" fontSize="large" />
           </IconButton>
         </Link>
         {linkBuyTicket ? (
-          <Link href={linkBuyTicket} passHref>
+          <Link href={linkBuyTicket} legacyBehavior passHref>
             <IconButton component="a">
               <LocalActivityIcon color="action" fontSize="large" />
             </IconButton>

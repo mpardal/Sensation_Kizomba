@@ -2,7 +2,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { AppBar, Toolbar } from '@mui/material';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import logo from '../../public/logo_SK.png';
 import Burger from './burger';
 import Nav from './nav';
@@ -29,7 +29,7 @@ function Header() {
           open={open}
         />
         <span className="h-full p-2 lg:mr-4">
-          <Link href="/" passHref>
+          <Link href="/" legacyBehavior passHref>
             <ButtonBase
               className="h-full rounded-full text-center"
               component="a"
