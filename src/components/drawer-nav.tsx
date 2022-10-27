@@ -7,6 +7,7 @@ import {
   SwipeableDrawer,
 } from '@mui/material';
 import { signOut } from 'firebase/auth';
+import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -29,16 +30,16 @@ function Drawer({
   onClose: () => void;
   onOpen: () => void;
 }) {
-  const router = useRouter();
+  const router = useRouter() as NextRouter | null;
   const { logged } = useAuth();
   const { setMessage } = useGlobalSnackbar();
 
   //Ferme le menu quand on change de page
   useEffect(() => {
-    router.events.on('routeChangeComplete', onClose);
+    router?.events.on('routeChangeComplete', onClose);
 
     return () => {
-      router.events.off('routeChangeComplete', onClose);
+      router?.events.off('routeChangeComplete', onClose);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -50,35 +51,35 @@ function Drawer({
       </DrawerHeader>
       <Divider />
       <List>
-        <Link href="/about" legacyBehavior passHref>
+        <Link href="/app/about" legacyBehavior passHref>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               L'association
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/nantes" legacyBehavior passHref>
+        <Link href="/app/nantes" legacyBehavior passHref>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Nantes
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/bordeaux" legacyBehavior passHref>
+        <Link href="/app/bordeaux" legacyBehavior passHref>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Bordeaux
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/le-mans" legacyBehavior passHref>
+        <Link href="/app/le-mans" legacyBehavior passHref>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Le Mans
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/orleans" legacyBehavior passHref>
+        <Link href="/app/orleans" legacyBehavior passHref>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Orléans
@@ -88,7 +89,7 @@ function Drawer({
       </List>
       <Divider />
       <List>
-        <Link href="/contact" legacyBehavior passHref>
+        <Link href="/app/contact" legacyBehavior passHref>
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Nous contacter
@@ -96,7 +97,7 @@ function Drawer({
           </ListItemButton>
         </Link>
         {!logged ? (
-          <Link href="/login" legacyBehavior passHref>
+          <Link href="/app/login" legacyBehavior passHref>
             <ListItemButton component="a">
               <ListItemText className="mr-3 text-primary-500">
                 Se connecter

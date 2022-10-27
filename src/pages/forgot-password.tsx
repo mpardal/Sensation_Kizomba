@@ -112,7 +112,7 @@ const ForgotPassword: NextPageWithLayout = () => {
               type="email"
               value={values.email}
             />
-            <Link href="/login" legacyBehavior passHref>
+            <Link href="/app/login" legacyBehavior passHref>
               <MuiLink>Retour à la connexion</MuiLink>
             </Link>
           </div>

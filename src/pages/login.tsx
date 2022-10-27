@@ -177,10 +177,10 @@ const LoginPage: NextPageWithLayout<{
               ) : null}
             </FormControl>
             <div className="flex justify-between">
-              <Link href="/forgot-password" legacyBehavior passHref>
+              <Link href="/app/forgot-password" legacyBehavior passHref>
                 <MuiLink>Mot de passe oublié ?</MuiLink>
               </Link>
-              <Link href="/sign-up" legacyBehavior passHref>
+              <Link href="/app/sign-up" legacyBehavior passHref>
                 <MuiLink>Inscription</MuiLink>
               </Link>
             </div>

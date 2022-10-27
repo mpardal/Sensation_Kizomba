@@ -1,14 +1,17 @@
+'use client';
+
 import { FormatBold } from '@mui/icons-material';
 import { AppBar, Button, TextField, Toolbar } from '@mui/material';
 import { EditorContent, useEditor } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
 import { useFormik } from 'formik';
 import { z } from 'zod';
-import Footer from '../../components/footer';
-import Header from '../../components/header';
-import PageContainer from '../../components/page-container';
-import { toFormikValidationSchema } from '../../utils/zod-formik-adapter';
-import type { NextPageWithLayout } from '../../components/layout';
+import Footer from '../../../components/footer';
+import Header from '../../../components/header';
+import PageContainer from '../../../components/page-container';
+import { toFormikValidationSchema } from '../../../utils/zod-formik-adapter';
+import type { NextPageWithLayout } from '../../../components/layout';
+import '../../../styles/globals.css';
 
 const EventObject = z.object({
   title: z.string(),

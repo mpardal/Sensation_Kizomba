@@ -29,7 +29,7 @@ function Header() {
           open={open}
         />
         <span className="h-full p-2 lg:mr-4">
-          <Link href="/" legacyBehavior passHref>
+          <Link href="/app/" legacyBehavior passHref>
             <ButtonBase
               className="h-full rounded-full text-center"
               component="a"
