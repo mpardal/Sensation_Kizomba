@@ -1,7 +1,6 @@
 import {
   CardActions,
   CardContent,
-  CardMedia,
   Card,
   List,
   ListItem,
@@ -17,33 +16,44 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import dayjs from 'dayjs';
 import Link from 'next/link';
+import type { AppEventDate } from '../types/app-event-date';
 
 function Event({
   title,
-  image,
   city,
   address,
   date,
-  professor,
+  teacher,
   dj,
   linkBuyTicket,
   linkDetails,
 }: {
   title: string;
-  image: string;
   city: string;
   address: string;
-  date: string;
-  professor: string;
+  date: AppEventDate;
+  teacher: string;
   dj: string;
-  linkBuyTicket: string;
+  linkBuyTicket?: string;
   linkDetails: string;
 }) {
+  const formattedDate = {
+    from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
+    to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
+  };
+
   return (
     <Card variant="outlined">
-      <CardHeader subheader={date} title={title} />
-      <CardMedia component="img" loading="lazy" src={image} title={title} />
+      <CardHeader
+        subheader={
+          formattedDate.to
+            ? `Du ${formattedDate.from} au ${formattedDate.to}`
+            : formattedDate.from
+        }
+        title={title}
+      />
       <CardContent>
         <List>
           <ListItem>
@@ -52,7 +62,11 @@ function Event({
                 <CalendarMonthIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText>{date}</ListItemText>
+            <ListItemText>
+              {formattedDate.to
+                ? `${formattedDate.from} — ${formattedDate.to}`
+                : formattedDate.from}
+            </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -70,7 +84,7 @@ function Event({
                 <SupervisorAccountIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText>{professor}</ListItemText>
+            <ListItemText>{teacher}</ListItemText>
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -83,16 +97,18 @@ function Event({
         </List>
       </CardContent>
       <CardActions>
-        <Link href={linkDetails} passHref>
+        <Link href={linkDetails} legacyBehavior passHref>
           <IconButton component="a">
             <AddCircleOutlineIcon color="action" fontSize="large" />
           </IconButton>
         </Link>
-        <Link href={linkBuyTicket} passHref>
-          <IconButton component="a">
-            <LocalActivityIcon color="action" fontSize="large" />
-          </IconButton>
-        </Link>
+        {linkBuyTicket ? (
+          <Link href={linkBuyTicket} legacyBehavior passHref>
+            <IconButton component="a">
+              <LocalActivityIcon color="action" fontSize="large" />
+            </IconButton>
+          </Link>
+        ) : null}
       </CardActions>
     </Card>
   );

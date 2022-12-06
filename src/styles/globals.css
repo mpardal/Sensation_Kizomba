@@ -49,3 +49,7 @@
 
 @tailwind components;
 @tailwind utilities;
+
+.ProseMirror p {
+    margin: 0;
+}

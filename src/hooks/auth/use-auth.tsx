@@ -1,11 +1,12 @@
 import { getDoc, doc } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { auth, database } from '../../config/firebase-config';
-import { logger } from '../../utils/logger';
-import { useGlobalSnackbar } from '../use-global-snackbar';
 import type { DocumentSnapshot } from 'firebase/firestore';
 import type { NextOrObserver, User } from 'firebase/auth';
 import type { PropsWithChildren } from 'react';
+import invariant from 'tiny-invariant';
+import { auth, database } from '../../config/firebase-config';
+import { logger } from '../../utils/logger';
+import { useGlobalSnackbar } from '../use-global-snackbar';
 import type { AppUser } from '../../types/app-user';
 
 const AuthContext = createContext(
@@ -32,10 +33,12 @@ function FirebaseAuthProvider({ children }: PropsWithChildren) {
           doc(database, 'users', user.uid),
         )) as DocumentSnapshot<{ firstname: string; lastname: string }>;
 
+        invariant(user.email, 'logged user must have an email');
+
         // permet d'enregistrer l'utilisateur qui vient de se connecter
         setAuthUser({
           uid: user.uid,
-          email: user.email as string,
+          email: user.email,
           user,
           information: userInfo,
         });

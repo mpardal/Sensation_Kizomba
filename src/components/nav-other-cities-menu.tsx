@@ -1,16 +1,18 @@
 import { Button, Menu, MenuItem } from '@mui/material';
 import Link from 'next/link';
+import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 function NavOtherCitiesMenu() {
-  const router = useRouter();
+  const router = useRouter() as NextRouter | null;
 
   useEffect(() => {
-    router.events.on('routeChangeStart', handleOtherCitiesMenuClose);
+    //Si l'url change, le menu se ferme
+    router?.events.on('routeChangeStart', handleOtherCitiesMenuClose);
 
     return () => {
-      router.events.off('routeChangeStart', handleOtherCitiesMenuClose);
+      router?.events.off('routeChangeStart', handleOtherCitiesMenuClose);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -50,13 +52,13 @@ function NavOtherCitiesMenu() {
         onClose={handleOtherCitiesMenuClose}
         open={otherCitiesMenuOpen}
       >
-        <Link href="/bordeaux" passHref>
+        <Link href="/bordeaux" legacyBehavior passHref>
           <MenuItem component="a">Bordeaux</MenuItem>
         </Link>
-        <Link href="/le-mans" passHref>
+        <Link href="/le-mans" legacyBehavior passHref>
           <MenuItem component="a">Le Mans</MenuItem>
         </Link>
-        <Link href="/orleans" passHref>
+        <Link href="/orleans" legacyBehavior passHref>
           <MenuItem component="a">Orléans</MenuItem>
         </Link>
       </Menu>

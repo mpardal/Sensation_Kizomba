@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 function Footer() {
   return (
-    <AppBar className="bottom-0 top-auto" component="footer" position="fixed">
+    <AppBar component="footer" position="static">
       <Toolbar className="justify-around gap-3">
         <div className="flex items-center">
           <Typography className="mr-2">Facebook</Typography>

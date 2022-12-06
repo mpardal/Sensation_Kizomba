@@ -12,6 +12,7 @@ import {
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import { FirebaseError } from 'firebase/app';
 import { useFormik } from 'formik';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { z } from 'zod';
@@ -82,55 +83,60 @@ const ForgotPassword: NextPageWithLayout = () => {
   });
 
   return (
-    <Container maxWidth="xs">
-      <div className="mb-4 flex flex-col items-center gap-2">
-        <Avatar className="bg-primary-500">
-          <HelpCenterIcon />
-        </Avatar>
-        <Typography className="text-center" gutterBottom variant="h4">
-          Mot de passe oublié
-        </Typography>
-      </div>
-
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4">
-          <TextField
-            aria-errormessage={errors.email}
-            error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
-            id="email"
-            label="Adresse e-mail"
-            name="email"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            required
-            type="email"
-            value={values.email}
-          />
-          <Link href="/login" passHref>
-            <MuiLink>Retour à la connexion</MuiLink>
-          </Link>
+    <>
+      <Head>
+        <title>SENSATION-KIZOMBA — Mot de passe oublié</title>
+      </Head>
+      <Container maxWidth="xs">
+        <div className="mb-4 flex flex-col items-center gap-2">
+          <Avatar className="bg-primary-500">
+            <HelpCenterIcon />
+          </Avatar>
+          <Typography className="text-center" gutterBottom variant="h4">
+            Mot de passe oublié
+          </Typography>
         </div>
 
-        <LoadingButton
-          color="primary"
-          disabled={!isValid || Object.keys(touched).length === 0}
-          loading={askPassword.isLoading || isSubmitting}
-          loadingPosition="start"
-          startIcon={<AlternateEmailIcon />}
-          type="submit"
-          variant="contained"
-        >
-          Demander un nouveau mot de passe
-        </LoadingButton>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-4">
+            <TextField
+              aria-errormessage={errors.email}
+              error={touched.email ? Boolean(errors.email) : undefined}
+              helperText={touched.email ? errors.email : undefined}
+              id="email"
+              label="Adresse e-mail"
+              name="email"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              required
+              type="email"
+              value={values.email}
+            />
+            <Link href="/login" legacyBehavior passHref>
+              <MuiLink>Retour à la connexion</MuiLink>
+            </Link>
+          </div>
 
-        <Grow in={showMessage}>
-          <Alert onClose={() => setShowMessage(false)} severity="warning">
-            {messageToShow}
-          </Alert>
-        </Grow>
-      </form>
-    </Container>
+          <LoadingButton
+            color="primary"
+            disabled={!isValid || Object.keys(touched).length === 0}
+            loading={askPassword.isLoading || isSubmitting}
+            loadingPosition="start"
+            startIcon={<AlternateEmailIcon />}
+            type="submit"
+            variant="contained"
+          >
+            Demander un nouveau mot de passe
+          </LoadingButton>
+
+          <Grow in={showMessage}>
+            <Alert onClose={() => setShowMessage(false)} severity="warning">
+              {messageToShow}
+            </Alert>
+          </Grow>
+        </form>
+      </Container>
+    </>
   );
 };
 

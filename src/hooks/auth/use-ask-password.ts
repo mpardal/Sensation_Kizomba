@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../../config/firebase-config';
 import type { UseMutationOptions } from '@tanstack/react-query';
+import { auth } from '../../config/firebase-config';
 
 interface Variables {
   email: string;

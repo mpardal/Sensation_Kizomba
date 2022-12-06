@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, database } from '../../config/firebase-config';
 import type { User } from 'firebase/auth';
 import type { UseMutationOptions } from '@tanstack/react-query';
+import { auth, database } from '../../config/firebase-config';
 
 interface Variables {
   email: string;

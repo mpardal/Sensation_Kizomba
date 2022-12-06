@@ -7,45 +7,40 @@ import { useAuth } from '../hooks/auth/use-auth';
 import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
 import { logger } from '../utils/logger';
 import NavOtherCitiesMenu from './nav-other-cities-menu';
-import Search from './search';
 
 function Nav() {
   const { logged, loading } = useAuth();
   const { setMessage } = useGlobalSnackbar();
 
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="hidden lg:flex lg:items-center">
-        <Link href="/about" passHref>
+    <div className="flex h-full w-full items-center">
+      <div className="hidden lg:flex lg:items-center gap-6">
+        <Link href="/about" legacyBehavior passHref>
           <Button color="primary" component="a">
             L'association
           </Button>
         </Link>
-        <Link href="/nantes" passHref>
+        <Link href="/nantes" legacyBehavior passHref>
           <Button color="primary" component="a">
             Nantes
           </Button>
         </Link>
 
         <NavOtherCitiesMenu />
-      </div>
-
-      <div className="flex items-center w-full gap-3">
-        <Link href="/contact" passHref>
+        <Link href="/contact" legacyBehavior passHref>
           <Button className="hidden lg:block" component="a">
             Nous contacter
           </Button>
         </Link>
 
-        <Search />
-
         {!logged ? (
-          <Link href="/login" passHref>
+          <Link href="/login" legacyBehavior passHref>
             <Button className="hidden text-primary-500 lg:block" component="a">
               Se connecter
             </Button>
           </Link>
         ) : (
+          //Bouton de déconnexion
           <Button
             className="ml-auto sm:ml-0"
             color="primary"

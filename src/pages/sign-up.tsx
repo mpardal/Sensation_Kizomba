@@ -9,8 +9,11 @@ import {
 } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import { FirebaseError } from 'firebase/app';
+//Gestion des formulaires
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import Head from 'next/head';
+import React, { useState } from 'react';
+//zod permet d'éviter la duplication de validation
 import { z } from 'zod';
 import Layout from '../components/layout';
 import { useCreateUser } from '../hooks/auth/use-create-user';
@@ -149,101 +152,112 @@ const SignUp: NextPageWithLayout = () => {
   });
 
   return (
-    <Container maxWidth="sm">
-      <div className="flex flex-col items-center gap-2">
-        <Avatar className="bg-primary-500" />
-        <Typography className="text-center" gutterBottom variant="h4">
-          Inscription
-        </Typography>
-      </div>
+    <>
+      <Head>
+        <title>SENSATION-KIZOMBA — Inscription</title>
+      </Head>
+      <Container maxWidth="sm">
+        <div className="flex flex-col items-center gap-2">
+          <Avatar className="bg-primary-500" />
+          <Typography className="text-center" gutterBottom variant="h4">
+            Inscription
+          </Typography>
+        </div>
 
-      <Grow in={showErrorMessage}>
-        <Alert className="mb-4" severity="error">
-          {errorMessage}
-        </Alert>
-      </Grow>
+        <Grow in={showErrorMessage}>
+          <Alert className="mb-4" severity="error">
+            {errorMessage}
+          </Alert>
+        </Grow>
 
-      <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
-        <TextField
-          aria-errormessage={errors.firstname}
-          error={touched.firstname && Boolean(errors.firstname)}
-          helperText={touched.firstname && errors.firstname}
-          id="firstname"
-          label="Prénom"
-          name="firstname"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          required
-          type="text"
-          value={values.firstname}
-        />
-        <TextField
-          aria-errormessage={errors.lastname}
-          error={touched.lastname && Boolean(errors.lastname)}
-          helperText={touched.lastname && errors.lastname}
-          id="lastname"
-          label="Nom"
-          name="lastname"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          required
-          type="text"
-          value={values.lastname}
-        />
-        <TextField
-          aria-errormessage={errors.email}
-          className="col-span-2"
-          error={touched.email && Boolean(errors.email)}
-          helperText={touched.email && errors.email}
-          id="email"
-          label="Adresse e-mail"
-          name="email"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          required
-          type="email"
-          value={values.email}
-        />
-        <TextField
-          aria-errormessage={errors.password}
-          error={touched.password && Boolean(errors.password)}
-          helperText={touched.password && errors.password}
-          id="password"
-          label="Mot de passe"
-          name="password"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          required
-          type="password"
-          value={values.password}
-        />
-        <TextField
-          aria-errormessage={errors.confirmPassword}
-          error={touched.confirmPassword && Boolean(errors.confirmPassword)}
-          helperText={touched.confirmPassword && errors.confirmPassword}
-          id="confirmPassword"
-          label="Confirmer le mot de passe"
-          name="confirmPassword"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          required
-          type="password"
-          value={values.confirmPassword}
-        />
-        <LoadingButton
-          className="col-span-2"
-          color="primary"
-          disabled={!isValid || Object.keys(touched).length === 0}
-          loading={isSubmitting || isValidating || createUser.isLoading}
-          loadingPosition="start"
-          startIcon={<PeopleIcon />}
-          type="submit"
-          variant="contained"
-        >
-          S'inscrire
-        </LoadingButton>
-      </form>
-    </Container>
+        <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
+          <TextField
+            aria-errormessage={errors.firstname}
+            error={touched.firstname ? Boolean(errors.firstname) : undefined}
+            helperText={touched.firstname ? errors.firstname : undefined}
+            id="firstname"
+            label="Prénom"
+            name="firstname"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            required
+            type="text"
+            value={values.firstname}
+          />
+          <TextField
+            aria-errormessage={errors.lastname}
+            error={touched.lastname ? Boolean(errors.lastname) : undefined}
+            helperText={touched.lastname ? errors.lastname : undefined}
+            id="lastname"
+            label="Nom"
+            name="lastname"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            required
+            type="text"
+            value={values.lastname}
+          />
+          <TextField
+            aria-errormessage={errors.email}
+            className="col-span-2"
+            error={touched.email ? Boolean(errors.email) : undefined}
+            helperText={touched.email ? errors.email : undefined}
+            id="email"
+            label="Adresse e-mail"
+            name="email"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            required
+            type="email"
+            value={values.email}
+          />
+          <TextField
+            aria-errormessage={errors.password}
+            error={touched.password ? Boolean(errors.password) : undefined}
+            helperText={touched.password ? errors.password : undefined}
+            id="password"
+            label="Mot de passe"
+            name="password"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            required
+            type="password"
+            value={values.password}
+          />
+          <TextField
+            aria-errormessage={errors.confirmPassword}
+            error={
+              touched.confirmPassword
+                ? Boolean(errors.confirmPassword)
+                : undefined
+            }
+            helperText={
+              touched.confirmPassword ? errors.confirmPassword : undefined
+            }
+            id="confirmPassword"
+            label="Confirmer le mot de passe"
+            name="confirmPassword"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            required
+            type="password"
+            value={values.confirmPassword}
+          />
+          <LoadingButton
+            className="col-span-2"
+            color="primary"
+            disabled={!isValid || Object.keys(touched).length === 0}
+            loading={isSubmitting || isValidating || createUser.isLoading}
+            loadingPosition="start"
+            startIcon={<PeopleIcon />}
+            type="submit"
+            variant="contained"
+          >
+            S'inscrire
+          </LoadingButton>
+        </form>
+      </Container>
+    </>
   );
 };
 
