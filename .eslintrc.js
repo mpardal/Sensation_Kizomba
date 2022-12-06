@@ -72,15 +72,9 @@ module.exports = {
       },
     },
     {
-      files: ['src/**/{app,pages}/**/*.{ts,tsx}'],
+      files: ['src/**/pages/**/*.{ts,tsx}'],
       rules: {
         'react/function-component-definition': 'off'
-      }
-    },
-    {
-      files: ['src/app/**/layout.{ts,tsx}'],
-      rules: {
-        '@next/next/no-head-element': 'off'
       }
     }
   ],
