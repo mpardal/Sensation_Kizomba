@@ -52,13 +52,13 @@ function NavOtherCitiesMenu() {
         onClose={handleOtherCitiesMenuClose}
         open={otherCitiesMenuOpen}
       >
-        <Link href="/app/bordeaux" legacyBehavior passHref>
+        <Link href="/bordeaux" legacyBehavior passHref>
           <MenuItem component="a">Bordeaux</MenuItem>
         </Link>
-        <Link href="/app/le-mans" legacyBehavior passHref>
+        <Link href="/le-mans" legacyBehavior passHref>
           <MenuItem component="a">Le Mans</MenuItem>
         </Link>
-        <Link href="/app/orleans" legacyBehavior passHref>
+        <Link href="/orleans" legacyBehavior passHref>
           <MenuItem component="a">Orléans</MenuItem>
         </Link>
       </Menu>

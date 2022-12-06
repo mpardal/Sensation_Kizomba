@@ -1,5 +1,4 @@
-import { QueryClient } from '@tanstack/query-core';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
 import React from 'react';
 import type { AppProps } from 'next/app';
