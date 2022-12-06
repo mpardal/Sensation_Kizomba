@@ -23,7 +23,11 @@ function Footer() {
           Association Sensation Kizomba
         </Typography>
         <div className="flex items-center">
-          <Link href="#" legacyBehavior passHref>
+          <Link
+            href="https://instagram.com/sensationkizomba?igshid=YmMyMTA2M2Y="
+            legacyBehavior
+            passHref
+          >
             <a className="flex items-center no-underline text-inherit">
               <Typography className="mr-2">Instagram</Typography>
               <InstagramIcon />
