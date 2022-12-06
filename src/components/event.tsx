@@ -1,42 +1,32 @@
 import {
-  CardActions,
   CardContent,
   Card,
   List,
   ListItem,
-  IconButton,
   CardHeader,
   ListItemText,
   ListItemAvatar,
   Avatar,
 } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import LoupeIcon from '@mui/icons-material/Loupe';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { AppEventDate } from '../types/app-event-date';
+import mardi from '../../public/mardi.jpeg';
+import mardi2 from '../../public/mardi2.jpeg';
 
 function Event({
   title,
-  city,
   address,
   date,
-  teacher,
-  dj,
-  linkBuyTicket,
   linkDetails,
 }: {
   title: string;
-  city: string;
   address: string;
   date: AppEventDate;
-  teacher: string;
-  dj: string;
-  linkBuyTicket?: string;
   linkDetails: string;
 }) {
   const formattedDate = {
@@ -46,15 +36,9 @@ function Event({
 
   return (
     <Card variant="outlined">
-      <CardHeader
-        subheader={
-          formattedDate.to
-            ? `Du ${formattedDate.from} au ${formattedDate.to}`
-            : formattedDate.from
-        }
-        title={title}
-      />
-      <CardContent>
+      <CardHeader className="text-center underline" title={title} />
+      <CardContent className="text-center">
+        <Image alt="event" className="p-3 w-3/4 h-auto" src={mardi} />
         <List>
           <ListItem>
             <ListItemAvatar>
@@ -74,42 +58,22 @@ function Event({
                 <LocationCityIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText>
-              {address} à <strong>{city}</strong>
-            </ListItemText>
+            <ListItemText>{address}</ListItemText>
           </ListItem>
           <ListItem>
             <ListItemAvatar>
               <Avatar>
-                <SupervisorAccountIcon />
+                <LoupeIcon color="inherit" fontSize="large" />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText>{teacher}</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <MusicNoteIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText>{dj}</ListItemText>
+            <Link href={linkDetails} legacyBehavior passHref>
+              <a className="no-underline text-inherit">
+                <ListItemText>Détail de l'événement</ListItemText>
+              </a>
+            </Link>
           </ListItem>
         </List>
       </CardContent>
-      <CardActions>
-        <Link href={linkDetails} legacyBehavior passHref>
-          <IconButton component="a">
-            <AddCircleOutlineIcon color="action" fontSize="large" />
-          </IconButton>
-        </Link>
-        {linkBuyTicket ? (
-          <Link href={linkBuyTicket} legacyBehavior passHref>
-            <IconButton component="a">
-              <LocalActivityIcon color="action" fontSize="large" />
-            </IconButton>
-          </Link>
-        ) : null}
-      </CardActions>
     </Card>
   );
 }

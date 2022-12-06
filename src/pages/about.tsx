@@ -14,45 +14,43 @@ const About: NextPageWithLayout = () => {
         <div className="m-3 lg:m-5">
           <h2 className="underline">Qui sommes nous ?</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-            accusantium, aperiam, aspernatur dolorum est fugit laboriosam libero
-            maxime nemo obcaecati quo tempore? Architecto asperiores blanditiis
-            illo nobis officiis vero, voluptas!
+            Nous sommes une association de danse, basé dans l'ouest de la
+            France, depuis plus de dix ans.
           </p>
           <h2 className="underline">Que faisons-nous ?</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aut,
-            delectus, distinctio eaque error facilis fugiat id laborum minima
-            molestiae molestias nemo odit omnis placeat sed vel velit vero
-            voluptas. Enim eveniet illo pariatur voluptate? Accusamus amet
-            aperiam asperiores aspernatur consectetur dicta ducimus, earum
-            facere facilis harum illo incidunt magnam, molestiae neque nesciunt,
-            pariatur quasi sunt temporibus! Iure, magnam veritatis.
+            Nous donnons des cours de kizomba, nous organisons des soirées et
+            festivals kizomba, mais également quelques soirées et festivals avec
+            de la bachata et de la salsa, dans plusieurs villes de l'ouest de la
+            France.
           </p>
           <h2 className="underline">Où sommes nous ?</h2>
-          <Link href="/nantes" legacyBehavior passHref>
-            <a className="text-black no-underline">
-              <h4 className="italic">Nantes</h4>
-            </a>
-          </Link>
-          <p />
-          <Link href="/le-mans" legacyBehavior passHref>
-            <a className="text-black no-underline">
-              <h4 className="italic">Le Mans</h4>
-            </a>
-          </Link>
-          <p />
-          <Link href="/orleans" legacyBehavior passHref>
-            <a className="text-black no-underline">
-              <h4 className="italic">Orléans</h4>
-            </a>
-          </Link>
-          <p />
-          <Link href="/bordeaux" legacyBehavior passHref>
-            <a className="text-black no-underline">
-              <h4 className="italic">Bordeaux</h4>
-            </a>
-          </Link>
+          <p>Vous pouvez nous retoruver dans les villes suivantes :</p>
+          <div className="flex flex-row justify-around">
+            <Link href="/nantes" legacyBehavior passHref>
+              <a className="text-inherit no-underline">
+                <h4 className="italic">Nantes</h4>
+              </a>
+            </Link>
+            <p />
+            <Link href="/le-mans" legacyBehavior passHref>
+              <a className="text-inherit no-underline">
+                <h4 className="italic">Le Mans</h4>
+              </a>
+            </Link>
+            <p />
+            <Link href="/orleans" legacyBehavior passHref>
+              <a className="text-inherit no-underline">
+                <h4 className="italic">Orléans</h4>
+              </a>
+            </Link>
+            <p />
+            <Link href="/bordeaux" legacyBehavior passHref>
+              <a className="text-inherit no-underline">
+                <h4 className="italic">Bordeaux</h4>
+              </a>
+            </Link>
+          </div>
           <p />
           <div>
             <p>

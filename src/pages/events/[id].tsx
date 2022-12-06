@@ -25,11 +25,8 @@ const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
       {event.isSuccess && eventData ? (
         <Event
           address={eventData.address}
-          city={eventData.city}
           date={eventData.date}
-          dj={eventData.dj}
           linkDetails={`/events/${event.data.id}`}
-          teacher={eventData.teacher}
           title={eventData.title}
         />
       ) : null}

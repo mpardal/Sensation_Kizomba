@@ -17,17 +17,14 @@ function Events({
       )}
 
       {eventsSnapshot.map((doc) => {
-        const { title, city, address, date, teacher, dj } = doc.data();
+        const { title, city, address, date } = doc.data();
 
         return (
           <Event
             address={address}
-            city={city}
             date={date}
-            dj={dj}
             key={doc.id}
             linkDetails={`/events/${doc.id}`}
-            teacher={teacher}
             title={title}
           />
         );
