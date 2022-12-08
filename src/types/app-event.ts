@@ -6,8 +6,7 @@ export interface AppEvent {
   address: string;
   city: string;
   date: AppEventDate;
-  dj: string;
-  teacher: string;
   title: string;
   type: AppEventType;
+  description: string;
 }

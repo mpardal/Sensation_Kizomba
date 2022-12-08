@@ -17,7 +17,7 @@ function Events({
       )}
 
       {eventsSnapshot.map((doc) => {
-        const { title, city, address, date } = doc.data();
+        const { title, address, date } = doc.data();
 
         return (
           <Event

@@ -16,7 +16,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { AppEventDate } from '../types/app-event-date';
 import mardi from '../../public/mardi.jpeg';
-import mardi2 from '../../public/mardi2.jpeg';
 
 function Event({
   title,

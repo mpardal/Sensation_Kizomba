@@ -1,11 +1,13 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+//import type { GetServerSideProps } from 'next';
 import type { GetServerSideProps } from 'next';
 import Layout from '../../components/layout';
 import { useEvent } from '../../hooks/use-event';
 import Event from '../../components/event';
 import type { NextPageWithLayout } from '../../components/layout';
+import DetailEvent from '../../components/detail-event';
 
 interface EventPageProps {
   //Type le paramètre id
@@ -23,10 +25,10 @@ const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
   return (
     <div className="px-4">
       {event.isSuccess && eventData ? (
-        <Event
+        <DetailEvent
           address={eventData.address}
           date={eventData.date}
-          linkDetails={`/events/${event.data.id}`}
+          description={eventData.description}
           title={eventData.title}
         />
       ) : null}
