@@ -10,7 +10,7 @@ const Nantes: NextPageWithLayout = () => {
       <Head>
         <title>SENSATION-KIZOMBA — Événements à Nantes</title>
       </Head>
-      <City city="Nantes" />
+      <City city="nantes" />
     </>
   );
 };

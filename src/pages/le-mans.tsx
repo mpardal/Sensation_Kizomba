@@ -10,7 +10,7 @@ const LeMans: NextPageWithLayout = () => {
       <Head>
         <title>SENSATION-KIZOMBA — Événements au Mans</title>
       </Head>
-      <City city="Le Mans" />
+      <City city="le-mans" />
     </>
   );
 };
