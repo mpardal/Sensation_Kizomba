@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import { useEvents } from '../../hooks/use-events';
 import Events from '../events';
+import { cityKeyToCityName } from '../../utils/city-key-to-city-name';
 
 function City({ city }: { city: string }) {
   const eventsSnapshot = useEvents(city);
@@ -18,7 +19,7 @@ function City({ city }: { city: string }) {
       {/*Appel le composant Events*/}
       <div className="m-3 lg:m-5">
         <Typography gutterBottom variant="h2">
-          {city}
+          {cityKeyToCityName(city)}
         </Typography>
 
         {eventsSnapshot.isLoading ? (

@@ -66,7 +66,6 @@ function DetailEvent({
           <ListItem>
             <ListItemText>
               <div
-                className="text-center"
                 contentEditable="true"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
