@@ -1,13 +1,11 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
-//import type { GetServerSideProps } from 'next';
 import type { GetServerSideProps } from 'next';
-import Layout from '../../components/layout';
-import { useEvent } from '../../hooks/use-event';
-import Event from '../../components/event';
-import type { NextPageWithLayout } from '../../components/layout';
-import DetailEvent from '../../components/detail-event';
+import { useEvent } from '@/hooks/use-event';
+import type { NextPageWithLayout } from '@/components/layout';
+import Layout from '@/components/layout';
+import DetailEvent from '@/components/detail-event';
 
 interface EventPageProps {
   //Type le paramètre id
