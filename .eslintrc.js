@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 
 const tsConfig = path.resolve(__dirname, 'tsconfig.json');
 
@@ -37,6 +37,15 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off'
   },
   overrides: [
+    {
+      files: ['__tests__/**/*.{ts,tsx}'],
+      extends: [
+          require.resolve('@vercel/style-guide/eslint/jest'),
+      ],
+      env: {
+        jest: true
+      }
+    },
     {
       files: ['*.ts', '*.tsx'],
       rules: {

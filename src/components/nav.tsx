@@ -13,7 +13,7 @@ function Nav() {
   const { setMessage } = useGlobalSnackbar();
 
   return (
-    <div className="flex h-full w-full items-center">
+    <nav className="flex h-full w-full items-center">
       <div className="hidden lg:flex lg:items-center gap-6">
         <Link href="/about" legacyBehavior passHref>
           <Button color="primary" component="a">
@@ -59,7 +59,7 @@ function Nav() {
           </Button>
         )}
       </div>
-    </div>
+    </nav>
   );
 }
 
