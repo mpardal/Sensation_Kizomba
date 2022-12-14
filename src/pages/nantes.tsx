@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
+import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '../components/layout';
 import City from '../components/ui/city';
-import type { NextPageWithLayout } from '../components/layout';
 
 const Nantes: NextPageWithLayout = () => {
   return (

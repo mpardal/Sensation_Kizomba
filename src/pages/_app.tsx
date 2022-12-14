@@ -2,10 +2,10 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
 import React from 'react';
 import type { AppProps } from 'next/app';
+import type { NextPageWithLayout } from '@/components/layout';
 import MuiTheme from '../components/mui-theme';
 import FirebaseAuthProvider from '../hooks/auth/use-auth';
 import GlobalSnackbarProvider from '../hooks/use-global-snackbar';
-import type { NextPageWithLayout } from '../components/layout';
 import '../styles/globals.css';
 
 type AppPropsWithLayout = AppProps & {
