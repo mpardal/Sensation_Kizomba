@@ -35,7 +35,7 @@ function City({ city }: { city: string }) {
                 <Card className="flex flex-col">
                   <CardHeader
                     title="Événements hebdomadaires"
-                    titleTypographyProps={{ variant: 'h4' }}
+                    titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
 
                   <CardContent className="grow flex justify-center">
@@ -50,7 +50,7 @@ function City({ city }: { city: string }) {
                 <Card className="flex flex-col">
                   <CardHeader
                     title="Événements mensuels"
-                    titleTypographyProps={{ variant: 'h4' }}
+                    titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
                   <CardContent className="grow flex justify-center">
                     <Events
@@ -64,7 +64,7 @@ function City({ city }: { city: string }) {
                 <Card className="flex flex-col">
                   <CardHeader
                     title="Événements trimestriels"
-                    titleTypographyProps={{ variant: 'h4' }}
+                    titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
 
                   <CardContent className="grow flex justify-center">
@@ -79,7 +79,7 @@ function City({ city }: { city: string }) {
                 <Card className="flex flex-col">
                   <CardHeader
                     title="Événements annuels"
-                    titleTypographyProps={{ variant: 'h4' }}
+                    titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
                   <CardContent className="grow flex justify-center">
                     <Events
