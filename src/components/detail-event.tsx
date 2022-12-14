@@ -12,7 +12,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import type { AppEventDate } from '../types/app-event-date';
+import type { AppEventDate } from '@/types/app-event-date';
 import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
