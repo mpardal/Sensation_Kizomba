@@ -14,7 +14,7 @@ import LoupeIcon from '@mui/icons-material/Loupe';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { AppEventDate } from '../types/app-event-date';
+import type { AppEventDate } from '@/types/app-event-date';
 import mardi from '../../public/mardi.jpeg';
 
 function Event({
@@ -60,13 +60,13 @@ function Event({
             <ListItemText>{address}</ListItemText>
           </ListItem>
           <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <LoupeIcon color="inherit" fontSize="large" />
-              </Avatar>
-            </ListItemAvatar>
             <Link href={linkDetails} legacyBehavior passHref>
-              <a className="no-underline text-inherit">
+              <a className="flex flex-row no-underline text-inherit">
+                <ListItemAvatar>
+                  <Avatar>
+                    <LoupeIcon color="inherit" fontSize="large" />
+                  </Avatar>
+                </ListItemAvatar>
                 <ListItemText>Détail de l'événement</ListItemText>
               </a>
             </Link>
