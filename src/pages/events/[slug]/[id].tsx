@@ -46,7 +46,6 @@ export const getServerSideProps: GetServerSideProps<EventPageProps> = async (
 ) => {
   //Utiliser pour gérér la récupération des routes dynamiques
   const id = ctx.query.id as string;
-
   return {
     //Renseigne le paramètre à renvoyer
     props: {

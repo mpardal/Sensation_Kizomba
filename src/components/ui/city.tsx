@@ -7,9 +7,9 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import { useEvents } from '../../hooks/use-events';
+import { useEvents } from '@/hooks/use-events';
+import { cityKeyToCityName } from '@/utils/city-key-to-city-name';
 import Events from '../events';
-import { cityKeyToCityName } from '../../utils/city-key-to-city-name';
 
 function City({ city }: { city: string }) {
   const eventsSnapshot = useEvents(city);

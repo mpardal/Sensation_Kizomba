@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import type { QueryDocumentSnapshot } from 'firebase/firestore';
+import slugify from 'slugify';
 import type { AppEvent } from '@/types/app-event';
 import Event from './event';
 
@@ -24,7 +25,7 @@ function Events({
             address={address}
             date={date}
             key={doc.id}
-            linkDetails={`/events/${doc.id}`}
+            linkDetails={`/events/${slugify(title)}/${doc.id}`}
             title={title}
           />
         );
