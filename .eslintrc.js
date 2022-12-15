@@ -34,17 +34,16 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'prettier/prettier': 'error',
     'import/no-named-as-default-member': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
   },
   overrides: [
     {
       files: ['__tests__/**/*.{ts,tsx}'],
-      extends: [
-          require.resolve('@vercel/style-guide/eslint/jest'),
-      ],
+      extends: [require.resolve('@vercel/style-guide/eslint/jest')],
       env: {
-        jest: true
-      }
+        jest: true,
+      },
     },
     {
       files: ['*.ts', '*.tsx'],
@@ -71,7 +70,7 @@ module.exports = {
       files: ['*.tsx'],
       rules: {
         'import/no-default-export': 'off',
-        'jsx-a11y/anchor-is-valid': 'off'
+        'jsx-a11y/anchor-is-valid': 'off',
       },
     },
     {
@@ -83,8 +82,14 @@ module.exports = {
     {
       files: ['src/**/pages/**/*.{ts,tsx}'],
       rules: {
-        'react/function-component-definition': 'off'
-      }
-    }
+        'react/function-component-definition': 'off',
+      },
+    },
+    {
+      files: ['src/**/pages/api/**/*.{ts,tsx}'],
+      rules: {
+        'import/no-default-export': 'off',
+      },
+    },
   ],
 };

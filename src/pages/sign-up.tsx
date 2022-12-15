@@ -15,11 +15,11 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 //zod permet d'éviter la duplication de validation
 import { z } from 'zod';
+import { useCreateUser } from '@/hooks/auth/use-create-user';
+import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
+import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
+import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '../components/layout';
-import { useCreateUser } from '../hooks/auth/use-create-user';
-import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
-import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
-import type { NextPageWithLayout } from '../components/layout';
 
 const SignUpObject = z
   .object({

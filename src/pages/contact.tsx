@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -10,12 +10,12 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import MessageIcon from '@mui/icons-material/Message';
 import type { FormEvent } from 'react';
+import { logger } from '@/utils/logger';
+import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '../components/layout';
-import { logger } from '../utils/logger';
-import type { NextPageWithLayout } from '../components/layout';
 
 const Contact: NextPageWithLayout = () => {
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.currentTarget);
@@ -25,8 +25,27 @@ const Contact: NextPageWithLayout = () => {
     const email = formData.get('email') as string;
     const comment = formData.get('comment') as string;
 
+    const res = await fetch('/api/mail', {
+      body: JSON.stringify({
+        email,
+        firstname,
+        lastname,
+        message,
+      }),
+      headers: {
+        'Content-type': 'application/json',
+      },
+      method: 'POST',
+    });
+
     logger.log(firstname, lastname, email, comment);
   };
+
+  //État des champs du formulaire de contact
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   return (
     <>
@@ -49,8 +68,12 @@ const Contact: NextPageWithLayout = () => {
                 id="firstname"
                 label="Prénom"
                 name="firstname"
+                onChange={(e) => {
+                  setFirstname(e.target.value);
+                }}
                 required
                 type="text"
+                value={firstname}
               />
             </div>
             <div className="my-3 flex flex-col lg:w-full">
@@ -58,8 +81,12 @@ const Contact: NextPageWithLayout = () => {
                 id="lastname"
                 label="Nom"
                 name="lastname"
+                onChange={(e) => {
+                  setLastname(e.target.value);
+                }}
                 required
                 type="text"
+                value={lastname}
               />
             </div>
           </div>
@@ -72,8 +99,12 @@ const Contact: NextPageWithLayout = () => {
                 id="email"
                 label="Adresse e-mail"
                 name="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 required
                 type="email"
+                value={email}
               />
             </div>
           </div>
@@ -84,7 +115,11 @@ const Contact: NextPageWithLayout = () => {
               minRows={3}
               multiline
               name="comment"
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
               type="text"
+              value={message}
             />
           </div>
           <Button
