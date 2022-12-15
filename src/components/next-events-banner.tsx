@@ -7,7 +7,6 @@ import { appEventFormatDate } from '@/utils/app-event-format-date';
 
 function NextEventsBanner() {
   const nextEvents = useNextEvents();
-  // Design à définir, il ne faudrait pas que ce soit très grand. Rajouter des Link par la suite => Trois événements, c'est suffisant (Micka) faire une MAJ automatique
 
   return (
     <div className="flex p-2 w-screen items-center bg-secondary-900">
