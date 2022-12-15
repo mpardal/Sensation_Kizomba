@@ -35,9 +35,6 @@ function NextEventsBanner() {
               </ButtonBase>
             );
           })}
-          {/*<Chip icon={<NightlifeIcon />} label="Noite Kizomba - 24 septembre" />
-          <Chip icon={<NightlifeIcon />} label="Unidade - 1 octobre" />
-          <Chip icon={<NightlifeIcon />} label="Conexao - 8 octobre" />*/}
         </div>
       ) : null}
     </div>
