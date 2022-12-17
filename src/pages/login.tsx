@@ -26,12 +26,12 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
 import type { GetServerSideProps } from 'next';
-import Layout from '../components/layout';
-import { useAuth } from '../hooks/auth/use-auth';
-import { useLogin } from '../hooks/auth/use-login';
-import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
-import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
-import type { NextPageWithLayout } from '../components/layout';
+import Layout from '@/components/layout';
+import { useAuth } from '@/hooks/auth/use-auth';
+import { useLogin } from '@/hooks/auth/use-login';
+import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
+import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
+import type { NextPageWithLayout } from '@/components/layout';
 
 const LoginObject = z.object({
   email: z
@@ -47,10 +47,15 @@ const LoginObject = z.object({
     .min(6, { message: 'Le mot de passe doit faire au moins 6 caractères' }),
 });
 
-const LoginPage: NextPageWithLayout<{
+interface LoginProps {
   defaultEmail: string;
   fromForgotPassword: boolean;
-}> = ({ defaultEmail, fromForgotPassword }) => {
+}
+
+const LoginPage: NextPageWithLayout<LoginProps> = ({
+  defaultEmail,
+  fromForgotPassword,
+}) => {
   const { setMessage, hide } = useGlobalSnackbar();
   const { logged } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -213,8 +218,10 @@ LoginPage.Layout = function LoginLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<LoginProps> = async (
+  ctx,
+  // eslint-disable-next-line @typescript-eslint/require-await
+) => {
   return {
     props: {
       defaultEmail: (ctx.query.email as string | undefined) ?? '',

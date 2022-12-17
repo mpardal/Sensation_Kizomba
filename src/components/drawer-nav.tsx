@@ -12,10 +12,10 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
-import { auth } from '../config/firebase-config';
-import { useAuth } from '../hooks/auth/use-auth';
-import { useGlobalSnackbar } from '../hooks/use-global-snackbar';
-import { logger } from '../utils/logger';
+import { auth } from '@/config/firebase-config';
+import { useAuth } from '@/hooks/auth/use-auth';
+import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
+import { logger } from '@/utils/logger';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,

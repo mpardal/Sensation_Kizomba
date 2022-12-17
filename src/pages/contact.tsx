@@ -25,7 +25,7 @@ const Contact: NextPageWithLayout = () => {
     const email = formData.get('email') as string;
     const comment = formData.get('comment') as string;
 
-    const res = await fetch('/api/mail', {
+    await fetch('/api/mail', {
       body: JSON.stringify({
         email,
         firstname,

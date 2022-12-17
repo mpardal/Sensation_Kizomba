@@ -8,15 +8,16 @@ import type { AppEvent } from '../types/app-event';
 //Fonction permettant de récupérer un document d'une collection Firebase
 export function useEvent(
   //id est un string
-  id: string,
+  id?: string,
   //?
   options?: UseQueryOptions<DocumentSnapshot<AppEvent>>,
 ) {
   return useQuery({
     queryKey: ['events', id],
+    enabled: Boolean(id),
     queryFn: async () => {
       return (await getDoc(
-        doc(database, 'events', id),
+        doc(database, 'events', id as string),
       )) as DocumentSnapshot<AppEvent>;
     },
     //?

@@ -1,13 +1,14 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import { useNextEvents } from '@/hooks/use-next-events';
-import Event from '@/components/event';
+import Layout from '@/components/layout';
 import type { NextPageWithLayout } from '@/components/layout';
+import { useNextEvents } from '@/hooks/use-next-events';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
-import Layout from '../components/layout';
+import Event from '@/components/event';
 
 const Home: NextPageWithLayout = () => {
   const nextEvents = useNextEvents();
+
   return (
     <div>
       <Typography className="text-center mb-10" component="h1" variant="h3">
