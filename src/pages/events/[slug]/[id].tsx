@@ -1,6 +1,5 @@
+/* eslint-disable no-console */
 import React from 'react';
-import dayjs from 'dayjs';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import type { GetServerSideProps } from 'next';
 import { useEvent } from '@/hooks/use-event';
 import type { NextPageWithLayout } from '@/components/layout';
@@ -13,11 +12,12 @@ interface EventPageProps {
 }
 
 const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
-  // [id].tsx - events/slug-conexao
+  console.log('start eventPage render');
+  // [id].tsx - events/slug-conexao/[id].tsx
   const event = useEvent(id);
+  console.log('useEvent');
 
   const eventData = event.data?.data();
-  dayjs.extend(localizedFormat); //Donne la possibilité de fixer une localisation pour le format d'affichage de la date
 
   //Retourne le component event en intégrant les données récupéré dans Firebase
   return (
@@ -36,6 +36,8 @@ const EventPage: NextPageWithLayout<EventPageProps> = ({ id }) => {
 
 // Intègre les éléments de base de la page (graphisme)
 EventPage.Layout = function ContactLayout(page) {
+  console.log('yo');
+
   return <Layout>{page}</Layout>;
 };
 
@@ -44,14 +46,19 @@ export const getServerSideProps: GetServerSideProps<EventPageProps> = async (
   ctx,
   // eslint-disable-next-line @typescript-eslint/require-await
 ) => {
+  console.log('start function getServerSideProps');
   //Utiliser pour gérér la récupération des routes dynamiques
   const id = ctx.query.id as string;
+  console.log('get id', id);
+  console.log('return id', { props: { id } });
+
   return {
-    //Renseigne le paramètre à renvoyer
     props: {
+      //Renseigne le paramètre à renvoyer
       id,
     },
   };
 };
 
 export default EventPage;
+/* eslint-enable no-console */

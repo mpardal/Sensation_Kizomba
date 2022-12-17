@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
 import sanitizeHtml from 'sanitize-html';
+import nc from 'next-connect';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
@@ -11,7 +12,9 @@ interface ApiBody {
   message: string;
 }
 
-async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
+const app = nc<NextApiRequest, NextApiResponse>();
+
+app.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const { firstname, lastname, email, message } = req.body as ApiBody;
 
   try {
@@ -34,6 +37,6 @@ async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
   }
 
   return res.status(200).json({ ok: true });
-}
+});
 
-export default sendEmail;
+export default app;

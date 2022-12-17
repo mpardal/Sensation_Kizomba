@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install && playwright install",
+    "prepare": "husky install",
     "test": "jest --watch",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright install && playwright test"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
