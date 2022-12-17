@@ -66,7 +66,7 @@ function DetailEvent({
           <ListItem>
             <ListItemText>
               <div
-                contentEditable="true"
+                contentEditable="false"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             </ListItemText>

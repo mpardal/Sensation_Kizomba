@@ -21,7 +21,6 @@ function City({ city }: { city: string }) {
         <Typography gutterBottom variant="h2">
           {cityKeyToCityName(city)}
         </Typography>
-
         {eventsSnapshot.isLoading ? (
           <div className="flex justify-center">
             <CircularProgress variant="indeterminate" />
