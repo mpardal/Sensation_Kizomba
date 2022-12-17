@@ -74,7 +74,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.d.ts'],
+      files: ['*.d.ts', 'playwright.config.ts'],
       rules: {
         'import/no-default-export': 'off',
       },
