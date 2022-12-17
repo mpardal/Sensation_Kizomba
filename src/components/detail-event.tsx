@@ -79,7 +79,7 @@ function DetailEvent({
                 className="w-4/5"
                 height="750"
                 src={weezeventUrl}
-                title="iframe"
+                title={weezeventUrl}
               />
             </ListItemText>
           </ListItem>
