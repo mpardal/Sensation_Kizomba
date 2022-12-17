@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import slugify from 'slugify';
 import { useNextEvents } from '@/hooks/use-next-events';
 import Event from '@/components/event';
 import type { NextPageWithLayout } from '@/components/layout';
+import { slugifyEventLink } from '@/utils/slugify-event-link';
 import Layout from '../components/layout';
 
 const Home: NextPageWithLayout = () => {
@@ -23,7 +23,7 @@ const Home: NextPageWithLayout = () => {
                 address={data.address}
                 date={data.date}
                 key={event.id}
-                linkDetails={`/events/${slugify(data.title)}/${event.id}`}
+                linkDetails={slugifyEventLink(data, event)}
                 title={data.title}
               />
             );

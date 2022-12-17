@@ -1,9 +1,9 @@
 import NightlifeIcon from '@mui/icons-material/Nightlife';
 import { Chip, Typography, ButtonBase } from '@mui/material';
 import Link from 'next/link';
-import slugify from 'slugify';
 import { useNextEvents } from '@/hooks/use-next-events';
 import { appEventFormatDate } from '@/utils/app-event-format-date';
+import { slugifyEventLink } from '@/utils/slugify-event-link';
 
 function NextEventsBanner() {
   const nextEvents = useNextEvents();
@@ -23,7 +23,7 @@ function NextEventsBanner() {
               <ButtonBase className="rounded-2xl" key={event.id}>
                 <Link
                   className="no-underline"
-                  href={`/events/${slugify(data.title)}/${event.id}`}
+                  href={slugifyEventLink(data, event)}
                 >
                   <Chip
                     className="cursor-pointer"
