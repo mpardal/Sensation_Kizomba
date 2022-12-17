@@ -20,11 +20,13 @@ function DetailEvent({
   address,
   date,
   description,
+  weezeventUrl,
 }: {
   title: string;
   address: string;
   date: AppEventDate;
   description: string;
+  weezeventUrl: string;
 }) {
   const formattedDate = {
     from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
@@ -68,6 +70,16 @@ function DetailEvent({
               <div
                 contentEditable="false"
                 dangerouslySetInnerHTML={{ __html: description }}
+              />
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText className="text-center">
+              <iframe
+                className="w-4/5"
+                height="750"
+                src={weezeventUrl}
+                title="iframe"
               />
             </ListItemText>
           </ListItem>
