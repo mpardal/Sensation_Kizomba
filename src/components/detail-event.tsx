@@ -13,6 +13,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
+import { useEvent } from '@/hooks/use-event';
 import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
@@ -32,6 +33,7 @@ function DetailEvent({
     from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
     to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
   };
+  const weezeventLinkSnapshot = useEvent(weezeventUrl);
 
   return (
     <Card variant="outlined">
@@ -67,22 +69,21 @@ function DetailEvent({
           </section>
           <ListItem>
             <ListItemText>
-              <div
-                contentEditable="false"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <div dangerouslySetInnerHTML={{ __html: description }} />
             </ListItemText>
           </ListItem>
-          <ListItem>
-            <ListItemText className="text-center">
-              <iframe
-                className="w-4/5"
-                height="750"
-                src={weezeventUrl}
-                title={weezeventUrl}
-              />
-            </ListItemText>
-          </ListItem>
+          {weezeventUrl ? (
+            <ListItem>
+              <ListItemText className="text-center">
+                <iframe
+                  className="xl:w-4/5"
+                  height="500"
+                  src={weezeventUrl}
+                  title={weezeventUrl}
+                />
+              </ListItemText>
+            </ListItem>
+          ) : null}
         </List>
       </CardContent>
     </Card>
