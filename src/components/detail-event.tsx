@@ -20,17 +20,18 @@ function DetailEvent({
   address,
   date,
   description,
+  weezeventUrl,
 }: {
   title: string;
   address: string;
   date: AppEventDate;
   description: string;
+  weezeventUrl: string;
 }) {
   const formattedDate = {
     from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
     to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
   };
-
   return (
     <Card variant="outlined">
       <CardHeader className="text-center underline" title={title} />
@@ -65,12 +66,21 @@ function DetailEvent({
           </section>
           <ListItem>
             <ListItemText>
-              <div
-                contentEditable="false"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <div dangerouslySetInnerHTML={{ __html: description }} />
             </ListItemText>
           </ListItem>
+          {weezeventUrl ? (
+            <ListItem>
+              <ListItemText className="text-center">
+                <iframe
+                  className="xl:w-4/5"
+                  height="500"
+                  src={weezeventUrl}
+                  title={weezeventUrl}
+                />
+              </ListItemText>
+            </ListItem>
+          ) : null}
         </List>
       </CardContent>
     </Card>

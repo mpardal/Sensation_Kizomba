@@ -25,6 +25,7 @@ const EventPage: NextPageWithLayout = () => {
           date={eventData.date}
           description={eventData.description}
           title={eventData.title}
+          weezeventUrl={eventData.weezeventUrl}
         />
       ) : null}
     </div>

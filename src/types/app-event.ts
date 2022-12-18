@@ -9,4 +9,5 @@ export interface AppEvent {
   title: string;
   type: AppEventType;
   description: string;
+  weezeventUrl: string;
 }
