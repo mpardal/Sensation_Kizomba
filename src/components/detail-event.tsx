@@ -13,7 +13,6 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
-import { useEvent } from '@/hooks/use-event';
 import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
@@ -33,8 +32,6 @@ function DetailEvent({
     from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
     to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
   };
-  const weezeventLinkSnapshot = useEvent(weezeventUrl);
-
   return (
     <Card variant="outlined">
       <CardHeader className="text-center underline" title={title} />
