@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useNextEvents } from '@/hooks/use-next-events';
 import { appEventFormatDate } from '@/utils/app-event-format-date';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
+import { millisToTimestamp } from '@/utils/millis-to-timestamp';
 
 function NextEventsBanner() {
   const nextEvents = useNextEvents();
@@ -15,20 +16,23 @@ function NextEventsBanner() {
       </Typography>
       {nextEvents.isSuccess ? (
         <div className="flex grow overflow-auto gap-3">
-          {nextEvents.data.docs.map((event) => {
-            const data = event.data();
-            const date = appEventFormatDate(data.date.from, 'll');
+          {nextEvents.data.map((event) => {
+            const date = appEventFormatDate(
+              millisToTimestamp(event.date.from),
+              'll',
+            );
 
             return (
-              <ButtonBase className="rounded-2xl" key={event.id}>
-                <Link
-                  className="no-underline"
-                  href={slugifyEventLink(data, event)}
-                >
+              <ButtonBase
+                aria-label={`événement ${event.title.trim()} pour le ${date}`}
+                className="rounded-2xl"
+                key={event.id}
+              >
+                <Link className="no-underline" href={slugifyEventLink(event)}>
                   <Chip
                     className="cursor-pointer"
                     icon={<NightlifeIcon />}
-                    label={`${data.title} - ${date}`}
+                    label={`${event.title} - ${date}`}
                   />
                 </Link>
               </ButtonBase>

@@ -16,10 +16,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { z } from 'zod';
+import type { GetStaticProps } from 'next';
+import { dehydrate } from '@tanstack/react-query';
+import { initHydration } from '@/utils/react-query/ssr';
+import { logger } from '@/utils/logger';
+import {
+  staticPropsRevalidate,
+  staticPropsRevalidateError,
+} from '@/utils/static-props';
+import { useAskPassword } from '@/hooks/auth/use-ask-password';
+import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
+import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '../components/layout';
-import { useAskPassword } from '../hooks/auth/use-ask-password';
-import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
-import type { NextPageWithLayout } from '../components/layout';
 
 const ForgotPasswordObject = z.object({
   email: z
@@ -142,6 +150,28 @@ const ForgotPassword: NextPageWithLayout = () => {
 
 ForgotPassword.Layout = function ForgotPasswordLayout(page) {
   return <Layout>{page}</Layout>;
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { queryClient, hydrate } = initHydration();
+
+  try {
+    await hydrate();
+  } catch (err) {
+    logger.error('prefetch error', err);
+
+    return {
+      notFound: true,
+      revalidate: staticPropsRevalidateError,
+    };
+  }
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    revalidate: staticPropsRevalidate,
+  };
 };
 
 export default ForgotPassword;

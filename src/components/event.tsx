@@ -29,13 +29,13 @@ function Event({
   linkDetails: string;
 }) {
   const formattedDate = {
-    from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
-    to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
+    from: dayjs(date.from).format('DD/MM/YYYY'),
+    to: date.to ? dayjs(date.to).format('DD/MM/YYYY') : undefined,
   };
 
   return (
     <Card variant="outlined">
-      <CardHeader className="text-center underline" title={title} />
+      <CardHeader className="text-center" title={title} />
       <CardContent className="text-center">
         <Image alt="event" className="p-3 w-3/4 h-auto" src={mardi} />
         <List>
@@ -61,7 +61,7 @@ function Event({
           </ListItem>
           <ListItem>
             <Link href={linkDetails} legacyBehavior passHref>
-              <a className="flex flex-row no-underline text-inherit">
+              <a className="flex flex-row no-underline text-inherit items-center">
                 <ListItemAvatar>
                   <Avatar>
                     <LoupeIcon color="inherit" fontSize="large" />

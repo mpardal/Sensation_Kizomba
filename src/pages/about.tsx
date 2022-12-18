@@ -1,8 +1,13 @@
 import Head from 'next/head';
 import React from 'react';
 import Link from 'next/link';
-import Layout from '../components/layout';
-import type { NextPageWithLayout } from '../components/layout';
+import type { GetStaticProps } from 'next';
+import { dehydrate } from '@tanstack/react-query';
+import { staticPropsRevalidateError } from '@/utils/static-props';
+import { logger } from '@/utils/logger';
+import type { NextPageWithLayout } from '@/components/layout';
+import Layout from '@/components/layout';
+import { initHydration } from '@/utils/react-query/ssr';
 
 const About: NextPageWithLayout = () => {
   return (
@@ -67,6 +72,27 @@ const About: NextPageWithLayout = () => {
 
 About.Layout = function AboutLayout(page) {
   return <Layout>{page}</Layout>;
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { queryClient, hydrate } = initHydration();
+
+  try {
+    await hydrate();
+  } catch (err) {
+    logger.error('prefetch error', err);
+
+    return {
+      notFound: true,
+      revalidate: staticPropsRevalidateError,
+    };
+  }
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 };
 
 export default About;

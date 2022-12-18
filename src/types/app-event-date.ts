@@ -1,6 +1,4 @@
-import type { Timestamp } from 'firebase/firestore';
-
 export interface AppEventDate {
-  from: Timestamp;
-  to?: Timestamp;
+  from: number;
+  to?: number;
 }

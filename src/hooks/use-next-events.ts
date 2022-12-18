@@ -11,22 +11,32 @@ import {
 } from 'firebase/firestore';
 import type { AppEvent } from '@/types/app-event';
 import { database } from '@/config/firebase-config';
+import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
 
 const today = new Date();
-export function useNextEvents(
-  options?: UseQueryOptions<QuerySnapshot<AppEvent>>,
-) {
-  return useQuery({
-    queryKey: ['next-events'],
-    queryFn: async () => {
-      const nextEventsQuery = query(
-        collection(database, 'events'),
-        where('date.from', '>', today),
-        orderBy('date.from', 'asc'),
-        limit(3),
-      );
 
-      return (await getDocs(nextEventsQuery)) as QuerySnapshot<AppEvent>;
+export function getNextEventsQueryKey() {
+  return ['next-events'];
+}
+
+export async function fetchNextEvents() {
+  const nextEventsQuery = query(
+    collection(database, 'events'),
+    where('date.from', '>', today),
+    orderBy('date.from', 'asc'),
+    limit(3),
+  );
+
+  return (await getDocs(nextEventsQuery)) as QuerySnapshot<AppEvent>;
+}
+
+export function useNextEvents(options?: UseQueryOptions<AppEvent[]>) {
+  return useQuery({
+    queryKey: getNextEventsQueryKey(),
+    queryFn: async () => {
+      const nextEvents = await fetchNextEvents();
+
+      return serializeQuerySnapshot(nextEvents);
     },
     ...options,
   });

@@ -1,4 +1,8 @@
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import {
+  QueryClientProvider,
+  QueryClient,
+  Hydrate,
+} from '@tanstack/react-query';
 import Head from 'next/head';
 import React from 'react';
 import type { AppProps } from 'next/app';
@@ -12,7 +16,7 @@ import GlobalSnackbarProvider from '../hooks/use-global-snackbar';
 import 'dayjs/locale/fr';
 import '../styles/globals.css';
 
-type AppPropsWithLayout = AppProps & {
+type AppPropsWithLayout = AppProps<{ dehydratedState?: unknown }> & {
   Component: NextPageWithLayout;
 };
 
@@ -37,13 +41,17 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <MuiTheme>
         <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools />
+          <Hydrate state={pageProps.dehydratedState}>
+            <ReactQueryDevtools />
 
-          <GlobalSnackbarProvider>
-            <FirebaseAuthProvider>
-              {Layout(<Component {...pageProps} />)}
-            </FirebaseAuthProvider>
-          </GlobalSnackbarProvider>
+            <GlobalSnackbarProvider>
+              <FirebaseAuthProvider>
+                {Layout(
+                  <Component {...(pageProps as Record<never, unknown>)} />,
+                )}
+              </FirebaseAuthProvider>
+            </GlobalSnackbarProvider>
+          </Hydrate>
         </QueryClientProvider>
       </MuiTheme>
     </>
