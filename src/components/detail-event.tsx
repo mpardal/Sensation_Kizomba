@@ -13,6 +13,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
+import OptimizedIframe from '@/components/optimized-iframe';
 import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
@@ -100,11 +101,11 @@ function DetailEvent({
           {weezeventUrl ? (
             <ListItem disablePadding>
               <ListItemText className="text-center -mx-4 sm:mx-0">
-                <iframe
+                <OptimizedIframe
                   className="w-full border-none"
-                  height="500"
+                  height={500}
                   src={weezeventUrl}
-                  title={weezeventUrl}
+                  title="Afficher la billeterie"
                 />
               </ListItemText>
             </ListItem>

@@ -10,12 +10,12 @@ function NextEventsBanner() {
   const nextEvents = useNextEvents();
 
   return (
-    <aside className="flex p-2 w-full items-center bg-secondary-900">
-      <Typography className="mr-3" component="span" variant="body2">
+    <aside className="flex w-full bg-secondary-900 gap-3">
+      <Typography className="p-2 self-center" component="span" variant="body2">
         Prochains événements
       </Typography>
       {nextEvents.isSuccess ? (
-        <div className="flex grow overflow-auto gap-3">
+        <div className="flex grow overflow-auto gap-3 py-2 pr-2">
           {nextEvents.data.map((event) => {
             const date = appEventFormatDate(
               millisToTimestamp(event.date.from),
