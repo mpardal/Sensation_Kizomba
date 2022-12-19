@@ -1,23 +1,19 @@
 import React from 'react';
-import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import { dehydrate } from '@tanstack/react-query';
 import type { CollectionReference } from 'firebase/firestore';
 import { collection, getDocs } from 'firebase/firestore';
 import slugify from 'slugify';
-import { useEvent, getEventQueryKey, fetchEvent } from '@/hooks/use-event';
+import { useEvent } from '@/hooks/use-event';
 import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '@/components/layout';
 import DetailEvent from '@/components/detail-event';
 import { database } from '@/config/firebase-config';
 import type { AppEvent } from '@/types/app-event';
-import { serializeSnapshot } from '@/utils/serialize-snapshot';
-import {
-  staticPropsRevalidate,
-  staticPropsRevalidateError,
-} from '@/utils/static-props';
-import { initHydration } from '@/utils/react-query/ssr';
-import { logger } from '@/utils/logger';
+import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
+import { staticPropsRevalidate } from '@/utils/static-props';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 
 const EventPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -48,7 +44,10 @@ EventPage.Layout = function ContactLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
+export const getStaticPaths: GetStaticPaths<{
+  id: string;
+  slug: string;
+}> = async () => {
   const eventsDocRef = collection(
     database,
     'events',
@@ -66,43 +65,17 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<
-  Record<string, unknown>,
-  { id: string }
-> = async (ctx) => {
-  const id = ctx.params?.id;
+export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
+  await queryClient.fetchQuery(getEventsQueryKey('bordeaux'), async () => {
+    const eventsQuerySnapshot = await fetchEvents('bordeaux');
 
-  if (!id) {
-    return {
-      notFound: true,
-      revalidate: 60,
-    };
-  }
-
-  const { queryClient, hydrate } = initHydration();
-
-  try {
-    await queryClient.fetchQuery(getEventQueryKey(id), async () => {
-      const eventSnapshot = await fetchEvent(id);
-
-      return serializeSnapshot(eventSnapshot);
-    });
-    await hydrate();
-  } catch (err) {
-    logger.error('prefetch error', err);
-
-    return {
-      notFound: true,
-      revalidate: staticPropsRevalidateError,
-    };
-  }
+    return serializeQuerySnapshot(eventsQuerySnapshot);
+  });
 
   return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
+    props: {},
     revalidate: staticPropsRevalidate,
   };
-};
+});
 
 export default EventPage;

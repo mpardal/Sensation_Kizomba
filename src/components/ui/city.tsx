@@ -28,7 +28,7 @@ function City({ city }: { city: string }) {
         ) : null}
 
         <Fade in={eventsQuery.isSuccess}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8 sm:gap-y-12">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-12 gap-y-8 sm:gap-y-12">
             {eventsQuery.data ? (
               <>
                 <Card className="flex flex-col">

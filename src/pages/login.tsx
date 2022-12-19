@@ -25,16 +25,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
-import type { GetServerSideProps } from 'next';
-import { dehydrate } from '@tanstack/react-query';
 import Layout from '@/components/layout';
 import { useAuth } from '@/hooks/auth/use-auth';
 import { useLogin } from '@/hooks/auth/use-login';
 import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
-import { initHydration } from '@/utils/react-query/ssr';
-import { logger } from '@/utils/logger';
+import { withServerQuerySSR } from '@/utils/react-query/ssr';
 
 const LoginObject = z.object({
   email: z
@@ -221,29 +218,14 @@ LoginPage.Layout = function LoginLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps<LoginProps> = async (
-  ctx,
-) => {
-  const { queryClient, hydrate } = initHydration();
-
-  try {
-    await hydrate();
-  } catch (err) {
-    logger.error('prefetch error', err);
-
-    return {
-      notFound: true,
-    };
-  }
-
+export const getServerSideProps = withServerQuerySSR((ctx) => {
   return {
     props: {
       defaultEmail: (ctx.query.email as string | undefined) ?? '',
       fromForgotPassword:
         ((ctx.query.fromForgotPassword as string | undefined) ?? '') === 'true',
-      dehydratedState: dehydrate(queryClient),
     },
   };
-};
+});
 
 export default LoginPage;

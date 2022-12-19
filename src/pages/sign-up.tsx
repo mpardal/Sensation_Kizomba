@@ -15,18 +15,12 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 //zod permet d'éviter la duplication de validation
 import { z } from 'zod';
-import type { GetStaticProps } from 'next';
-import { dehydrate } from '@tanstack/react-query';
 import { useCreateUser } from '@/hooks/auth/use-create-user';
 import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
-import { initHydration } from '@/utils/react-query/ssr';
-import { logger } from '@/utils/logger';
-import {
-  staticPropsRevalidate,
-  staticPropsRevalidateError,
-} from '@/utils/static-props';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { staticPropsRevalidate } from '@/utils/static-props';
 import Layout from '../components/layout';
 
 const SignUpObject = z
@@ -273,26 +267,8 @@ SignUp.Layout = function ForgotPasswordLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { queryClient, hydrate } = initHydration();
-
-  try {
-    await hydrate();
-  } catch (err) {
-    logger.error('prefetch error', err);
-
-    return {
-      notFound: true,
-      revalidate: staticPropsRevalidateError,
-    };
-  }
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-    revalidate: staticPropsRevalidate,
-  };
-};
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default SignUp;

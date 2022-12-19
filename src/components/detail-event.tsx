@@ -92,10 +92,10 @@ function DetailEvent({
             </ListItemText>
           </ListItem>
           {weezeventUrl ? (
-            <ListItem>
-              <ListItemText className="text-center">
+            <ListItem disablePadding>
+              <ListItemText className="text-center -mx-4 sm:mx-0">
                 <iframe
-                  className="xl:w-4/5"
+                  className="w-full border-none"
                   height="500"
                   src={weezeventUrl}
                   title={weezeventUrl}

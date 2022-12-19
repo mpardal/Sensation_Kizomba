@@ -10,15 +10,10 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import MessageIcon from '@mui/icons-material/Message';
 import type { FormEvent } from 'react';
-import type { GetStaticProps } from 'next';
-import { dehydrate } from '@tanstack/react-query';
 import { logger } from '@/utils/logger';
 import type { NextPageWithLayout } from '@/components/layout';
-import { initHydration } from '@/utils/react-query/ssr';
-import {
-  staticPropsRevalidate,
-  staticPropsRevalidateError,
-} from '@/utils/static-props';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { staticPropsRevalidate } from '@/utils/static-props';
 import Layout from '../components/layout';
 
 const Contact: NextPageWithLayout = () => {
@@ -147,26 +142,8 @@ Contact.Layout = function ContactLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { queryClient, hydrate } = initHydration();
-
-  try {
-    await hydrate();
-  } catch (err) {
-    logger.error('prefetch error', err);
-
-    return {
-      notFound: true,
-      revalidate: staticPropsRevalidateError,
-    };
-  }
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-    revalidate: staticPropsRevalidate,
-  };
-};
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default Contact;

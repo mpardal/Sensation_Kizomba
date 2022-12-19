@@ -1,13 +1,10 @@
 import Head from 'next/head';
 import React from 'react';
 import Link from 'next/link';
-import type { GetStaticProps } from 'next';
-import { dehydrate } from '@tanstack/react-query';
-import { staticPropsRevalidateError } from '@/utils/static-props';
-import { logger } from '@/utils/logger';
+import { staticPropsRevalidate } from '@/utils/static-props';
 import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '@/components/layout';
-import { initHydration } from '@/utils/react-query/ssr';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 
 const About: NextPageWithLayout = () => {
   return (
@@ -74,25 +71,8 @@ About.Layout = function AboutLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { queryClient, hydrate } = initHydration();
-
-  try {
-    await hydrate();
-  } catch (err) {
-    logger.error('prefetch error', err);
-
-    return {
-      notFound: true,
-      revalidate: staticPropsRevalidateError,
-    };
-  }
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default About;

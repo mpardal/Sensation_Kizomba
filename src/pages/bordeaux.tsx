@@ -1,13 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import type { GetStaticProps } from 'next';
-import { dehydrate } from '@tanstack/react-query';
-import { initHydration } from '@/utils/react-query/ssr';
-import { logger } from '@/utils/logger';
-import {
-  staticPropsRevalidate,
-  staticPropsRevalidateError,
-} from '@/utils/static-props';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { staticPropsRevalidate } from '@/utils/static-props';
 import Layout from '@/components/layout';
 import City from '@/components/ui/city';
 import type { NextPageWithLayout } from '@/components/layout';
@@ -29,31 +23,17 @@ Bordeaux.Layout = function BordeauxLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { queryClient, hydrate } = initHydration();
+export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
+  await queryClient.fetchQuery(getEventsQueryKey('bordeaux'), async () => {
+    const eventsQuerySnapshot = await fetchEvents('bordeaux');
 
-  try {
-    await hydrate();
-    await queryClient.fetchQuery(getEventsQueryKey('bordeaux'), async () => {
-      const eventsQuerySnapshot = await fetchEvents('bordeaux');
-
-      return serializeQuerySnapshot(eventsQuerySnapshot);
-    });
-  } catch (err) {
-    logger.error('prefetch error', err);
-
-    return {
-      notFound: true,
-      revalidate: staticPropsRevalidateError,
-    };
-  }
+    return serializeQuerySnapshot(eventsQuerySnapshot);
+  });
 
   return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
+    props: {},
     revalidate: staticPropsRevalidate,
   };
-};
+});
 
 export default Bordeaux;

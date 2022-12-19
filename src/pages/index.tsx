@@ -1,18 +1,12 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import { dehydrate } from '@tanstack/react-query';
-import type { GetStaticProps } from 'next';
 import Layout from '@/components/layout';
 import type { NextPageWithLayout } from '@/components/layout';
 import { useNextEvents } from '@/hooks/use-next-events';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
 import Event from '@/components/event';
-import {
-  staticPropsRevalidate,
-  staticPropsRevalidateError,
-} from '@/utils/static-props';
-import { initHydration } from '@/utils/react-query/ssr';
-import { logger } from '@/utils/logger';
+import { staticPropsRevalidate } from '@/utils/static-props';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 
 const Home: NextPageWithLayout = () => {
   const nextEvents = useNextEvents();
@@ -43,26 +37,8 @@ Home.Layout = function HomeLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { queryClient, hydrate } = initHydration();
-
-  try {
-    await hydrate();
-  } catch (err) {
-    logger.error(err);
-
-    return {
-      notFound: true,
-      revalidate: staticPropsRevalidateError,
-    };
-  }
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-    revalidate: staticPropsRevalidate,
-  };
-};
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default Home;
