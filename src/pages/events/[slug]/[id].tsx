@@ -49,7 +49,9 @@ const EventPage: NextPageWithLayout = () => {
           property="og:title"
         />
         <meta
-          content={`Événement programmé par Sensation Kizomba. ${
+          content={`${
+            event.data?.title ?? ''
+          } - Événement programmé par Sensation Kizomba. ${
             event.data?.description.slice(0, 400) ?? ''
           }...`}
           property="og:description"
@@ -65,7 +67,9 @@ const EventPage: NextPageWithLayout = () => {
           property="twitter:title"
         />
         <meta
-          content={`Événement programmé par Sensation Kizomba. ${
+          content={`${
+            event.data?.title ?? ''
+          } - Événement programmé par Sensation Kizomba. ${
             event.data?.description.slice(0, 400) ?? ''
           }...`}
           property="twitter:description"
