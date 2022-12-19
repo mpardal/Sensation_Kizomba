@@ -12,7 +12,7 @@ const LeMans: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>SENSATION-KIZOMBA — Événements au Mans</title>
+        <title>SENSATION-KIZOMBA — Les événements au Mans</title>
       </Head>
       <City city="le-mans" />
     </>

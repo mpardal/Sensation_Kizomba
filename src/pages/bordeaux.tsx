@@ -12,7 +12,7 @@ const Bordeaux: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>SENSATION-KIZOMBA — Événements à Bordeaux</title>
+        <title>SENSATION-KIZOMBA — Les événements à Bordeaux</title>
       </Head>
       <City city="bordeaux" />
     </>

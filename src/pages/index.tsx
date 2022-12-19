@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import React from 'react';
+import Head from 'next/head';
 import Layout from '@/components/layout';
 import type { NextPageWithLayout } from '@/components/layout';
 import { useNextEvents } from '@/hooks/use-next-events';
@@ -12,24 +13,29 @@ const Home: NextPageWithLayout = () => {
   const nextEvents = useNextEvents();
 
   return (
-    <div>
-      <Typography className="text-center mb-10" component="h1" variant="h3">
-        Prochains événements
-      </Typography>
-      {nextEvents.isSuccess ? (
-        <div className="flex flex-col w-full mx-auto grow overflow-auto gap-3 px-4">
-          {nextEvents.data.map((event) => (
-            <Event
-              address={event.address}
-              date={event.date}
-              key={event.id}
-              linkDetails={slugifyEventLink(event)}
-              title={event.title}
-            />
-          ))}
-        </div>
-      ) : null}
-    </div>
+    <>
+      <Head>
+        <title>SENSATION-KIZOMBA — Les prochains événements</title>
+      </Head>
+      <div>
+        <Typography className="text-center mb-10" component="h1" variant="h3">
+          Prochains événements
+        </Typography>
+        {nextEvents.isSuccess ? (
+          <div className="flex flex-col w-full mx-auto grow overflow-auto gap-3 px-4">
+            {nextEvents.data.map((event) => (
+              <Event
+                address={event.address}
+                date={event.date}
+                key={event.id}
+                linkDetails={slugifyEventLink(event)}
+                title={event.title}
+              />
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 };
 

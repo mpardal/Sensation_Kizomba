@@ -12,7 +12,7 @@ const Orleans: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>SENSATION-KIZOMBA — Événements à Orléans</title>
+        <title>SENSATION-KIZOMBA — Les événements à Orléans</title>
       </Head>
       <City city="orleans" />
     </>

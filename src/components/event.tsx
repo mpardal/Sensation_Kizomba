@@ -7,6 +7,8 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
+  CardActions,
+  Button,
 } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
@@ -37,7 +39,11 @@ function Event({
     <Card variant="outlined">
       <CardHeader className="text-center" title={title} />
       <CardContent className="text-center">
-        <Image alt="event" className="p-3 w-3/4 h-auto" src={mardi} />
+        <Image
+          alt="event"
+          className="p-3 w-full h-full object-contain"
+          src={mardi}
+        />
         <List>
           <ListItem>
             <ListItemAvatar>
@@ -59,20 +65,20 @@ function Event({
             </ListItemAvatar>
             <ListItemText>{address}</ListItemText>
           </ListItem>
-          <ListItem>
-            <Link href={linkDetails} legacyBehavior passHref>
-              <a className="flex flex-row no-underline text-inherit items-center">
-                <ListItemAvatar>
-                  <Avatar>
-                    <LoupeIcon color="inherit" fontSize="large" />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText>Détail de l'événement</ListItemText>
-              </a>
-            </Link>
-          </ListItem>
         </List>
       </CardContent>
+      <CardActions>
+        <Link href={linkDetails} legacyBehavior passHref>
+          <Button
+            color="primary"
+            fullWidth
+            startIcon={<LoupeIcon color="inherit" fontSize="large" />}
+            variant="contained"
+          >
+            Détail de l'événement
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   );
 }
