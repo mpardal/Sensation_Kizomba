@@ -37,7 +37,7 @@ function Event({
 
   return (
     <Card variant="outlined">
-      <CardHeader className="text-center" title={title} />
+      <CardHeader className="text-center" component="h2" title={title} />
       <CardContent className="text-center">
         <Image
           alt="event"

@@ -16,6 +16,28 @@ const Home: NextPageWithLayout = () => {
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Les prochains événements</title>
+        <meta
+          content="Sensation Kizomba, nous sommes une association de danse, basé dans l'ouest de la
+            France, depuis plus de dix ans. Nous donnons des cours de kizomba, nous organisons des soirées et
+            festivals kizomba, mais également quelques soirées et festivals avec
+            de la bachata et de la salsa, dans plusieurs villes de l'ouest de la
+            France."
+          key="desc"
+          name="description"
+        />
+        <meta content="Sensation Kizomba" property="og:title" />
+        <meta
+          content="Association de danse, basé dans l'ouest de la
+            France, depuis plus de dix ans. Nous donnons des cours de kizomba, nous organisons des soirées et
+            festivals kizomba, mais également quelques soirées et festivals avec
+            de la bachata et de la salsa, dans plusieurs villes de l'ouest de la
+            France."
+          property="og:description"
+        />
+        <meta
+          content="https://example.com/images/cool-page.jpg"
+          property="og:image"
+        />
       </Head>
       <div>
         <Typography className="text-center mb-10" component="h1" variant="h3">

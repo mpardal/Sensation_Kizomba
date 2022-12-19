@@ -2,8 +2,9 @@ import React from 'react';
 import type { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import type { CollectionReference } from 'firebase/firestore';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, Timestamp } from 'firebase/firestore';
 import slugify from 'slugify';
+import Head from 'next/head';
 import { useEvent } from '@/hooks/use-event';
 import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '@/components/layout';
@@ -14,6 +15,12 @@ import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
 import { staticPropsRevalidate } from '@/utils/static-props';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
+import { generateEventJsonLd } from '@/utils/seo/generate-event-json-ld';
+import {
+  cityKeyToCityName,
+  cityNameForPageTitle,
+} from '@/utils/city-key-to-city-name';
+import { appEventFormatDate } from '@/utils/app-event-format-date';
 
 const EventPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -22,20 +29,54 @@ const EventPage: NextPageWithLayout = () => {
 
   // [id].tsx - events/slug-conexao/[id].tsx
   const event = useEvent(id);
+  const pageTitle = `SENSATION-KIZOMBA —
+  ${
+    event.data?.title
+      ? ` ${event.data.title} prochainement ${cityNameForPageTitle(
+          cityKeyToCityName(event.data.city),
+        )} le ${appEventFormatDate(Timestamp.fromMillis(event.data.date.from))}`
+      : ' Événement'
+  }`;
 
   //Retourne le component event en intégrant les données récupéré dans Firebase
   return (
-    <div className="px-4">
-      {event.isSuccess ? (
-        <DetailEvent
-          address={event.data.address}
-          date={event.data.date}
-          description={event.data.description}
-          title={event.data.title}
-          weezeventUrl={event.data.weezeventUrl}
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta
+          content={`Sensation Kizomba — ${
+            event.data?.title ? `Événement ${event.data.title}` : 'Événement'
+          }`}
+          property="og:title"
         />
-      ) : null}
-    </div>
+        <meta
+          content={`Événement programmé par Sensation Kizomba. ${
+            event.data?.description.slice(0, 400) ?? ''
+          }...`}
+          property="og:description"
+        />
+        <meta
+          content="https://example.com/images/cool-page.jpg"
+          property="og:image"
+        />
+        <script
+          dangerouslySetInnerHTML={generateEventJsonLd(event.data)}
+          key="event-jsonld"
+          type="application/ld+json"
+        />
+      </Head>
+      <div className="px-4">
+        {event.isSuccess ? (
+          <DetailEvent
+            address={event.data.address}
+            date={event.data.date}
+            description={event.data.description}
+            title={event.data.title}
+            weezeventUrl={event.data.weezeventUrl}
+          />
+        ) : null}
+      </div>
+    </>
   );
 };
 

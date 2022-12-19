@@ -10,7 +10,7 @@ const About: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>SENSATION-KIZOMBA — L'association</title>
+        <title>SENSATION-KIZOMBA — Détails de l'association</title>
       </Head>
       <div>
         <div className="m-3 lg:m-5">
