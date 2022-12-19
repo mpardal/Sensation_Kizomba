@@ -68,16 +68,13 @@ function Event({
         </List>
       </CardContent>
       <CardActions>
-        <Link
-          href={linkDetails}
-          legacyBehavior
-          passHref
-          title="détail de l'événement"
-        >
+        <Link href={linkDetails} legacyBehavior passHref>
           <Button
             color="primary"
+            component="a"
             fullWidth
             startIcon={<LoupeIcon color="inherit" fontSize="large" />}
+            title="détail de l'événement"
             variant="contained"
           >
             Détail de l'événement

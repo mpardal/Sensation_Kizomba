@@ -15,8 +15,8 @@ function Nav() {
   return (
     <nav className="flex h-full w-full items-center">
       <div className="hidden lg:flex lg:items-center gap-6">
-        <Link href="/about" legacyBehavior passHref title="qui sommes-nous ?">
-          <Button color="primary" component="a">
+        <Link href="/about" legacyBehavior passHref>
+          <Button color="primary" component="a" title="qui sommes-nous ?">
             L'association
           </Button>
         </Link>

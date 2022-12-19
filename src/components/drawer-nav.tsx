@@ -72,13 +72,8 @@ function Drawer({
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link
-          href="/le-mans"
-          legacyBehavior
-          passHref
-          title="événements au Mans"
-        >
-          <ListItemButton component="a">
+        <Link href="/le-mans" legacyBehavior passHref>
+          <ListItemButton component="a" title="événements au Mans">
             <ListItemText className="mr-3 text-primary-500">
               Le Mans
             </ListItemText>
