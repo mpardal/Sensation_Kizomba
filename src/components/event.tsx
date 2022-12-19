@@ -68,7 +68,12 @@ function Event({
         </List>
       </CardContent>
       <CardActions>
-        <Link href={linkDetails} legacyBehavior passHref>
+        <Link
+          href={linkDetails}
+          legacyBehavior
+          passHref
+          title="détail de l'événement"
+        >
           <Button
             color="primary"
             fullWidth

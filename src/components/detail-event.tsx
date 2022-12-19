@@ -37,6 +37,7 @@ function DetailEvent({
     <Card variant="outlined">
       <CardHeader
         className="text-center"
+        component="h1"
         subheader={
           <>
             {formattedDate.to ? 'Du ' : 'Le '}
@@ -50,6 +51,9 @@ function DetailEvent({
             )}
           </>
         }
+        subheaderTypographyProps={{
+          component: 'h2',
+        }}
         title={title}
       />
       <CardContent className="text-center">

@@ -33,6 +33,7 @@ function Header() {
             <ButtonBase
               className="h-full rounded-full text-center"
               component="a"
+              title="aller à l'accueil"
             >
               <Image
                 alt="logo"

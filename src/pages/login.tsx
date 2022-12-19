@@ -188,10 +188,14 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
             </FormControl>
             <div className="flex justify-between">
               <Link href="/forgot-password" legacyBehavior passHref>
-                <MuiLink>Mot de passe oublié ?</MuiLink>
+                <MuiLink title="mot de passe oublié ?">
+                  Mot de passe oublié ?
+                </MuiLink>
               </Link>
               <Link href="/sign-up" legacyBehavior passHref>
-                <MuiLink>Inscription</MuiLink>
+                <MuiLink title="inscription à Sensation Kizomba">
+                  Inscription
+                </MuiLink>
               </Link>
             </div>
           </div>

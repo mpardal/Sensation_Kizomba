@@ -29,28 +29,36 @@ const About: NextPageWithLayout = () => {
           <h2 className="underline">Où sommes nous ?</h2>
           <p>Vous pouvez nous retoruver dans les villes suivantes :</p>
           <div className="flex flex-row justify-around">
-            <Link href="/nantes" legacyBehavior passHref>
-              <a className="text-inherit no-underline">
-                <h4 className="italic">Nantes</h4>
-              </a>
+            <Link
+              className="text-inherit no-underline"
+              href="/nantes"
+              title="événements sur Nantes"
+            >
+              <h4 className="italic">Nantes</h4>
             </Link>
             <p />
-            <Link href="/le-mans" legacyBehavior passHref>
-              <a className="text-inherit no-underline">
-                <h4 className="italic">Le Mans</h4>
-              </a>
+            <Link
+              className="text-inherit no-underline"
+              href="/le-mans"
+              title="événements au Mans"
+            >
+              <h4 className="italic">Le Mans</h4>
             </Link>
             <p />
-            <Link href="/orleans" legacyBehavior passHref>
-              <a className="text-inherit no-underline">
-                <h4 className="italic">Orléans</h4>
-              </a>
+            <Link
+              className="text-inherit no-underline"
+              href="/orleans"
+              title="événements sur Orléans"
+            >
+              <h4 className="italic">Orléans</h4>
             </Link>
             <p />
-            <Link href="/bordeaux" legacyBehavior passHref>
-              <a className="text-inherit no-underline">
-                <h4 className="italic">Bordeaux</h4>
-              </a>
+            <Link
+              className="text-inherit no-underline"
+              href="/bordeaux"
+              title="événements sur Bordeaux"
+            >
+              <h4 className="italic">Bordeaux</h4>
             </Link>
           </div>
           <p />

@@ -15,27 +15,35 @@ function Nav() {
   return (
     <nav className="flex h-full w-full items-center">
       <div className="hidden lg:flex lg:items-center gap-6">
-        <Link href="/about" legacyBehavior passHref>
+        <Link href="/about" legacyBehavior passHref title="qui sommes-nous ?">
           <Button color="primary" component="a">
             L'association
           </Button>
         </Link>
         <Link href="/nantes" legacyBehavior passHref>
-          <Button color="primary" component="a">
+          <Button color="primary" component="a" title="événements sur Nantes">
             Nantes
           </Button>
         </Link>
 
         <NavOtherCitiesMenu />
         <Link href="/contact" legacyBehavior passHref>
-          <Button className="hidden lg:block" component="a">
+          <Button
+            className="hidden lg:block"
+            component="a"
+            title="nous contacter"
+          >
             Nous contacter
           </Button>
         </Link>
 
         {!logged ? (
           <Link href="/login" legacyBehavior passHref>
-            <Button className="hidden text-primary-500 lg:block" component="a">
+            <Button
+              className="hidden text-primary-500 lg:block"
+              component="a"
+              title="connexion à Sensation Kizomba"
+            >
               Se connecter
             </Button>
           </Link>

@@ -115,7 +115,9 @@ const ForgotPassword: NextPageWithLayout = () => {
               value={values.email}
             />
             <Link href="/login" legacyBehavior passHref>
-              <MuiLink>Retour à la connexion</MuiLink>
+              <MuiLink title="connexion à Sensation Kizomba">
+                Retour à la connexion
+              </MuiLink>
             </Link>
           </div>
 

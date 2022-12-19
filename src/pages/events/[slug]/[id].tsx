@@ -58,6 +58,22 @@ const EventPage: NextPageWithLayout = () => {
           content="https://example.com/images/cool-page.jpg"
           property="og:image"
         />
+        <meta
+          content={`Sensation Kizomba — ${
+            event.data?.title ? `Événement ${event.data.title}` : 'Événement'
+          }`}
+          property="twitter:title"
+        />
+        <meta
+          content={`Événement programmé par Sensation Kizomba. ${
+            event.data?.description.slice(0, 400) ?? ''
+          }...`}
+          property="twitter:description"
+        />
+        <meta
+          content="https://example.com/images/cool-page.jpg"
+          property="twitter:image"
+        />
         <script
           dangerouslySetInnerHTML={generateEventJsonLd(event.data)}
           key="event-jsonld"

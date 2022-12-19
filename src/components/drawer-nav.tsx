@@ -52,34 +52,44 @@ function Drawer({
       <Divider />
       <List>
         <Link href="/about" legacyBehavior passHref>
-          <ListItemButton component="a">
+          <ListItemButton component="a" title="qui sommes-nous ?">
             <ListItemText className="mr-3 text-primary-500">
               L'association
             </ListItemText>
           </ListItemButton>
         </Link>
         <Link href="/nantes" legacyBehavior passHref>
-          <ListItemButton component="a">
+          <ListItemButton component="a" title="événements sur Nantes">
             <ListItemText className="mr-3 text-primary-500">
               Nantes
             </ListItemText>
           </ListItemButton>
         </Link>
         <Link href="/bordeaux" legacyBehavior passHref>
-          <ListItemButton component="a">
+          <ListItemButton component="a" title="événements sur Bordeaux">
             <ListItemText className="mr-3 text-primary-500">
               Bordeaux
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/le-mans" legacyBehavior passHref>
+        <Link
+          href="/le-mans"
+          legacyBehavior
+          passHref
+          title="événements au Mans"
+        >
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Le Mans
             </ListItemText>
           </ListItemButton>
         </Link>
-        <Link href="/orleans" legacyBehavior passHref>
+        <Link
+          href="/orleans"
+          legacyBehavior
+          passHref
+          title="événements sur Orléans"
+        >
           <ListItemButton component="a">
             <ListItemText className="mr-3 text-primary-500">
               Orléans
@@ -90,7 +100,7 @@ function Drawer({
       <Divider />
       <List>
         <Link href="/contact" legacyBehavior passHref>
-          <ListItemButton component="a">
+          <ListItemButton component="a" title="nous contacter">
             <ListItemText className="mr-3 text-primary-500">
               Nous contacter
             </ListItemText>
@@ -98,7 +108,7 @@ function Drawer({
         </Link>
         {!logged ? (
           <Link href="/login" legacyBehavior passHref>
-            <ListItemButton component="a">
+            <ListItemButton component="a" title="Connexion à Sensation Kizomba">
               <ListItemText className="mr-3 text-primary-500">
                 Se connecter
               </ListItemText>

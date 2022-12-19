@@ -28,7 +28,11 @@ function NextEventsBanner() {
                 className="rounded-2xl"
                 key={event.id}
               >
-                <Link className="no-underline" href={slugifyEventLink(event)}>
+                <Link
+                  className="no-underline"
+                  href={slugifyEventLink(event)}
+                  title={`${event.title} - ${date}`}
+                >
                   <Chip
                     className="cursor-pointer"
                     icon={<NightlifeIcon />}
