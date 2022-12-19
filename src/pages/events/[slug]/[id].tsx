@@ -5,16 +5,15 @@ import type { CollectionReference } from 'firebase/firestore';
 import { collection, getDocs, Timestamp } from 'firebase/firestore';
 import slugify from 'slugify';
 import Head from 'next/head';
-import { useEvent } from '@/hooks/use-event';
+import { fetchEvent, getEventQueryKey, useEvent } from '@/hooks/use-event';
 import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '@/components/layout';
 import DetailEvent from '@/components/detail-event';
 import { database } from '@/config/firebase-config';
 import type { AppEvent } from '@/types/app-event';
-import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
+import { serializeSnapshot } from '@/utils/serialize-snapshot';
 import { staticPropsRevalidate } from '@/utils/static-props';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
-import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import { generateEventJsonLd } from '@/utils/seo/generate-event-json-ld';
 import {
   cityKeyToCityName,
@@ -106,11 +105,13 @@ export const getStaticPaths: GetStaticPaths<{
   };
 };
 
-export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
-  await queryClient.fetchQuery(getEventsQueryKey('bordeaux'), async () => {
-    const eventsQuerySnapshot = await fetchEvents('bordeaux');
+export const getStaticProps = withStaticQuerySSR(async (ctx, queryClient) => {
+  const id = ctx.params?.id as string | undefined;
 
-    return serializeQuerySnapshot(eventsQuerySnapshot);
+  await queryClient.fetchQuery(getEventQueryKey(id), async () => {
+    const eventDocumentSnapshot = await fetchEvent(id);
+
+    return serializeSnapshot(eventDocumentSnapshot);
   });
 
   return {
