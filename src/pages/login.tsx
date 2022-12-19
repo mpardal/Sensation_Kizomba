@@ -148,7 +148,12 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
               value={values.email}
             />
             <FormControl>
-              <InputLabel htmlFor="password">Mot de passe</InputLabel>
+              <InputLabel
+                error={touched.password ? Boolean(errors.password) : undefined}
+                htmlFor="password"
+              >
+                Mot de passe
+              </InputLabel>
               <OutlinedInput
                 aria-label="mot de passe"
                 aria-required="true"
