@@ -31,7 +31,7 @@ const EventPage: NextPageWithLayout = () => {
   const pageTitle = `SENSATION-KIZOMBA —
   ${
     event.data?.title
-      ? ` ${event.data.title} prochainement ${cityNameForPageTitle(
+      ? ` ${event.data.title} ${cityNameForPageTitle(
           cityKeyToCityName(event.data.city),
         )} le ${appEventFormatDate(Timestamp.fromMillis(event.data.date.from))}`
       : ' Événement'
@@ -78,6 +78,14 @@ const EventPage: NextPageWithLayout = () => {
           content="https://example.com/images/cool-page.jpg"
           property="twitter:image"
         />
+        <meta
+          content={`${
+            event.data?.title ?? ''
+          } - Événement programmé par Sensation Kizomba. ${
+            event.data?.description.slice(0, 400) ?? ''
+          }...`}
+          name="description"
+        />
         <script
           dangerouslySetInnerHTML={generateEventJsonLd(event.data)}
           key="event-jsonld"
@@ -88,6 +96,7 @@ const EventPage: NextPageWithLayout = () => {
         {event.isSuccess ? (
           <DetailEvent
             address={event.data.address}
+            city={event.data.city}
             date={event.data.date}
             description={event.data.description}
             title={event.data.title}
