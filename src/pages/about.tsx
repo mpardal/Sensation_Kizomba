@@ -5,12 +5,16 @@ import { staticPropsRevalidate } from '@/utils/static-props';
 import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '@/components/layout';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import MetaForDescription from '@/components/meta-for-description';
+import MetaForTitle from '@/components/meta-for-title';
 
 const About: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Détails de l'association</title>
+        <MetaForTitle title="SENSATION-KIZOMBA — Détails de l'association" />
+        <MetaForDescription description="Détails de l'association SENSATION-KIZOMBA" />
       </Head>
       <div>
         <div className="m-3 lg:m-5">

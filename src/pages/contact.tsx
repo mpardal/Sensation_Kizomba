@@ -14,6 +14,8 @@ import { logger } from '@/utils/logger';
 import type { NextPageWithLayout } from '@/components/layout';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { staticPropsRevalidate } from '@/utils/static-props';
+import MetaForTitle from '@/components/meta-for-title';
+import MetaForDescription from '@/components/meta-for-description';
 import Layout from '../components/layout';
 
 const Contact: NextPageWithLayout = () => {
@@ -53,6 +55,8 @@ const Contact: NextPageWithLayout = () => {
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Nous contacter</title>
+        <MetaForTitle title="SENSATION-KIZOMBA — Nous contacter" />
+        <MetaForDescription description="Une demande ? Une question ? Une remarque ? N'hésitez pas à nous contacter !" />
       </Head>
       <Container maxWidth="sm">
         <div className="mb-4 flex flex-col items-center gap-2">

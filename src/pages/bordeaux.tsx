@@ -7,12 +7,14 @@ import City from '@/components/ui/city';
 import type { NextPageWithLayout } from '@/components/layout';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
+import MetaForCity from '@/components/meta-for-city';
 
 const Bordeaux: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Les événements à Bordeaux</title>
+        <MetaForCity city="bordeaux" />
       </Head>
       <City city="bordeaux" />
     </>

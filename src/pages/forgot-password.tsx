@@ -21,6 +21,8 @@ import { staticPropsRevalidate } from '@/utils/static-props';
 import { useAskPassword } from '@/hooks/auth/use-ask-password';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
+import MetaForTitle from '@/components/meta-for-title';
+import MetaForDescription from '@/components/meta-for-description';
 import Layout from '../components/layout';
 
 const ForgotPasswordObject = z.object({
@@ -88,6 +90,8 @@ const ForgotPassword: NextPageWithLayout = () => {
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Mot de passe oublié</title>
+        <MetaForTitle title="SENSATION-KIZOMBA - demander un nouveau mot de passe" />
+        <MetaForDescription description="Demandez un nouveau mot de passe pour accéder à votre compte SENSATION-KIZOMBA" />
       </Head>
       <Container maxWidth="xs">
         <div className="mb-4 flex flex-col items-center gap-2">

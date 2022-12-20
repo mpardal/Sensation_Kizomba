@@ -7,12 +7,14 @@ import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { staticPropsRevalidate } from '@/utils/static-props';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
+import MetaForCity from '@/components/meta-for-city';
 
 const Orleans: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Les événements à Orléans</title>
+        <MetaForCity city="orleans" />
       </Head>
       <City city="orleans" />
     </>

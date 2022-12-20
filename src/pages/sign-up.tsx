@@ -21,6 +21,8 @@ import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { staticPropsRevalidate } from '@/utils/static-props';
+import MetaForTitle from '@/components/meta-for-title';
+import MetaForDescription from '@/components/meta-for-description';
 import Layout from '../components/layout';
 
 const SignUpObject = z
@@ -157,6 +159,8 @@ const SignUp: NextPageWithLayout = () => {
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Inscription</title>
+        <MetaForTitle title="S'inscrire sur SENSATION-KIZOMBA" />
+        <MetaForDescription description="Inscrivez-vous sur SENSATION-KIZOMBA pour accéder à toutes les fonctionnalités du site." />
       </Head>
       <Container maxWidth="sm">
         <div className="flex flex-col items-center gap-2">
