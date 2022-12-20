@@ -7,12 +7,14 @@ import City from '@/components/ui/city';
 import Layout from '@/components/layout';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
+import MetaForCity from '@/components/meta-for-city';
 
 const Nantes: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Les événements à Nantes</title>
+        <MetaForCity city="nantes" />
       </Head>
       <City city="nantes" />
     </>

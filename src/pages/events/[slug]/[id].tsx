@@ -5,6 +5,7 @@ import type { CollectionReference } from 'firebase/firestore';
 import { collection, getDocs, Timestamp } from 'firebase/firestore';
 import slugify from 'slugify';
 import Head from 'next/head';
+import { stripHtml } from 'string-strip-html';
 import { fetchEvent, getEventQueryKey, useEvent } from '@/hooks/use-event';
 import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '@/components/layout';
@@ -20,6 +21,8 @@ import {
   cityNameForPageTitle,
 } from '@/utils/city-key-to-city-name';
 import { appEventFormatDate } from '@/utils/app-event-format-date';
+import MetaForDescription from '@/components/meta-for-description';
+import MetaForTitle from '@/components/meta-for-title';
 
 const EventPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -31,7 +34,7 @@ const EventPage: NextPageWithLayout = () => {
   const pageTitle = `SENSATION-KIZOMBA —
   ${
     event.data?.title
-      ? ` ${event.data.title} prochainement ${cityNameForPageTitle(
+      ? ` ${event.data.title} ${cityNameForPageTitle(
           cityKeyToCityName(event.data.city),
         )} le ${appEventFormatDate(Timestamp.fromMillis(event.data.date.from))}`
       : ' Événement'
@@ -42,44 +45,17 @@ const EventPage: NextPageWithLayout = () => {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta
-          content={`Sensation Kizomba — ${
-            event.data?.title ? `Événement ${event.data.title}` : 'Événement'
-          }`}
-          property="og:title"
-        />
-        <meta
-          content={`${
+        <MetaForTitle title={pageTitle} />
+        <MetaForDescription
+          description={`${
             event.data?.title ?? ''
-          } - Événement programmé par Sensation Kizomba. ${
-            event.data?.description.slice(0, 400) ?? ''
+          } - Événement organisé par Sensation Kizomba. ${
+            stripHtml(event.data?.description.slice(0, 400) ?? '').result
           }...`}
-          property="og:description"
-        />
-        <meta
-          content="https://example.com/images/cool-page.jpg"
-          property="og:image"
-        />
-        <meta
-          content={`Sensation Kizomba — ${
-            event.data?.title ? `Événement ${event.data.title}` : 'Événement'
-          }`}
-          property="twitter:title"
-        />
-        <meta
-          content={`${
-            event.data?.title ?? ''
-          } - Événement programmé par Sensation Kizomba. ${
-            event.data?.description.slice(0, 400) ?? ''
-          }...`}
-          property="twitter:description"
-        />
-        <meta
-          content="https://example.com/images/cool-page.jpg"
-          property="twitter:image"
         />
         <script
           dangerouslySetInnerHTML={generateEventJsonLd(event.data)}
+          id="event-json-ld"
           key="event-jsonld"
           type="application/ld+json"
         />
@@ -88,6 +64,7 @@ const EventPage: NextPageWithLayout = () => {
         {event.isSuccess ? (
           <DetailEvent
             address={event.data.address}
+            city={event.data.city}
             date={event.data.date}
             description={event.data.description}
             title={event.data.title}

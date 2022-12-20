@@ -1,3 +1,4 @@
+import { stripHtml } from 'string-strip-html';
 import type { AppEvent } from '@/types/app-event';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
 
@@ -22,7 +23,7 @@ export function generateEventJsonLd(event?: AppEvent) {
         "@type": "Place",
         "name": "${event.address}"
       },
-      "description": "${event.description}",
+      "description": "${stripHtml(event.description.slice(400)).result}",
       "url": "https://sensation-kizomba.fr/events/${slugifyEventLink(event)}",
       "organizer": {
         "@type": "Organization",

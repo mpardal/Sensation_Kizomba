@@ -32,6 +32,8 @@ import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
 import { withServerQuerySSR } from '@/utils/react-query/ssr';
+import MetaForDescription from '@/components/meta-for-description';
+import MetaForTitle from '@/components/meta-for-title';
 
 const LoginObject = z.object({
   email: z
@@ -119,6 +121,8 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Connexion</title>
+        <MetaForTitle title="SENSATION-KIZOMBA — Connexion" />
+        <MetaForDescription description="SENSATION-KIZOMBA - se connecter à notre galerie de vidéo" />
       </Head>
       <Container maxWidth="xs">
         <div className="mb-4 flex flex-col items-center gap-2">

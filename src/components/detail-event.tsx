@@ -14,6 +14,10 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
 import OptimizedIframe from '@/components/optimized-iframe';
+import {
+  cityKeyToCityName,
+  cityNameForPageTitle,
+} from '@/utils/city-key-to-city-name';
 import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
@@ -22,12 +26,14 @@ function DetailEvent({
   date,
   description,
   weezeventUrl,
+  city,
 }: {
   title: string;
   address: string;
   date: AppEventDate;
   description: string;
   weezeventUrl: string;
+  city: string;
 }) {
   const formattedDate = {
     from: dayjs(date.from).format('DD/MM/YYYY'),
@@ -54,7 +60,12 @@ function DetailEvent({
         subheaderTypographyProps={{
           component: 'h2',
         }}
-        title={title}
+        title={
+          <>
+            Événement <strong>{title}</strong> prévu{' '}
+            <strong>{cityNameForPageTitle(cityKeyToCityName(city))}</strong>
+          </>
+        }
         titleTypographyProps={{
           component: 'h1',
         }}
