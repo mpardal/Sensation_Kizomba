@@ -13,6 +13,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
+import OptimizedIframe from '@/components/optimized-iframe';
 import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
@@ -29,18 +30,48 @@ function DetailEvent({
   weezeventUrl: string;
 }) {
   const formattedDate = {
-    from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
-    to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
+    from: dayjs(date.from).format('DD/MM/YYYY'),
+    to: date.to ? dayjs(date.to).format('DD/MM/YYYY') : undefined,
   };
+
   return (
     <Card variant="outlined">
-      <CardHeader className="text-center underline" title={title} />
+      <CardHeader
+        className="text-center"
+        subheader={
+          <>
+            {formattedDate.to ? 'Du ' : 'Le '}
+            <strong>{formattedDate.from} </strong>
+            {formattedDate.to ? (
+              <>
+                au <strong>{formattedDate.to}</strong>
+              </>
+            ) : (
+              ''
+            )}
+          </>
+        }
+        subheaderTypographyProps={{
+          component: 'h2',
+        }}
+        title={title}
+        titleTypographyProps={{
+          component: 'h1',
+        }}
+      />
       <CardContent className="text-center">
-        <Image alt="event" className="p-3 w-3/4 h-auto" src={mardi} />
+        <Image
+          alt="maquette de l'événement"
+          className="p-3 w-3/4 h-auto"
+          src={mardi}
+        />
         <List>
-          <section className="flex flex-row justify-evenly">
-            <div>
-              <ListItem>
+          <li>
+            <List className="flex justify-evenly">
+              <ListItem
+                aria-label="date de l'événement"
+                className="justify-center w-auto"
+              >
                 <ListItemAvatar>
                   <Avatar>
                     <CalendarMonthIcon />
@@ -52,9 +83,7 @@ function DetailEvent({
                     : formattedDate.from}
                 </ListItemText>
               </ListItem>
-            </div>
-            <div>
-              <ListItem>
+              <ListItem aria-label="adresse de l'événement" className="w-auto">
                 <ListItemAvatar>
                   <Avatar>
                     <LocationCityIcon />
@@ -62,21 +91,21 @@ function DetailEvent({
                 </ListItemAvatar>
                 <ListItemText>{address}</ListItemText>
               </ListItem>
-            </div>
-          </section>
+            </List>
+          </li>
           <ListItem>
             <ListItemText>
               <div dangerouslySetInnerHTML={{ __html: description }} />
             </ListItemText>
           </ListItem>
           {weezeventUrl ? (
-            <ListItem>
-              <ListItemText className="text-center">
-                <iframe
-                  className="xl:w-4/5"
-                  height="500"
+            <ListItem disablePadding>
+              <ListItemText className="text-center -mx-4 sm:mx-0">
+                <OptimizedIframe
+                  className="w-full border-none"
+                  height={500}
                   src={weezeventUrl}
-                  title={weezeventUrl}
+                  title="Afficher la billeterie"
                 />
               </ListItemText>
             </ListItem>

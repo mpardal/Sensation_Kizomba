@@ -31,6 +31,20 @@ function MuiTheme({ children }: PropsWithChildren) {
       drawer: 20,
       modal: 40,
     },
+    typography: {
+      allVariants: {
+        fontFamily: "'Inter', 'Helvetica Neue', 'sans-serif'",
+      },
+      h1: {
+        fontFamily: "'Alatsi', 'Inter', 'Helvetica Neue', 'sans-serif'",
+      },
+      h2: {
+        fontFamily: "'Alatsi', 'Inter', 'Helvetica Neue', 'sans-serif'",
+      },
+      h3: {
+        fontFamily: "'Alatsi', 'Inter', 'Helvetica Neue', 'sans-serif'",
+      },
+    },
     components: {
       MuiAppBar: {
         defaultProps: {

@@ -53,13 +53,19 @@ function NavOtherCitiesMenu() {
         open={otherCitiesMenuOpen}
       >
         <Link href="/bordeaux" legacyBehavior passHref>
-          <MenuItem component="a">Bordeaux</MenuItem>
+          <MenuItem component="a" title="événements sur Bordeaux">
+            Bordeaux
+          </MenuItem>
         </Link>
         <Link href="/le-mans" legacyBehavior passHref>
-          <MenuItem component="a">Le Mans</MenuItem>
+          <MenuItem component="a" title="événements au Mans">
+            Le Mans
+          </MenuItem>
         </Link>
         <Link href="/orleans" legacyBehavior passHref>
-          <MenuItem component="a">Orléans</MenuItem>
+          <MenuItem component="a" title="événements sur Orléans">
+            Orléans
+          </MenuItem>
         </Link>
       </Menu>
     </>

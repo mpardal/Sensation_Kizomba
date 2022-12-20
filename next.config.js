@@ -5,6 +5,10 @@ const nextConfig = {
   experimental: {
     transpilePackages: ['firebase', '@firebase/.*'],
   },
+  i18n: {
+    defaultLocale: 'fr',
+    locales: ['fr'],
+  },
 };
 
 module.exports = nextConfig;

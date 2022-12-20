@@ -4,31 +4,39 @@ import Link from 'next/link';
 import { useNextEvents } from '@/hooks/use-next-events';
 import { appEventFormatDate } from '@/utils/app-event-format-date';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
+import { millisToTimestamp } from '@/utils/millis-to-timestamp';
 
 function NextEventsBanner() {
   const nextEvents = useNextEvents();
 
   return (
-    <div className="flex p-2 w-full items-center bg-secondary-900">
-      <Typography className="mr-3" component="span" variant="body2">
+    <aside className="flex w-full bg-secondary-900 gap-3">
+      <Typography className="p-2 self-center" component="span" variant="body2">
         Prochains événements
       </Typography>
       {nextEvents.isSuccess ? (
-        <div className="flex grow overflow-auto gap-3">
-          {nextEvents.data.docs.map((event) => {
-            const data = event.data();
-            const date = appEventFormatDate(data.date.from, 'll');
+        <div className="flex grow overflow-auto gap-3 py-2 pr-2">
+          {nextEvents.data.map((event) => {
+            const date = appEventFormatDate(
+              millisToTimestamp(event.date.from),
+              'll',
+            );
 
             return (
-              <ButtonBase className="rounded-2xl" key={event.id}>
+              <ButtonBase
+                aria-label={`événement ${event.title.trim()} pour le ${date}`}
+                className="rounded-2xl"
+                key={event.id}
+              >
                 <Link
                   className="no-underline"
-                  href={slugifyEventLink(data, event)}
+                  href={slugifyEventLink(event)}
+                  title={`${event.title} - ${date}`}
                 >
                   <Chip
                     className="cursor-pointer"
                     icon={<NightlifeIcon />}
-                    label={`${data.title} - ${date}`}
+                    label={`${event.title} - ${date}`}
                   />
                 </Link>
               </ButtonBase>
@@ -36,7 +44,7 @@ function NextEventsBanner() {
           })}
         </div>
       ) : null}
-    </div>
+    </aside>
   );
 }
 

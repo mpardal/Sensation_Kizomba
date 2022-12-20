@@ -25,13 +25,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
-import type { GetServerSideProps } from 'next';
 import Layout from '@/components/layout';
 import { useAuth } from '@/hooks/auth/use-auth';
 import { useLogin } from '@/hooks/auth/use-login';
 import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
+import { withServerQuerySSR } from '@/utils/react-query/ssr';
 
 const LoginObject = z.object({
   email: z
@@ -148,7 +148,12 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
               value={values.email}
             />
             <FormControl>
-              <InputLabel htmlFor="password">Mot de passe</InputLabel>
+              <InputLabel
+                error={touched.password ? Boolean(errors.password) : undefined}
+                htmlFor="password"
+              >
+                Mot de passe
+              </InputLabel>
               <OutlinedInput
                 aria-label="mot de passe"
                 aria-required="true"
@@ -183,10 +188,14 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
             </FormControl>
             <div className="flex justify-between">
               <Link href="/forgot-password" legacyBehavior passHref>
-                <MuiLink>Mot de passe oublié ?</MuiLink>
+                <MuiLink title="mot de passe oublié ?">
+                  Mot de passe oublié ?
+                </MuiLink>
               </Link>
               <Link href="/sign-up" legacyBehavior passHref>
-                <MuiLink>Inscription</MuiLink>
+                <MuiLink title="inscription à Sensation Kizomba">
+                  Inscription
+                </MuiLink>
               </Link>
             </div>
           </div>
@@ -218,10 +227,7 @@ LoginPage.Layout = function LoginLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps: GetServerSideProps<LoginProps> = async (
-  ctx,
-  // eslint-disable-next-line @typescript-eslint/require-await
-) => {
+export const getServerSideProps = withServerQuerySSR((ctx) => {
   return {
     props: {
       defaultEmail: (ctx.query.email as string | undefined) ?? '',
@@ -229,6 +235,6 @@ export const getServerSideProps: GetServerSideProps<LoginProps> = async (
         ((ctx.query.fromForgotPassword as string | undefined) ?? '') === 'true',
     },
   };
-};
+});
 
 export default LoginPage;

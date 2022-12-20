@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CircularProgress,
-  Grow,
+  Fade,
   Typography,
 } from '@mui/material';
 import React from 'react';
@@ -12,7 +12,7 @@ import { cityKeyToCityName } from '@/utils/city-key-to-city-name';
 import Events from '../events';
 
 function City({ city }: { city: string }) {
-  const eventsSnapshot = useEvents(city);
+  const eventsQuery = useEvents(city);
 
   return (
     <div>
@@ -21,15 +21,15 @@ function City({ city }: { city: string }) {
         <Typography gutterBottom variant="h2">
           {cityKeyToCityName(city)}
         </Typography>
-        {eventsSnapshot.isLoading ? (
+        {eventsQuery.isLoading ? (
           <div className="flex justify-center">
             <CircularProgress variant="indeterminate" />
           </div>
         ) : null}
 
-        <Grow in={eventsSnapshot.isSuccess}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 sm:gap-y-12">
-            {eventsSnapshot.data ? (
+        <Fade in={eventsQuery.isSuccess}>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-12 gap-y-8 sm:gap-y-12">
+            {eventsQuery.data ? (
               <>
                 <Card className="flex flex-col">
                   <CardHeader
@@ -39,8 +39,8 @@ function City({ city }: { city: string }) {
 
                   <CardContent className="grow flex justify-center">
                     <Events
-                      events={eventsSnapshot.data.docs.filter(
-                        (d) => d.data().type === 'weekly',
+                      events={eventsQuery.data.filter(
+                        (d) => d.type === 'weekly',
                       )}
                     />
                   </CardContent>
@@ -53,8 +53,8 @@ function City({ city }: { city: string }) {
                   />
                   <CardContent className="grow flex justify-center">
                     <Events
-                      events={eventsSnapshot.data.docs.filter(
-                        (d) => d.data().type === 'monthly',
+                      events={eventsQuery.data.filter(
+                        (d) => d.type === 'monthly',
                       )}
                     />
                   </CardContent>
@@ -68,8 +68,8 @@ function City({ city }: { city: string }) {
 
                   <CardContent className="grow flex justify-center">
                     <Events
-                      events={eventsSnapshot.data.docs.filter(
-                        (d) => d.data().type === 'quarterly',
+                      events={eventsQuery.data.filter(
+                        (d) => d.type === 'quarterly',
                       )}
                     />
                   </CardContent>
@@ -82,8 +82,8 @@ function City({ city }: { city: string }) {
                   />
                   <CardContent className="grow flex justify-center">
                     <Events
-                      events={eventsSnapshot.data.docs.filter(
-                        (d) => d.data().type === 'yearly',
+                      events={eventsQuery.data.filter(
+                        (d) => d.type === 'yearly',
                       )}
                     />
                   </CardContent>
@@ -91,7 +91,7 @@ function City({ city }: { city: string }) {
               </>
             ) : null}
           </div>
-        </Grow>
+        </Fade>
       </div>
     </div>
   );

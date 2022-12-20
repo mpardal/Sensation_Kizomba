@@ -19,6 +19,8 @@ import { useCreateUser } from '@/hooks/auth/use-create-user';
 import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { staticPropsRevalidate } from '@/utils/static-props';
 import Layout from '../components/layout';
 
 const SignUpObject = z
@@ -264,5 +266,9 @@ const SignUp: NextPageWithLayout = () => {
 SignUp.Layout = function ForgotPasswordLayout(page) {
   return <Layout>{page}</Layout>;
 };
+
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default SignUp;

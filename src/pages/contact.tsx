@@ -12,6 +12,8 @@ import MessageIcon from '@mui/icons-material/Message';
 import type { FormEvent } from 'react';
 import { logger } from '@/utils/logger';
 import type { NextPageWithLayout } from '@/components/layout';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { staticPropsRevalidate } from '@/utils/static-props';
 import Layout from '../components/layout';
 
 const Contact: NextPageWithLayout = () => {
@@ -139,5 +141,9 @@ const Contact: NextPageWithLayout = () => {
 Contact.Layout = function ContactLayout(page) {
   return <Layout>{page}</Layout>;
 };
+
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default Contact;

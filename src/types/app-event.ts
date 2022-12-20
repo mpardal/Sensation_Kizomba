@@ -3,6 +3,7 @@ import type { AppEventType } from './app-event-type';
 
 //type les données provenant de firebase
 export interface AppEvent {
+  id: string;
   address: string;
   city: string;
   date: AppEventDate;

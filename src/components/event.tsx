@@ -7,6 +7,8 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
+  CardActions,
+  Button,
 } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
@@ -29,15 +31,19 @@ function Event({
   linkDetails: string;
 }) {
   const formattedDate = {
-    from: dayjs(date.from.toDate()).format('DD/MM/YYYY'),
-    to: date.to ? dayjs(date.to.toDate()).format('DD/MM/YYYY') : undefined,
+    from: dayjs(date.from).format('DD/MM/YYYY'),
+    to: date.to ? dayjs(date.to).format('DD/MM/YYYY') : undefined,
   };
 
   return (
     <Card variant="outlined">
-      <CardHeader className="text-center underline" title={title} />
+      <CardHeader className="text-center" component="h2" title={title} />
       <CardContent className="text-center">
-        <Image alt="event" className="p-3 w-3/4 h-auto" src={mardi} />
+        <Image
+          alt="event"
+          className="p-3 w-full h-full object-contain"
+          src={mardi}
+        />
         <List>
           <ListItem>
             <ListItemAvatar>
@@ -59,20 +65,22 @@ function Event({
             </ListItemAvatar>
             <ListItemText>{address}</ListItemText>
           </ListItem>
-          <ListItem>
-            <Link href={linkDetails} legacyBehavior passHref>
-              <a className="flex flex-row no-underline text-inherit">
-                <ListItemAvatar>
-                  <Avatar>
-                    <LoupeIcon color="inherit" fontSize="large" />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText>Détail de l'événement</ListItemText>
-              </a>
-            </Link>
-          </ListItem>
         </List>
       </CardContent>
+      <CardActions>
+        <Link href={linkDetails} legacyBehavior passHref>
+          <Button
+            color="primary"
+            component="a"
+            fullWidth
+            startIcon={<LoupeIcon color="inherit" fontSize="large" />}
+            title="détail de l'événement"
+            variant="contained"
+          >
+            Détail de l'événement
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   );
 }

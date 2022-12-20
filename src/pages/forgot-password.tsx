@@ -16,10 +16,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { z } from 'zod';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
+import { staticPropsRevalidate } from '@/utils/static-props';
+import { useAskPassword } from '@/hooks/auth/use-ask-password';
+import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
+import type { NextPageWithLayout } from '@/components/layout';
 import Layout from '../components/layout';
-import { useAskPassword } from '../hooks/auth/use-ask-password';
-import { toFormikValidationSchema } from '../utils/zod-formik-adapter';
-import type { NextPageWithLayout } from '../components/layout';
 
 const ForgotPasswordObject = z.object({
   email: z
@@ -113,7 +115,9 @@ const ForgotPassword: NextPageWithLayout = () => {
               value={values.email}
             />
             <Link href="/login" legacyBehavior passHref>
-              <MuiLink>Retour à la connexion</MuiLink>
+              <MuiLink title="connexion à Sensation Kizomba">
+                Retour à la connexion
+              </MuiLink>
             </Link>
           </div>
 
@@ -143,5 +147,9 @@ const ForgotPassword: NextPageWithLayout = () => {
 ForgotPassword.Layout = function ForgotPasswordLayout(page) {
   return <Layout>{page}</Layout>;
 };
+
+export const getStaticProps = withStaticQuerySSR(() => {
+  return { props: {}, revalidate: staticPropsRevalidate };
+});
 
 export default ForgotPassword;
