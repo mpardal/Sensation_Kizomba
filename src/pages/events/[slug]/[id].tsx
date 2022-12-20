@@ -65,6 +65,7 @@ const EventPage: NextPageWithLayout = () => {
             city={event.data.city}
             date={event.data.date}
             description={event.data.description}
+            images={event.data.images}
             title={event.data.title}
             weezeventUrl={event.data.weezeventUrl}
           />

@@ -41,14 +41,20 @@ function EventCard({
     <Card className="w-full" variant="outlined">
       <CardHeader className="text-center" component="h2" title={title} />
       <CardContent className="text-center">
-        <div className="relative w-full h-80">
+        <Link
+          className="relative w-full h-80 block"
+          href={linkDetails}
+          title="lien vers les détails de l'événement"
+        >
           <Image
             alt="event"
-            className="p-3 w-full h-full object-contain"
+            className="object-contain"
             fill
+            priority
+            sizes="100vw"
             src={images[0] ?? mardi}
           />
-        </div>
+        </Link>
         <List>
           <ListItem>
             <ListItemAvatar>
