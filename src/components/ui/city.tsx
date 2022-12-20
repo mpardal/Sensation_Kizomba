@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import { useEvents } from '@/hooks/use-events';
 import { cityKeyToCityName } from '@/utils/city-key-to-city-name';
-import Events from '../events';
+import EventsCardList from '../events-card-list';
 
 function City({ city }: { city: string }) {
   const eventsQuery = useEvents(city);
@@ -37,8 +37,8 @@ function City({ city }: { city: string }) {
                     titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
 
-                  <CardContent className="grow flex justify-center">
-                    <Events
+                  <CardContent className="w-full">
+                    <EventsCardList
                       events={eventsQuery.data.filter(
                         (d) => d.type === 'weekly',
                       )}
@@ -52,7 +52,7 @@ function City({ city }: { city: string }) {
                     titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
                   <CardContent className="grow flex justify-center">
-                    <Events
+                    <EventsCardList
                       events={eventsQuery.data.filter(
                         (d) => d.type === 'monthly',
                       )}
@@ -67,7 +67,7 @@ function City({ city }: { city: string }) {
                   />
 
                   <CardContent className="grow flex justify-center">
-                    <Events
+                    <EventsCardList
                       events={eventsQuery.data.filter(
                         (d) => d.type === 'quarterly',
                       )}
@@ -81,7 +81,7 @@ function City({ city }: { city: string }) {
                     titleTypographyProps={{ variant: 'h4', component: 'h4' }}
                   />
                   <CardContent className="grow flex justify-center">
-                    <Events
+                    <EventsCardList
                       events={eventsQuery.data.filter(
                         (d) => d.type === 'yearly',
                       )}

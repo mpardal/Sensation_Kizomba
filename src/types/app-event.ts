@@ -11,4 +11,5 @@ export interface AppEvent {
   type: AppEventType;
   description: string;
   weezeventUrl: string;
+  images: string[];
 }

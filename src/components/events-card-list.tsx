@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material';
 import type { AppEvent } from '@/types/app-event';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
-import Event from './event';
+import EventCard from './event-card';
 
-function Events({ events }: { events: AppEvent[] }) {
+function EventsCardList({ events }: { events: AppEvent[] }) {
   return (
-    <div className="flex justify-center items-center flex-wrap gap-4">
+    <div className="flex flex-wrap justify-center gap-4 w-full">
       {events.length === 0 && (
         <Typography className="text-center my-8" variant="h5">
           Aucun événement
@@ -13,12 +13,13 @@ function Events({ events }: { events: AppEvent[] }) {
       )}
 
       {events.map((doc) => {
-        const { title, address, date } = doc;
+        const { title, address, date, images } = doc;
 
         return (
-          <Event
+          <EventCard
             address={address}
             date={date}
+            images={images}
             key={doc.id}
             linkDetails={slugifyEventLink(doc)}
             title={title}
@@ -29,4 +30,4 @@ function Events({ events }: { events: AppEvent[] }) {
   );
 }
 
-export default Events;
+export default EventsCardList;

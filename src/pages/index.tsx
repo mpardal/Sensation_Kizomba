@@ -5,11 +5,11 @@ import Layout from '@/components/layout';
 import type { NextPageWithLayout } from '@/components/layout';
 import { useNextEvents } from '@/hooks/use-next-events';
 import { slugifyEventLink } from '@/utils/slugify-event-link';
-import Event from '@/components/event';
 import { staticPropsRevalidate } from '@/utils/static-props';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import MetaForDescription from '@/components/meta-for-description';
 import MetaForTitle from '@/components/meta-for-title';
+import EventCard from '@/components/event-card';
 
 const Home: NextPageWithLayout = () => {
   const nextEvents = useNextEvents();
@@ -31,9 +31,10 @@ const Home: NextPageWithLayout = () => {
         {nextEvents.isSuccess ? (
           <div className="flex flex-col w-full mx-auto grow overflow-auto gap-3 px-4">
             {nextEvents.data.map((event) => (
-              <Event
+              <EventCard
                 address={event.address}
                 date={event.date}
+                images={event.images}
                 key={event.id}
                 linkDetails={slugifyEventLink(event)}
                 title={event.title}

@@ -1,12 +1,23 @@
 import type { DocumentSnapshot, QuerySnapshot } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 
-function transformTimestamp(obj: object): object {
+function transformTimestamp<T extends string | unknown[] | object>(obj: T): T {
+  if (typeof obj === 'string') return obj;
+
+  if (Array.isArray(obj)) {
+    return obj.map((item: T) => transformTimestamp(item)) as T;
+  }
+
   return Object.entries(obj).reduce((acc, [key, value]) => {
     if (value instanceof Timestamp) {
       return {
         ...acc,
         [key]: value.toMillis(),
+      };
+    } else if (Array.isArray(value)) {
+      return {
+        ...acc,
+        [key]: value.map((v) => transformTimestamp(v) as T),
       };
     } else if (typeof value === 'object') {
       return {
@@ -14,11 +25,12 @@ function transformTimestamp(obj: object): object {
         [key]: transformTimestamp(value as object),
       };
     }
+
     return {
       ...acc,
       [key]: value as unknown,
     };
-  }, {});
+  }, {}) as T;
 }
 
 type ExtractSnapshotData<T> = T extends DocumentSnapshot<infer U>
