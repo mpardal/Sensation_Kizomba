@@ -60,9 +60,12 @@ function DetailEvent({
         subheaderTypographyProps={{
           component: 'h2',
         }}
-        title={`Événement ${title} prévu ${cityKeyToCityName(
-          cityNameForPageTitle(city),
-        )}`}
+        title={
+          <>
+            Événement <strong>{title}</strong> prévu{' '}
+            <strong>{cityNameForPageTitle(cityKeyToCityName(city))}</strong>
+          </>
+        }
         titleTypographyProps={{
           component: 'h1',
         }}

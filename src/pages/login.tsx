@@ -119,6 +119,10 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
     <>
       <Head>
         <title>SENSATION-KIZOMBA — Connexion</title>
+        <meta
+          content="SENSATION-KIZOMBA - se connecter à notre galerie de vidéo"
+          name="description"
+        />
       </Head>
       <Container maxWidth="xs">
         <div className="mb-4 flex flex-col items-center gap-2">
