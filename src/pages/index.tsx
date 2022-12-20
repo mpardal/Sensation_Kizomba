@@ -20,10 +20,7 @@ const Home: NextPageWithLayout = () => {
         <title>SENSATION-KIZOMBA — Les prochains événements</title>
         <MetaForDescription
           description="Sensation Kizomba, les prochains événements. Nous sommes une association de danse, basé dans l'ouest de la
-            France, depuis plus de dix ans. Nous donnons des cours de kizomba, nous organisons des soirées et
-            festivals kizomba, mais également quelques soirées et festivals avec
-            de la bachata et de la salsa, dans plusieurs villes de l'ouest de la
-            France."
+            France, depuis plus de dix ans. Nous donnons des cours de kizomba, soirées et festivals."
         />
         <MetaForTitle title="Sensation Kizomba - Les prochains événements" />
       </Head>

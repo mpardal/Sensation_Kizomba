@@ -49,7 +49,7 @@ const EventPage: NextPageWithLayout = () => {
         <MetaForDescription
           description={`${
             event.data?.title ?? ''
-          } - Événement programmé par Sensation Kizomba. ${
+          } - Événement organisé par Sensation Kizomba. ${
             stripHtml(event.data?.description.slice(0, 400) ?? '').result
           }...`}
         />
