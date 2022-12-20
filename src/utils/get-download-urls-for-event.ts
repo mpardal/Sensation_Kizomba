@@ -7,7 +7,13 @@ export async function getDownloadUrlsForEvent(
 ): Promise<string[]> {
   const urls = (
     await Promise.allSettled(
-      event.images.map((image) => getDownloadURL(ref(storage, image))),
+      event.images.map((image) => {
+        if (image.startsWith('https')) {
+          return image;
+        }
+
+        return getDownloadURL(ref(storage, image));
+      }),
     )
   ).filter((u) => u.status === 'fulfilled') as PromiseFulfilledResult<string>[];
 

@@ -9,10 +9,13 @@ import {
 import React from 'react';
 import { useEvents } from '@/hooks/use-events';
 import { cityKeyToCityName } from '@/utils/city-key-to-city-name';
+import type { AppEvent } from '@/types/app-event';
 import EventsCardList from '../events-card-list';
 
-function City({ city }: { city: string }) {
-  const eventsQuery = useEvents(city);
+function City({ city, events }: { city: string; events?: AppEvent[] }) {
+  const eventsQuery = useEvents(city, {
+    initialData: events,
+  });
 
   return (
     <div>

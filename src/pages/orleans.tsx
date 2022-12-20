@@ -4,7 +4,6 @@ import Layout from '@/components/layout';
 import City from '@/components/ui/city';
 import type { NextPageWithLayout } from '@/components/layout';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
-import { staticPropsRevalidate } from '@/utils/static-props';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import MetaForCity from '@/components/meta-for-city';
 
@@ -31,7 +30,6 @@ export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
 
   return {
     props: {},
-    revalidate: staticPropsRevalidate,
   };
 });
 

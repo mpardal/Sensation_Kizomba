@@ -12,7 +12,6 @@ import Layout from '@/components/layout';
 import DetailEvent from '@/components/detail-event';
 import { database } from '@/config/firebase-config';
 import type { AppEvent } from '@/types/app-event';
-import { staticPropsRevalidate } from '@/utils/static-props';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { generateEventJsonLd } from '@/utils/seo/generate-event-json-ld';
 import {
@@ -108,7 +107,6 @@ export const getStaticProps = withStaticQuerySSR(async (ctx, queryClient) => {
 
   return {
     props: {},
-    revalidate: staticPropsRevalidate,
   };
 });
 
