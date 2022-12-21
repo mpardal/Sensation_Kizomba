@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { z } from 'zod';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
-import { staticPropsRevalidate } from '@/utils/static-props';
 import { useAskPassword } from '@/hooks/auth/use-ask-password';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
@@ -153,7 +152,7 @@ ForgotPassword.Layout = function ForgotPasswordLayout(page) {
 };
 
 export const getStaticProps = withStaticQuerySSR(() => {
-  return { props: {}, revalidate: staticPropsRevalidate };
+  return { props: {}, revalidate: 3_600 };
 });
 
 export default ForgotPassword;

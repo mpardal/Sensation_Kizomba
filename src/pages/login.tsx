@@ -31,9 +31,9 @@ import { useLogin } from '@/hooks/auth/use-login';
 import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
 import { toFormikValidationSchema } from '@/utils/zod-formik-adapter';
 import type { NextPageWithLayout } from '@/components/layout';
-import { withServerQuerySSR } from '@/utils/react-query/ssr';
 import MetaForDescription from '@/components/meta-for-description';
 import MetaForTitle from '@/components/meta-for-title';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 
 const LoginObject = z.object({
   email: z
@@ -49,21 +49,15 @@ const LoginObject = z.object({
     .min(6, { message: 'Le mot de passe doit faire au moins 6 caractères' }),
 });
 
-interface LoginProps {
-  defaultEmail: string;
-  fromForgotPassword: boolean;
-}
-
-const LoginPage: NextPageWithLayout<LoginProps> = ({
-  defaultEmail,
-  fromForgotPassword,
-}) => {
+const LoginPage: NextPageWithLayout = () => {
   const { setMessage, hide } = useGlobalSnackbar();
   const { logged } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const router = useRouter();
+
+  const queries = router.query as { from?: string; email?: string };
 
   const login = useLogin({
     onMutate: () => {
@@ -95,9 +89,10 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
     touched,
     errors,
     values,
+    setFieldValue,
   } = useFormik({
     initialValues: {
-      email: defaultEmail,
+      email: '',
       password: '',
     },
     validationSchema: toFormikValidationSchema(LoginObject),
@@ -111,11 +106,18 @@ const LoginPage: NextPageWithLayout<LoginProps> = ({
   });
 
   useEffect(() => {
-    if (fromForgotPassword) {
+    if (queries.from) {
       setMessage('Votre mot de passe a été modifié', 'success', 4000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fromForgotPassword]);
+  }, [queries.from]);
+
+  useEffect(() => {
+    if (queries.email) {
+      void setFieldValue('email', queries.email);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queries.email]);
 
   return (
     <>
@@ -231,14 +233,8 @@ LoginPage.Layout = function LoginLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps = withServerQuerySSR((ctx) => {
-  return {
-    props: {
-      defaultEmail: (ctx.query.email as string | undefined) ?? '',
-      fromForgotPassword:
-        ((ctx.query.fromForgotPassword as string | undefined) ?? '') === 'true',
-    },
-  };
-});
+export const getStaticProps = withStaticQuerySSR(() => ({
+  props: {},
+}));
 
 export default LoginPage;

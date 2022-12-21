@@ -18,7 +18,6 @@ import {
   cityKeyToCityName,
   cityNameForPageTitle,
 } from '@/utils/city-key-to-city-name';
-import mardi from '../../public/mardi.jpeg';
 
 function DetailEvent({
   title,
@@ -82,7 +81,7 @@ function DetailEvent({
                 fill
                 priority
                 sizes="100vw"
-                src={image || mardi}
+                src={image}
               />
             </div>
           ))}
