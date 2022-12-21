@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
-import mardi from '../../public/mardi.jpeg';
+import sk from '../../public/logo_SK.png';
 
 function EventCard({
   title,
@@ -52,7 +52,7 @@ function EventCard({
             fill
             priority
             sizes="100vw"
-            src={images[0] ?? mardi}
+            src={images[0] ?? sk}
           />
         </Link>
         <List>
