@@ -4,9 +4,7 @@ import Layout from '@/components/layout';
 import City from '@/components/ui/city';
 import type { NextPageWithLayout } from '@/components/layout';
 import { withStaticQuerySSR } from '@/utils/react-query/ssr';
-import { staticPropsRevalidate } from '@/utils/static-props';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
-import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
 import MetaForCity from '@/components/meta-for-city';
 
 const Orleans: NextPageWithLayout = () => {
@@ -26,15 +24,12 @@ Orleans.Layout = function OrleansLayout(page) {
 };
 
 export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
-  await queryClient.fetchQuery(getEventsQueryKey('orleans'), async () => {
-    const eventsQuerySnapshot = await fetchEvents('orleans');
-
-    return serializeQuerySnapshot(eventsQuerySnapshot);
-  });
+  await queryClient.fetchQuery(getEventsQueryKey('orleans'), () =>
+    fetchEvents('orleans'),
+  );
 
   return {
     props: {},
-    revalidate: staticPropsRevalidate,
   };
 });
 

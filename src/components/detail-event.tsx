@@ -27,6 +27,7 @@ function DetailEvent({
   description,
   weezeventUrl,
   city,
+  images,
 }: {
   title: string;
   address: string;
@@ -34,6 +35,7 @@ function DetailEvent({
   description: string;
   weezeventUrl: string;
   city: string;
+  images: string[];
 }) {
   const formattedDate = {
     from: dayjs(date.from).format('DD/MM/YYYY'),
@@ -71,11 +73,20 @@ function DetailEvent({
         }}
       />
       <CardContent className="text-center">
-        <Image
-          alt="maquette de l'événement"
-          className="p-3 w-3/4 h-auto"
-          src={mardi}
-        />
+        <div className="md:flex m-3 md:gap-2">
+          {images.map((image) => (
+            <div className="relative w-full h-80" key={image}>
+              <Image
+                alt="maquette de l'événement"
+                className="object-contain"
+                fill
+                priority
+                sizes="100vw"
+                src={image || mardi}
+              />
+            </div>
+          ))}
+        </div>
         <List>
           <li>
             <List className="flex justify-evenly">
@@ -88,7 +99,7 @@ function DetailEvent({
                     <CalendarMonthIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText>
+                <ListItemText primaryTypographyProps={{ component: 'h3' }}>
                   {formattedDate.to
                     ? `${formattedDate.from} — ${formattedDate.to}`
                     : formattedDate.from}
@@ -100,7 +111,9 @@ function DetailEvent({
                     <LocationCityIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText>{address}</ListItemText>
+                <ListItemText primaryTypographyProps={{ component: 'h3' }}>
+                  {address}
+                </ListItemText>
               </ListItem>
             </List>
           </li>

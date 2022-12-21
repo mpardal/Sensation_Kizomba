@@ -19,16 +19,18 @@ import Image from 'next/image';
 import type { AppEventDate } from '@/types/app-event-date';
 import mardi from '../../public/mardi.jpeg';
 
-function Event({
+function EventCard({
   title,
   address,
   date,
   linkDetails,
+  images,
 }: {
   title: string;
   address: string;
   date: AppEventDate;
   linkDetails: string;
+  images: string[];
 }) {
   const formattedDate = {
     from: dayjs(date.from).format('DD/MM/YYYY'),
@@ -36,14 +38,23 @@ function Event({
   };
 
   return (
-    <Card variant="outlined">
+    <Card className="w-full" variant="outlined">
       <CardHeader className="text-center" component="h2" title={title} />
       <CardContent className="text-center">
-        <Image
-          alt="event"
-          className="p-3 w-full h-full object-contain"
-          src={mardi}
-        />
+        <Link
+          className="relative w-full h-80 block"
+          href={linkDetails}
+          title="lien vers les détails de l'événement"
+        >
+          <Image
+            alt="event"
+            className="object-contain"
+            fill
+            priority
+            sizes="100vw"
+            src={images[0] ?? mardi}
+          />
+        </Link>
         <List>
           <ListItem>
             <ListItemAvatar>
@@ -85,4 +96,4 @@ function Event({
   );
 }
 
-export default Event;
+export default EventCard;

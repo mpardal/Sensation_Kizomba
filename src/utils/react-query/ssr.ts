@@ -13,9 +13,11 @@ import {
   fetchNextEvents,
   getNextEventsQueryKey,
 } from '@/hooks/use-next-events';
-import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
 import { logger } from '@/utils/logger';
-import { staticPropsRevalidateError } from '@/utils/static-props';
+import {
+  staticPropsRevalidate,
+  staticPropsRevalidateError,
+} from '@/utils/static-props';
 
 export function initHydration() {
   const queryClient = new QueryClient();
@@ -23,11 +25,9 @@ export function initHydration() {
   return {
     queryClient,
     getPropsHydrate: async () => {
-      await queryClient.fetchQuery(getNextEventsQueryKey(), async () => {
-        const nextEvents = await fetchNextEvents();
-
-        return serializeQuerySnapshot(nextEvents);
-      });
+      await queryClient.fetchQuery(getNextEventsQueryKey(), () =>
+        fetchNextEvents(),
+      );
     },
   };
 }
@@ -123,6 +123,7 @@ export function withStaticQuerySSR<
 
       return {
         ...result,
+        revalidate: result.revalidate || staticPropsRevalidate,
         props: {
           ...props,
           dehydratedState: dehydrate(queryClient),
@@ -142,6 +143,7 @@ export function withStaticQuerySSR<
 
         return {
           ...result,
+          revalidate: result.revalidate || staticPropsRevalidateError,
           props: {
             ...props,
             dehydratedState: dehydrate(queryClient),

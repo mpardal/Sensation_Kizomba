@@ -12,6 +12,7 @@ import {
 import type { AppEvent } from '@/types/app-event';
 import { database } from '@/config/firebase-config';
 import { serializeQuerySnapshot } from '@/utils/serialize-snapshot';
+import { getDownloadUrlsForEvent } from '@/utils/get-download-urls-for-event';
 
 const today = new Date();
 
@@ -27,17 +28,24 @@ export async function fetchNextEvents() {
     limit(3),
   );
 
-  return (await getDocs(nextEventsQuery)) as QuerySnapshot<AppEvent>;
+  const nextEventsSnapshot = (await getDocs(
+    nextEventsQuery,
+  )) as QuerySnapshot<AppEvent>;
+
+  return Promise.all(
+    serializeQuerySnapshot(nextEventsSnapshot).map(async (event) => {
+      return {
+        ...event,
+        images: await getDownloadUrlsForEvent(event),
+      };
+    }),
+  );
 }
 
 export function useNextEvents(options?: UseQueryOptions<AppEvent[]>) {
   return useQuery({
     queryKey: getNextEventsQueryKey(),
-    queryFn: async () => {
-      const nextEvents = await fetchNextEvents();
-
-      return serializeQuerySnapshot(nextEvents);
-    },
+    queryFn: () => fetchNextEvents(),
     ...options,
   });
 }
