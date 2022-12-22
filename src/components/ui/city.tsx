@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { limit } from 'firebase/firestore';
 import { useEvents } from '@/hooks/use-events';
 import { cityKeyToCityName } from '@/utils/city-key-to-city-name';
 import type { AppEvent } from '@/types/app-event';
