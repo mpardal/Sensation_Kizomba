@@ -43,6 +43,14 @@ const About: NextPageWithLayout = () => {
             <p />
             <Link
               className="text-inherit no-underline"
+              href="/bordeaux"
+              title="événements sur Bordeaux"
+            >
+              <h4 className="italic">Bordeaux</h4>
+            </Link>
+            <p />
+            <Link
+              className="text-inherit no-underline"
               href="/le-mans"
               title="événements au Mans"
             >
@@ -59,10 +67,10 @@ const About: NextPageWithLayout = () => {
             <p />
             <Link
               className="text-inherit no-underline"
-              href="/bordeaux"
-              title="événements sur Bordeaux"
+              href="/rennes"
+              title="événements sur Rennes"
             >
-              <h4 className="italic">Bordeaux</h4>
+              <h4 className="italic">Rennes</h4>
             </Link>
           </div>
           <p />
