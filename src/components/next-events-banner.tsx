@@ -10,7 +10,7 @@ function NextEventsBanner() {
   const nextEvents = useNextEvents();
 
   return (
-    <aside className="flex w-full bg-secondary-900 gap-3">
+    <aside className="flex w-full bg-primary-700 gap-3">
       <Typography className="p-2 self-center" component="span" variant="body2">
         Prochains événements
       </Typography>
