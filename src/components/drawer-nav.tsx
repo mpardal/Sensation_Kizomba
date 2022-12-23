@@ -91,6 +91,18 @@ function Drawer({
             </ListItemText>
           </ListItemButton>
         </Link>
+        <Link
+          href="/rennes"
+          legacyBehavior
+          passHref
+          title="événements sur Rennes"
+        >
+          <ListItemButton component="a">
+            <ListItemText className="mr-3 text-primary-500">
+              Rennes
+            </ListItemText>
+          </ListItemButton>
+        </Link>
       </List>
       <Divider />
       <List>
