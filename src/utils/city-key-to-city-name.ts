@@ -8,6 +8,8 @@ export function cityKeyToCityName(key: string): string {
       return 'Le Mans';
     case 'orleans':
       return 'Orléans';
+    case 'rennes':
+      return 'Rennes';
     default:
       return '';
   }
@@ -23,6 +25,8 @@ export function cityNameForPageTitle(cityName: string): string {
       return 'au Mans';
     case 'Orléans':
       return 'à Orléans';
+    case 'Rennes':
+      return 'à Rennes';
     default:
       return '';
   }

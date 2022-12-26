@@ -67,6 +67,11 @@ function NavOtherCitiesMenu() {
             Orléans
           </MenuItem>
         </Link>
+        <Link href="/rennes" legacyBehavior passHref>
+          <MenuItem component="a" title="événements sur Rennes">
+            Rennes
+          </MenuItem>
+        </Link>
       </Menu>
     </>
   );
