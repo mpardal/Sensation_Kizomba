@@ -3,4 +3,5 @@
 export default {
   '!(.eslintrc.js)*.{js,jsx,ts,tsx}': ['eslint --fix'],
   'src/**/*.{ts,tsx}': () => 'pnpm tsc -p tsconfig.json',
+  'src/**/*.{css}': ['prettier --write'],
 };
