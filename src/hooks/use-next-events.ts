@@ -31,6 +31,7 @@ export async function fetchNextEvents() {
 
         return from >= today || (to && to >= today);
       })
+      .slice(0, 3)
       .map(async (event) => {
         return {
           ...event,

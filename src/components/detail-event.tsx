@@ -118,7 +118,10 @@ function DetailEvent({
           </li>
           <ListItem>
             <ListItemText>
-              <div dangerouslySetInnerHTML={{ __html: description }} />
+              <div
+                className="ProseMirror"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             </ListItemText>
           </ListItem>
           {weezeventUrl ? (
