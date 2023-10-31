@@ -60,9 +60,9 @@ const About: NextPageWithLayout = () => {
             <Link
               className="text-inherit no-underline"
               href="/orleans"
-              title="événements sur Orléans"
+              title="événements sur Tours"
             >
-              <h4 className="italic">Orléans</h4>
+              <h4 className="italic">Tours</h4>
             </Link>
             <p />
             <Link
