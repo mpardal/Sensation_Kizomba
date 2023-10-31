@@ -62,9 +62,9 @@ function NavOtherCitiesMenu() {
             Le Mans
           </MenuItem>
         </Link>
-        <Link href="/orleans" legacyBehavior passHref>
-          <MenuItem component="a" title="événements sur Orléans">
-            Orléans
+        <Link href="/tours" legacyBehavior passHref>
+          <MenuItem component="a" title="événements sur Tours">
+            Tours
           </MenuItem>
         </Link>
         <Link href="/rennes" legacyBehavior passHref>

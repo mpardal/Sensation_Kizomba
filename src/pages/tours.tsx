@@ -7,25 +7,25 @@ import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import MetaForCity from '@/components/meta-for-city';
 
-const Orleans: NextPageWithLayout = () => {
+const Tours: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>SENSATION-KIZOMBA — Les événements à Orléans</title>
-        <MetaForCity city="orleans" />
+        <title>SENSATION-KIZOMBA — Les événements à Tours</title>
+        <MetaForCity city="tours" />
       </Head>
-      <City city="orleans" />
+      <City city="tours" />
     </>
   );
 };
 
-Orleans.Layout = function OrleansLayout(page) {
+Tours.Layout = function ToursLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
-  await queryClient.fetchQuery(getEventsQueryKey('orleans'), () =>
-    fetchEvents('orleans'),
+  await queryClient.fetchQuery(getEventsQueryKey('tours'), () =>
+    fetchEvents('tours'),
   );
 
   return {
@@ -33,4 +33,4 @@ export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
   };
 });
 
-export default Orleans;
+export default Tours;
