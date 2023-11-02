@@ -37,7 +37,7 @@ function Nav() {
           </Button>
         </Link>
 
-        {!logged ? (
+        {/*{!logged ? (
           <Link href="/login" legacyBehavior passHref>
             <Button
               className="hidden text-primary-500 lg:block"
@@ -65,7 +65,7 @@ function Nav() {
           >
             Déconnexion
           </Button>
-        )}
+        )}*/}
       </div>
     </nav>
   );
