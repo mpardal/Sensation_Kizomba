@@ -22,8 +22,8 @@ function City({ city, events }: { city: string; events?: AppEvent[] }) {
   return (
     <div>
       {/*Appel le composant Events*/}
-      <div className="m-3 lg:m-5">
-        <Typography gutterBottom variant="h2">
+      <div className="m-3">
+        <Typography className="ml-3" gutterBottom variant="h2">
           {cityKeyToCityName(city)}
         </Typography>
         {eventsQuery.isLoading ? (
