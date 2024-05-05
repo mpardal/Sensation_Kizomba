@@ -1,3 +1,9 @@
-User-Agent: *
+# *
+User-agent: *
 Allow: /
-Sitemap: sitemap.xml
+
+# Host
+Host: <https://sensation-kizomba.fr/>
+
+# Sitemaps
+Sitemap: <https://sensation-kizomba.fr/>/sitemap.xml

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
@@ -27,6 +28,7 @@
     "formik": "^2.2.9",
     "next": "13.0.6",
     "next-connect": "^0.13.0",
+    "next-sitemap": "^4.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sanitize-html": "^2.8.0",
