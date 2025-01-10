@@ -1,17 +1,9 @@
-import { signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { Button } from '@mui/material';
 import React from 'react';
-import { auth } from '@/config/firebase-config';
-import { useAuth } from '@/hooks/auth/use-auth';
-import { useGlobalSnackbar } from '@/hooks/use-global-snackbar';
-import { logger } from '@/utils/logger';
 import NavOtherCitiesMenu from './nav-other-cities-menu';
 
 function Nav() {
-  const { logged, loading } = useAuth();
-  const { setMessage } = useGlobalSnackbar();
-
   return (
     <nav className="flex h-full w-full items-center">
       <div className="hidden lg:flex lg:items-center gap-6">

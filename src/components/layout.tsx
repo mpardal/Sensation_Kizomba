@@ -1,7 +1,6 @@
 import React from 'react';
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { Alert, Snackbar } from '@mui/material';
 import PageContainer from '@/components/page-container';
@@ -25,7 +24,6 @@ function Layout({ children }: PropsWithChildren) {
       <PageContainer>
         {children}
         <Analytics />
-        <SpeedInsights />
       </PageContainer>
       <Footer />
       {/*Permet d'afficher le message lors de la connexion*/}
