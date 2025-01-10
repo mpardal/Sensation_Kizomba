@@ -1,6 +1,8 @@
 import React from 'react';
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 import { Alert, Snackbar } from '@mui/material';
 import PageContainer from '@/components/page-container';
 import Header from '@/components/header';
@@ -20,7 +22,11 @@ function Layout({ children }: PropsWithChildren) {
     <div className="flex flex-col min-h-screen">
       <NextEventsBanner />
       <Header />
-      <PageContainer>{children}</PageContainer>
+      <PageContainer>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </PageContainer>
       <Footer />
       {/*Permet d'afficher le message lors de la connexion*/}
       <Snackbar
