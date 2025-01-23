@@ -66,6 +66,18 @@ function Drawer({
             </ListItemText>
           </ListItemButton>
         </Link>
+        <Link
+          href="/angers"
+          legacyBehavior
+          passHref
+          title="événements sur Angers"
+        >
+          <ListItemButton component="a">
+            <ListItemText className="mr-3 text-primary-500">
+              Angers
+            </ListItemText>
+          </ListItemButton>
+        </Link>
         <Link href="/bordeaux" legacyBehavior passHref>
           <ListItemButton component="a" title="événements sur Bordeaux">
             <ListItemText className="mr-3 text-primary-500">
@@ -77,18 +89,6 @@ function Drawer({
           <ListItemButton component="a" title="événements au Mans">
             <ListItemText className="mr-3 text-primary-500">
               Le Mans
-            </ListItemText>
-          </ListItemButton>
-        </Link>
-        <Link
-          href="/angers"
-          legacyBehavior
-          passHref
-          title="événements sur Angers"
-        >
-          <ListItemButton component="a">
-            <ListItemText className="mr-3 text-primary-500">
-              Angers
             </ListItemText>
           </ListItemButton>
         </Link>
