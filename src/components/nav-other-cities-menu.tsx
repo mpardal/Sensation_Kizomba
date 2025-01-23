@@ -52,6 +52,11 @@ function NavOtherCitiesMenu() {
         onClose={handleOtherCitiesMenuClose}
         open={otherCitiesMenuOpen}
       >
+        <Link href="/angers" legacyBehavior passHref>
+          <MenuItem component="a" title="événements sur Angers">
+            Angers
+          </MenuItem>
+        </Link>
         <Link href="/bordeaux" legacyBehavior passHref>
           <MenuItem component="a" title="événements sur Bordeaux">
             Bordeaux
@@ -60,11 +65,6 @@ function NavOtherCitiesMenu() {
         <Link href="/le-mans" legacyBehavior passHref>
           <MenuItem component="a" title="événements au Mans">
             Le Mans
-          </MenuItem>
-        </Link>
-        <Link href="/angers" legacyBehavior passHref>
-          <MenuItem component="a" title="événements sur Angers">
-            Angers
           </MenuItem>
         </Link>
         <Link href="/rennes" legacyBehavior passHref>
