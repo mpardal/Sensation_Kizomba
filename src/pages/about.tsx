@@ -35,10 +35,10 @@ const About: NextPageWithLayout = () => {
           <div className="flex flex-row justify-around">
             <Link
               className="text-inherit no-underline"
-              href="/nantes"
-              title="événements sur Nantes"
+              href="/angers"
+              title="événements sur Angers"
             >
-              <h4 className="italic">Nantes</h4>
+              <h4 className="italic">Angers</h4>
             </Link>
             <p />
             <Link
@@ -59,10 +59,10 @@ const About: NextPageWithLayout = () => {
             <p />
             <Link
               className="text-inherit no-underline"
-              href="/tours"
-              title="événements sur Tours"
+              href="/nantes"
+              title="événements à Nantes"
             >
-              <h4 className="italic">Tours</h4>
+              <h4 className="italic">Nantes</h4>
             </Link>
             <p />
             <Link

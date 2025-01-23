@@ -81,13 +81,15 @@ function Drawer({
           </ListItemButton>
         </Link>
         <Link
-          href="/tours"
+          href="/angers"
           legacyBehavior
           passHref
-          title="événements sur Tours"
+          title="événements sur Angers"
         >
           <ListItemButton component="a">
-            <ListItemText className="mr-3 text-primary-500">Tours</ListItemText>
+            <ListItemText className="mr-3 text-primary-500">
+              Angers
+            </ListItemText>
           </ListItemButton>
         </Link>
         <Link

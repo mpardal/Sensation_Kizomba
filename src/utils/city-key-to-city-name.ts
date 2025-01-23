@@ -6,8 +6,8 @@ export function cityKeyToCityName(key: string): string {
       return 'Bordeaux';
     case 'le-mans':
       return 'Le Mans';
-    case 'tours':
-      return 'Tours';
+    case 'angers':
+      return 'Angers';
     case 'rennes':
       return 'Rennes';
     default:
@@ -23,8 +23,8 @@ export function cityNameForPageTitle(cityName: string): string {
       return 'à Bordeaux';
     case 'Le Mans':
       return 'au Mans';
-    case 'Tours':
-      return 'à Tours';
+    case 'Angers':
+      return 'à Angers';
     case 'Rennes':
       return 'à Rennes';
     default:

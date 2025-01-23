@@ -1,31 +1,31 @@
 import Head from 'next/head';
 import React from 'react';
+import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import Layout from '@/components/layout';
 import City from '@/components/ui/city';
 import type { NextPageWithLayout } from '@/components/layout';
-import { withStaticQuerySSR } from '@/utils/react-query/ssr';
 import { fetchEvents, getEventsQueryKey } from '@/hooks/use-events';
 import MetaForCity from '@/components/meta-for-city';
 
-const Tours: NextPageWithLayout = () => {
+const Angers: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>SENSATION-KIZOMBA — Les événements à Tours</title>
-        <MetaForCity city="tours" />
+        <title>SENSATION-KIZOMBA — Les événements à Angers</title>
+        <MetaForCity city="angers" />
       </Head>
-      <City city="tours" />
+      <City city="angers" />
     </>
   );
 };
 
-Tours.Layout = function ToursLayout(page) {
+Angers.Layout = function AngersLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
-  await queryClient.fetchQuery(getEventsQueryKey('tours'), () =>
-    fetchEvents('tours'),
+  await queryClient.fetchQuery(getEventsQueryKey('angers'), () =>
+    fetchEvents('angers'),
   );
 
   return {
@@ -33,4 +33,4 @@ export const getStaticProps = withStaticQuerySSR(async (_, queryClient) => {
   };
 });
 
-export default Tours;
+export default Angers;
